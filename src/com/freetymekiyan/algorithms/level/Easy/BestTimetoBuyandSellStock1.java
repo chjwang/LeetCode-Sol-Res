@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.easy;
+package com.freetymekiyan.algorithms.level.Easy;
 
 /**
  * Best Time to Buy and Sell Stock
