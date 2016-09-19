@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Given a <strong>sorted</strong> array, remove the duplicates in place such 
  * that each element appear only once and return the new length.
@@ -23,15 +25,25 @@ class RemoveDuplicates {
      */
     public int removeDupStandard(int[] A) {
         int count = 0;
-        int len = A.length;
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < A.length; i++) {
             if (count == 0 || A[i] != A[count - 1]) { // first or not dup
                 A[count++] = A[i]; // copy and update count
             }
         }
         return count;
     }
-    
+
+    // Count the number of unique elements only, will not remove dups
+    public static int countUnique(int[] A) {
+        int count = 0;
+        for (int i = 0; i < A.length - 1; i++) {
+            if (A[i] == A[i + 1]) {
+                count++;
+            }
+        }
+        return (A.length - count);
+    }
+
     /**
      * use two pointers, one in the front, one for the dups
      */
@@ -51,4 +63,29 @@ class RemoveDuplicates {
         }
         return pos;
     }
+
+    // Create an array with all unique elements
+    // use two pointers, one in the front, one for the dups
+    public static int[] removeDuplicates(int[] A) {
+        if (A.length < 2)
+            return A;
+
+        int j = 0;
+        int i = 1;
+
+        while (i < A.length) {
+            if (A[i] == A[j]) {
+                i++;
+            } else {
+                j++;
+                A[j] = A[i];
+                i++;
+            }
+        }
+
+        int[] B = Arrays.copyOf(A, j + 1);
+
+        return B;
+    }
+
 }

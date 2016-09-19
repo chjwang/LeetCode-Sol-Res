@@ -122,6 +122,67 @@ class ValidSudoku {
         return true;
     }
 
+    public boolean isValidSudoku5(char[][] board) {
+        if (board == null || board.length != 9 || board[0].length != 9)
+            return false;
+        // check each column
+        for (int i = 0; i < 9; i++) {
+            boolean[] flag = new boolean[9];
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != '.') {
+                    if (flag[(int) (board[i][j] - '1')]) {
+                        return false;
+                    }
+                    flag[(int) (board[i][j] - '1')] = true;
+                }
+            }
+        }
+
+        //check each row
+        for (int j = 0; j < 9; j++) {
+            boolean[] flag = new boolean[9];
+            for (int i = 0; i < 9; i++) {
+                if (board[i][j] != '.') {
+                    if (flag[(int) (board[i][j] - '1')]) {
+                        return false;
+                    }
+                    flag[(int) (board[i][j] - '1')] = true;
+                }
+            }
+        }
+
+        //check each 3*3 matrix
+//        for (int block = 0; block < 9; block++) {
+//            boolean[] flag = new boolean[9];
+//            for (int i = block / 3 * 3; i < block / 3 * 3 + 3; i++) {
+//                for (int j = block % 3 * 3; j < block % 3 * 3 + 3; j++) {
+//                    if (board[i][j] != '.') {
+//                        if (flag[(int) (board[i][j] - '1')]) {
+//                            return false;
+//                        }
+//                        flag[(int) (board[i][j] - '1')] = true;
+//                    }
+//                }
+//            }
+//        }
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                boolean[] flag = new boolean[9];
+                for(int m=0; m<3; m++){
+                    for(int n=0; n<3; n++){
+                        if (board[i*3+m][j*3+n] != '.') {
+                            if (flag[(int) (board[i*3+m][j*3+n] - '1')]) {
+                                return false;
+                            }
+                            flag[(int) (board[i*3+m][j*3+n] - '1')] = true;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     private void printBoard(char[][] board) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {

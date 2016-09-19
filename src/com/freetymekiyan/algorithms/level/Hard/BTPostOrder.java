@@ -51,9 +51,9 @@ class BTPostOrder {
             TreeNode curNode = s.pop();
             res.add(curNode.val); // visit
             if (curNode.left != null) s.push(curNode.left);
-            if (curNode.right != null) s.push(curNode.right);
+            if (curNode.right != null) s.push(curNode.right); // right pops first
         }
-        Collections.reverse(res);
+        Collections.reverse(res); // reverse order
         return res;
     }
 

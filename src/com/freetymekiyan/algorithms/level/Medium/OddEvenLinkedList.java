@@ -21,6 +21,7 @@ import org.junit.Test;
  * The relative order inside both the even and odd groups should remain as it was in the input.
  * The first node is considered odd, the second node even and so on ...
  * <p>
+ *     http://www.programcreek.com/2015/03/leetcode-odd-even-linked-list-java/
  * Tags: Linked List
  */
 public class OddEvenLinkedList {
@@ -28,17 +29,39 @@ public class OddEvenLinkedList {
     private OddEvenLinkedList o;
 
     public ListNode oddEvenList(ListNode head) {
-        if (head == null) return null;
+        if (head == null)
+            return null;
+
         ListNode odd = head, even = head.next, evenHead = even;
         while (even != null && even.next != null) {
             odd.next = even.next;
             odd = odd.next;
+
             even.next = odd.next;
             even = even.next;
         }
         odd.next = evenHead;
         return head;
     }
+
+    public ListNode oddEvenList2(ListNode head) {
+        if(head == null)
+            return head;
+
+        ListNode result = head, odd = head, even = head.next;
+        ListNode evenHead = even;
+
+        while(odd != null && even != null && even.next != null){
+            odd.next = even.next;
+            odd = odd.next;
+
+            even.next = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return result;
+    }
+
 
     @Before
     public void setUp() {

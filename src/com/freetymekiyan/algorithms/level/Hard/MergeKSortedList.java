@@ -62,14 +62,14 @@ class MergeKSortedList {
         }
     }
 
-    public ListNode mergeKLists(List<ListNode> lists) {
+    public ListNode mergeKLists2(List<ListNode> lists) {
         /*base cases*/
         if (lists.size() == 0) return null;
         if (lists.size() == 1) return lists.get(0);
         if (lists.size() == 2) return mergeTwoLists(lists.get(0), lists.get(1));
         /*merge two halves*/
-        return mergeTwoLists(mergeKLists(lists.subList(0, lists.size()/2)), 
-            mergeKLists(lists.subList(lists.size()/2, lists.size())));
+        return mergeTwoLists(mergeKLists2(lists.subList(0, lists.size()/2)),
+            mergeKLists2(lists.subList(lists.size()/2, lists.size())));
     }
    
 }

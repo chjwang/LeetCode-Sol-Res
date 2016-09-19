@@ -1,10 +1,10 @@
 /**
  * Check if one tree is another tree's subtree
- * 
+ *
  * Tags: Tree, Recursive
  */
 class IsSubtree {
-    
+
     /**
      * t1 root of tree, t2 root of subtree
      */
@@ -12,7 +12,7 @@ class IsSubtree {
         if (t2 == null) return true; // subtree is null
         return subTree(t1, t2);
     }
-     
+
     /**
      * Recursive
      * If node values are the same, check if the tree matches
@@ -25,7 +25,7 @@ class IsSubtree {
         }
         return (subTree(r1.left, r2) || subTree(r1.right, r2)); // recurse down to r1's children
     }
-    
+
     /**
      * Check if both trees are the same
      */
@@ -33,6 +33,11 @@ class IsSubtree {
         if (r2 == null && r1 == null) return true; // both null
         if (r1 == null || r2 == null) return false; // one null, one not null
         if (r1.value != r2.value) return false; // different root value
-        return (matchTree(r1.left, r2.left) && matchTree(r1.right,              r2.right)); // recursively check children
+        return (matchTree(r1.left, r2.left) && matchTree(r1.right, r2.right)); // recursively check children
+    }
+
+    private class Node {
+        public Object value;
+        public Node left, right;
     }
 }

@@ -32,14 +32,14 @@ public class ReverseLinkedList {
      * Iterative
      */
     public ListNode reverseList2(ListNode head) {
-        ListNode newHead = null;
-        while (head != null) {
-            ListNode next = head.next;
-            head.next = newHead;
-            newHead = head;
-            head = next;
+        ListNode prev = null, curr = head;
+        while (curr != null) {
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
         }
-        return newHead;
+        return prev;
     }
 
     public class ListNode {

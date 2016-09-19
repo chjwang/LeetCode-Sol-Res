@@ -27,12 +27,14 @@ public class BinaryTreePath {
     public List<String> binaryTreePath1(TreeNode root) {
         if (root == null) return Collections.emptyList();
         List<String> res = new ArrayList<>();
-        dfs(res, root.val + "", root);
+        dfs(res, Integer.toString(root.val), root);
         return res;
     }
 
     private void dfs(List<String> res, String path, TreeNode root) {
-        if (root.left == null && root.right == null) res.add(path);
+        if (root.left == null && root.right == null)
+            res.add(path);
+
         if (root.left != null) dfs(res, path + "->" + root.left.val, root.left);
         if (root.right != null) dfs(res, path + "->" + root.right.val, root.right);
     }
@@ -48,7 +50,7 @@ public class BinaryTreePath {
         }
 
         if (root.left == null && root.right == null) {
-            paths.add(root.val + "");
+            paths.add(Integer.toString(root.val));
             return paths;
         }
 

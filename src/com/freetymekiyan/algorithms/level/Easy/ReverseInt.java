@@ -39,7 +39,18 @@ class ReverseInt {
             out = out * 10 + x % 10; // append last digit of x
             x = x / 10; // remove last digit
         }
-        if (out > Integer.MAX_VALUE || out < Integer.MIN_VALUE) return 0;
+        if (out > Integer.MAX_VALUE || out < Integer.MIN_VALUE)
+            throw new IllegalArgumentException("overflow or underflow");
         return (int)out;
+    }
+    public int reverse2(int x) {
+        String s = new StringBuffer(x).reverse().toString();
+        int i = 0;
+        try {
+            i = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+        return i;
     }
 }

@@ -70,8 +70,10 @@ class RemoveDuplicatesFromSortedList2 {
         ListNode cur = head;
         while (cur != null) {
             while (cur.next != null && cur.val == cur.next.val) cur = cur.next; // skip
-            if (pre.next == cur) pre = pre.next; // no dups
-            else pre.next = cur.next; // cur moved
+            if (pre.next == cur)
+                pre = pre.next; // no dups
+            else
+                pre.next = cur.next; // cur moved
             cur = cur.next; // update current 
         }
         return dummyHead.next;

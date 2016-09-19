@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * You are climbing a stair case. It takes n steps to reach to the top.
  * 
@@ -31,7 +33,7 @@ class ClimbingStairs {
     /**
      * Top-down approach with memory function
      */
-    public static int climbStairs(int n) {
+    public static int climbStairs2(int n) {
         int[] cache = new int[n + 1];
         return helper(n, cache);
     }

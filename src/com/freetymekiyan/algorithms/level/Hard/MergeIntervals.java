@@ -23,20 +23,27 @@ class MergeIntervals {
      * Which is the bigger of last.end and i.end
      */
     public List<Interval> merge(List<Interval> intervals) {
-        List<Interval> res = new ArrayList<Interval>();
-        if (intervals == null || intervals.size() == 0) return res;
+        List<Interval> result = new ArrayList<Interval>();
+
+        if(intervals==null || intervals.size()==0)
+            return result;
+
         Collections.sort(intervals, new MyComparator());
-        for (Interval i : intervals) {
-            if (res.isEmpty()) res.add(i); // first interval
-            else {
-                Interval last = res.get(res.size() - 1); // get last interval
-                if (last.end >= i.start) { // overlap
-                    res.remove(last);
-                    res.add(new Interval(last.start, Math.max(last.end, i.end))); // extend end
-                } else res.add(i); //no overlap
+
+        Interval pre = intervals.get(0);
+        for(int i=0; i<intervals.size(); i++){
+            Interval curr = intervals.get(i);
+            if(curr.start>pre.end){
+                result.add(pre);
+                pre = curr;
+            }else{
+                Interval merged = new Interval(pre.start, Math.max(pre.end, curr.end));
+                pre = merged;
             }
         }
-        return res;
+        result.add(pre);
+
+        return result;
     }
     
     /**
@@ -46,8 +53,14 @@ class MergeIntervals {
     class MyComparator implements Comparator<Interval> {
         
         @Override
-        public int compare(Interval i1, Interval i2) {
-            return i1.start - i2.start;
+//        public int compare(Interval i1, Interval i2) {
+//            return i1.start - i2.start;
+//        }
+        public int compare(Interval i1, Interval i2){
+            if(i1.start!=i2.start)
+                return i1.start-i2.start;
+            else
+                return i1.end-i2.end;
         }
     }
     
