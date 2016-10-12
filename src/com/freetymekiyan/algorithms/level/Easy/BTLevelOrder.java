@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 import java.util.*;
 
 /**
@@ -52,7 +54,34 @@ class BTLevelOrder {
 
         return res;
     }
-    
+
+    /**
+     * Queue
+     * Add current level's children to next level, and iterate
+     * Iterate that many times to build current level
+     */
+    private List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        if (root == null) return res;
+
+        List<TreeNode> curLevel = new ArrayList<>();
+        curLevel.add(root);
+
+        while (! curLevel.isEmpty()) {
+            List<TreeNode> nextLevel = new ArrayList<>();
+            List<Integer> vals = new ArrayList<>();
+
+            for (TreeNode node : curLevel) {
+                vals.add(node.val);
+                if (node.left != null) nextLevel.add(node.left);
+                if (node.right != null) nextLevel.add(node.right);
+            }
+            curLevel = nextLevel;
+            res.add(vals);
+        }
+        return res;
+    }
+
     public class TreeNode {
         int val;
         TreeNode left;

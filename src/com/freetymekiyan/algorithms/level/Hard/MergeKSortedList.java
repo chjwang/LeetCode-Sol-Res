@@ -17,12 +17,14 @@ class MergeKSortedList {
     public ListNode mergeKLists(List<ListNode> lists) {
         if (lists == null || lists.size() == 0) return null;
         // Build priority queue
-        Queue<ListNode> queue = new PriorityQueue<ListNode>(lists.size(), new Comparator<ListNode>() {
-            @Override
-            public int compare(ListNode n1, ListNode n2) {
-                return n1.val - n2.val;
-            }
-        });
+//        Queue<ListNode> queue = new PriorityQueue<ListNode>(lists.size(), new Comparator<ListNode>() {
+//            @Override
+//            public int compare(ListNode n1, ListNode n2) {
+//                return n1.val - n2.val;
+//            }
+//        });
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.size(), (x, y) -> (int) (x.val - y.val));
+
         for (ListNode n : lists) if (n != null) queue.add(n);
         
         ListNode dummy = new ListNode(0); // set dummy head

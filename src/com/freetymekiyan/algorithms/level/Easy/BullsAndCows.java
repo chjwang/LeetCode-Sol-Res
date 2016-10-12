@@ -44,8 +44,20 @@ public class BullsAndCows {
                 /*
                  * If count is less than zero before we increase it, it means that it was decreased by guess already.
                  */
-                if (count[secret.charAt(i) - '0']++ < 0) cows++;
-                if (count[guess.charAt(i) - '0']-- > 0) cows++;
+//                if (count[secret.charAt(i) - '0']++ < 0) cows++;
+//                if (count[guess.charAt(i) - '0']-- > 0) cows++;
+
+                int snum = secret.charAt(i) - '0';
+                if (count[snum] < 0){
+                    cows++;
+                }
+                count[snum]++;
+
+                int gnum = guess.charAt(i) - '0';
+                if (count[gnum] > 0){
+                    cows++;
+                }
+                count[gnum]--;
             }
         }
         return bulls + "A" + cows + "B";

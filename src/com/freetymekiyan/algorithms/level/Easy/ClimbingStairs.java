@@ -18,7 +18,7 @@ class ClimbingStairs {
      * Bottom-up approach
      * Remember the previous two solutions
      */
-    public int climbStairs(int n) {
+    public static int climbStairs(int n) {
         if (n <= 1) return n;
         int last = 1, lastlast = 1;
         int now = 0;

@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of
  * your product fails the quality check. Since each version is developed based on the previous version, all the versions
@@ -29,10 +31,14 @@ public class FirstBadVersion {
         return l;
     }
 
+    private boolean isBadVersion(int m) {
+        return false;
+    }
+
     /**
      * less loop improvement
      */
-    public int firstBadVersion(int n) {
+    public int firstBadVersion2(int n) {
         int l = 1;
         int r = n;
 
