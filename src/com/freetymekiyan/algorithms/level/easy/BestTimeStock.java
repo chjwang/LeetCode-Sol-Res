@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.easy;
 
 /**
  * Say you have an array for which the ith element is the price of a given
