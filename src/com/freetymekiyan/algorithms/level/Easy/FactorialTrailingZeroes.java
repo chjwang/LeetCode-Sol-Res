@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Given an integer n, return the number of trailing zeroes in n!.
  * 

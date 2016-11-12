@@ -86,7 +86,7 @@ class atoi {
     private static final int MAX_DIV_10 = Integer.MAX_VALUE / 10;
     private static final int MAX_LAST_DIGIT = Integer.MAX_VALUE % 10; //8
 
-    public int atoi(String str) {
+    public int atoi2(String str) {
         int n = str.length();
         int i = 0;
         while (i < n && Character.isWhitespace(str.charAt(i))) i++;

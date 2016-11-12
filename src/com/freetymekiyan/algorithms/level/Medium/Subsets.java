@@ -38,17 +38,24 @@ class Subsets {
      */
     public static List<List<Integer>> subsetsB(int[] s) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
-        // Arrays.sort(s); // unnecessary
+        Arrays.sort(s); // unnecessary, needed to have canonical ordered result sets
         subsetsB(s, 0, new ArrayList<>(), res);
         return res;
     }
 
-    public static void subsetsB(int[] s, int start, List<Integer> set, List<List<Integer>> result) {
-        result.add(new ArrayList<>(set));
+    /**
+     * DFS backtrack, recursive down to s.length branches: with each element not already in path.
+     * @param s
+     * @param start
+     * @param path path is the DFS path, contains result elements before start index
+     * @param result
+     */
+    public static void subsetsB(int[] s, int start, List<Integer> path, List<List<Integer>> result) {
+        result.add(new ArrayList<>(path));
         for (int i = start; i < s.length; i++) {
-            set.add(s[i]); // with i
-            subsetsB(s, i + 1, set, result); // DFS
-            set.remove(set.size() - 1); // remove last element
+            path.add(s[i]); // with i
+            subsetsB(s, i + 1, path, result); // DFS
+            path.remove(path.size() - 1); // remove last element
         }
     }
     
@@ -61,16 +68,50 @@ class Subsets {
     }
     
     /**
-     * Recursive down to two branches.
+     * Recursive down to two branches: with current element, or without current element.
      */
-    public static void subsetsA(int[] s, int start, List<Integer> set, List<List<Integer>> result) {
+    public static void subsetsA(int[] s, int start, List<Integer> path, List<List<Integer>> result) {
         if (start == s.length) {
-            result.add(set);
+            result.add(path);
             return;
         }
-        List<Integer> copy = new ArrayList<>(set);
-        subsetsA(s, start + 1, set, result); // without
-        copy.add(s[start]);
-        subsetsA(s, start + 1, copy, result); // with
+        List<Integer> pathWithStart = new ArrayList<>(path);
+
+        subsetsA(s, start + 1, path, result); // without
+        
+        pathWithStart.add(s[start]);
+        subsetsA(s, start + 1, pathWithStart, result); // with
     }
+
+
+    /**
+     * @param s: A set of numbers.
+     * @return: A list of lists. All valid subsets.
+     */
+    public ArrayList<ArrayList<Integer>> subsets(int[] s) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        int n = s.length;
+        Arrays.sort(s);
+
+        // 1 << n is 2^n
+        // each subset equals to an binary integer between 0 .. 2^n - 1
+        // 0 -> 000 -> []
+        // 1 -> 001 -> [1]
+        // 2 -> 010 -> [2]
+        // ..
+        // 7 -> 111 -> [1,2,3]
+        for (int i = 0; i < (1 << n); i++) {
+            ArrayList<Integer> subset = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                // check whether the jth digit in i's binary representation is 1
+                if ((i & (1 << j)) != 0) {
+                    subset.add(s[j]);
+                }
+            }
+            result.add(subset);
+        }
+
+        return result;
+    }
+
 }

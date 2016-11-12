@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

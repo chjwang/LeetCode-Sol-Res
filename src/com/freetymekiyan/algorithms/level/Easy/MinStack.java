@@ -39,8 +39,12 @@ class MinStack {
      * Check if the value is current min.
      * If it is, pop from min stack as well.
      */
-    public void pop() {
-        if (s.pop().equals(minStack.peek())) minStack.pop();
+    public Integer pop() {
+        Integer value = s.pop();
+        if (value.equals(minStack.peek())) {
+            minStack.pop();
+        }
+        return value;
     }
 
     public int top() {
@@ -70,8 +74,8 @@ class MinStackDP {
         s.push(new Element(x, min));
     }
 
-    public void pop() {
-        s.pop();
+    public int pop() {
+        return s.pop().value;
     }
 
     public int top() {

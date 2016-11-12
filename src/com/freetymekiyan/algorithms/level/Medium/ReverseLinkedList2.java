@@ -49,6 +49,7 @@ class reverseLinkedList2 {
         return dummy.next;
     }
 
+<<<<<<< HEAD
     public ListNode reverseBetween2(ListNode head, int m, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
@@ -72,6 +73,62 @@ class reverseLinkedList2 {
                 startpoint.next = node2;//node2作为新的点
                 node2 = node1.next;//node2回归到node1的下一个，继续遍历
             }
+=======
+/*
+  --------->1------>2------->3------->4-------5------->nullptr
+  ^         ^       ^       ^         ^       ^
+  |         |       |       |         |       |
+  |         |       |       |         |       |
+  |         |       |       |         |       |
+HeadPrev  head  constPrev  prev      cur  cur->next
+
+假设目前的m是3,n是5，那么prev-next指向cur->next,cur指向
+constPrev->next,constPrev->next指向cur，然后更新cur至prev->next
+思想是头插法交换node
+
+  --------->1------>2------->4------->3-------5------->nullptr
+  ^         ^       ^       ^         ^       ^
+  |         |       |       |         |       |
+  |         |       |       |         |       |
+  |         |       |       |         |       |
+HeadPrev  head  constPrev           prev     cur
+最后返回HeadPrev的next节点即可
+ */
+public ListNode reverseBetween2(ListNode head, int m, int n) {
+    if (m >= n || head == null) return head;
+
+    ListNode headPrev = new ListNode(0);
+    headPrev.next = head;
+    ListNode prev = headPrev;
+    for(int i = 0 ; i < m-1 ; i++){
+        prev = prev.next;
+    }
+    final ListNode constPrev = prev;
+
+    //position m
+    prev = prev.next;
+    ListNode cur = prev.next;
+
+    for(int i = m ; i < n ; i++){
+        ListNode temp = cur.next;
+
+        // insert cur to head of sublist
+        cur.next = constPrev.next;
+        constPrev.next = cur;
+
+        cur = temp;
+    }
+    return headPrev.next;
+}
+
+
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) {
+            val = x;
+            next = null;
+>>>>>>> 65c45a8ca4844254c0cfb702bf71e83c3c72e0fa
         }
         return dummy.next;
     }
