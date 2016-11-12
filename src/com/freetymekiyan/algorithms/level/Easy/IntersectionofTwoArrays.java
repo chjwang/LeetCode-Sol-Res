@@ -49,7 +49,7 @@ public class IntersectionofTwoArrays {
      * Then generate a distinct filtered stream from the other array.
      */
     public int[] intersectionJava8(int[] nums1, int[] nums2) {
-        Set<Integer> set = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
-        return Arrays.stream(nums1).distinct().filter(set::contains).toArray();
+        Set<Integer> array2Set = Arrays.stream(nums2).boxed().collect(Collectors.toSet());
+        return Arrays.stream(nums1).distinct().filter(array2Set::contains).toArray();
     }
 }

@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
+import com.freetymekiyan.algorithms.utils.Utils.ListNode;
+
 /**
  * Given a sorted linked list
  * delete all nodes that have duplicate numbers
@@ -69,20 +73,13 @@ class RemoveDuplicatesFromSortedList2 {
         ListNode pre = dummyHead; // two pointers
         ListNode cur = head;
         while (cur != null) {
-            while (cur.next != null && cur.val == cur.next.val) cur = cur.next; // skip
-            if (pre.next == cur) pre = pre.next; // no dups
-            else pre.next = cur.next; // cur moved
-            cur = cur.next; // update current 
+            while (cur.next != null && cur.val == cur.next.val) cur = cur.next; // skip duplicates
+            if (pre.next == cur)
+                pre = pre.next; // no dups
+            else
+                pre.next = cur.next; // cur removed
+            cur = cur.next; // update cur
         }
         return dummyHead.next;
-    }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
     }
 }

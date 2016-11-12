@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Write a function to find the longest common prefix string amongst an array
  * of strings.
@@ -36,11 +38,14 @@ class LongestCommonPrefix {
         int lenB = b.length();
         int i = 0;
         while (i < lenA && i < lenB) {
-            if (a.charAt(i) == b.charAt(i)) pref.append(a.charAt(i));
-            else break;
-            i++;
-        }    
-        return pref.toString();
+            if (a.charAt(i) == b.charAt(i))
+//                pref.append(a.charAt(i));
+                i++;
+            else
+                break;
+        }
+//        return pref.toString();
+        return a.substring(i);
     }
     
     /**
@@ -50,7 +55,7 @@ class LongestCommonPrefix {
      * Get minimum length of current result and next word
      * Check whether prefix is that long in that length
      */
-    public String longestCommonPrefix(String[] strs) {
+    public String longestCommonPrefix2(String[] strs) {
         if (strs == null) return null;
         if (strs.length == 0) return "";
         if (strs.length == 1) return strs[0];

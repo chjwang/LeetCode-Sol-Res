@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Implement int sqrt(int x).
  * Compute and return the square root of x.
@@ -29,9 +31,11 @@ class Sqrt {
 
         while (left <= right) { // can equal
             mid = left + (right - left) / 2; // left + right can overflow
+
             if (mid == x / mid) return mid; // mid * mid can overflow
             else if (mid > x / mid) right = mid - 1; // not right = mid
-            else left = mid + 1; // break equal
+            else
+                left = mid + 1; // break equal
         }
 
         return right;

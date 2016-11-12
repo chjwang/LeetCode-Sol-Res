@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given a string S, find the longest palindromic substring in S. You may
  * assume that the maximum length of S is 1000, and there exists one unique
@@ -113,6 +115,11 @@ class LongestPalindromicSubstring {
 
     /**
      * Search for range in both direction
+     *
+     * @param s
+     * @param i start index searching backward
+     * @param j start index searching forward
+     * @return palindrome substring
      */
     private String expandAroundCenter(String s, int i, int j) {
         int l = i;

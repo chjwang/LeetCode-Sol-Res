@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given two numbers represented as strings, return multiplication of the
  * numbers as a string.
@@ -39,7 +41,8 @@ class MultiplyStrings {
         StringBuilder ans = new StringBuilder();
         for (int i = m + n - 1; i >= 0; i--) {
             if (res[i] != 0) {
-                for (int j = i; j >= 0; j--) ans.append(res[j]); // note res[j]
+                for (int j = i; j >= 0; j--)
+                    ans.append(res[j]); // note res[j]
                 return ans.toString();
             }
         }

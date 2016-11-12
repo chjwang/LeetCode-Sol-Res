@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Palindrome Number
  * Determine whether an integer is a palindrome. Do this without extra space.

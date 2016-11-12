@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given an input string, reverse the string word by word.
  *
@@ -35,12 +37,14 @@ class ReverseWords {
         String res = "";
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (c == ' ') continue;
+            if (c == ' ')
+                continue;
             else {
                 StringBuilder word = new StringBuilder();
                 while (i < s.length()) {
                     c = s.charAt(i);
-                    if (c == ' ') break;
+                    if (c == ' ')
+                        break;
                     word.append(c);
                     i++;
                 }

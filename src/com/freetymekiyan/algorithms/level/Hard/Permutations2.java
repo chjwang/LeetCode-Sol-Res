@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Hard;
+
 import java.util.*;
 
 /**
@@ -13,7 +15,8 @@ import java.util.*;
 class Permutations2 {
     public static void main(String[] args) {
         List<List<Integer>> res = permuteUniqueB(new int[]{1, 2, 3});
-        for (List<Integer> l : res) System.out.println(l);
+        for (List<Integer> l : res)
+            System.out.println(l);
     }
     
     /**
@@ -30,8 +33,9 @@ class Permutations2 {
     
     public void permute(int[] num, int pos, List<List<Integer>> res) {
         if (pos == num.length) {
-            List<Integer> row = new ArrayList<Integer>();
-            for (int a : num) row.add(a);
+            List<Integer> row = new ArrayList<>();
+            for (int a : num)
+                row.add(a);
             res.add(row);
             return;
         }
@@ -65,11 +69,15 @@ class Permutations2 {
      */
     public static List<List<Integer>> permuteUniqueB(int[] num) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
-        if (num == null || num.length == 0) return res;
+        if (num == null || num.length == 0)
+            return res;
+
         Arrays.sort(num);
-        List<Integer> row = new ArrayList<Integer>();
-        for (int a : num) row.add(a);
+        List<Integer> row = new ArrayList<>();
+        for (int a : num)
+            row.add(a);
         res.add(new ArrayList<Integer>(row)); // first permutation
+
         while (nextPermutation(row)) { // if there is next permutation
             res.add(new ArrayList<Integer>(row));
         }

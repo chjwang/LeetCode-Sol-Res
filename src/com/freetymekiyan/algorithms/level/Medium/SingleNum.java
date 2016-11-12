@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -34,13 +36,39 @@ class SingleNum {
      * the only number left is the one
      */
     public static int singleNum(int[] A) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < A.length; i++) {
-            if (!map.containsKey(A[i])) map.put(A[i], 1);
-            else map.remove(A[i]);
+            if (!map.containsKey(A[i]))
+                map.put(A[i], 1);
+            else
+                map.remove(A[i]);
         }
         int res = 0;
-        for (Integer key : map.keySet()) res = key;
+        for (Integer key : map.keySet())
+            res = key;
         return res;
+    }
+
+    //通用性好，适合两种情况
+    public static int singleNumber(int A[], int n) {
+        //特殊情况1,2
+        if(n<=0) return -1;
+        if(n==1) return A[0];
+
+        Arrays.sort(A, 0, n);
+        int j = 1;
+        for(int i = 0; i < n - 1; i++)
+        {
+            if(A[i] == A[i+1])
+                j++;
+            else
+            {
+                if(j<2) return A[i];//这里修改为j<3那么就可以适用于single number II了。
+                j = 1;
+            }
+        }
+
+        //特殊情况3 最后一个是single number的特殊情况
+        return A[n-1];
     }
 }

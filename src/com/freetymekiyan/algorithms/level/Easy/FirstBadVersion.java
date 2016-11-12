@@ -32,7 +32,7 @@ public class FirstBadVersion {
     /**
      * less loop improvement
      */
-    public int firstBadVersion(int n) {
+    public int firstBadVersion2(int n) {
         int l = 1;
         int r = n;
 
@@ -44,6 +44,10 @@ public class FirstBadVersion {
             else r = m;
         }
         return l;
+    }
+
+    private boolean isBadVersion(int i) {
+        return true;
     }
 
 }

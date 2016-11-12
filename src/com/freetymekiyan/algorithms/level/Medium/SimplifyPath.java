@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -36,17 +38,23 @@ class SimplifyPath {
      */
     public static String simplifyPath(String path) {
         if (path == null) return "";
-        Stack<String> s = new Stack<String>();
+
+        Stack<String> s = new Stack<>();
         String[] words = path.split("/");
         for (String str : words) {
-            if (str.length() == 0 || str.equals(".")) continue;
+            if (str.length() == 0 || str.equals("."))
+                continue;
             if (str.equals("..")) {
-                if (s.isEmpty()) continue;
-                else s.pop();
-            } else s.push(str); // is a word
+                if (s.isEmpty())
+                    continue;
+                else
+                    s.pop();
+            } else
+                s.push(str); // is a word
         }
         String res = s.isEmpty() ? "/" : ""; // check whether stack is empty
-        for (String word : s) res += "/" + word;
+        for (String word : s)
+            res += "/" + word;
         return res;
     }
 }

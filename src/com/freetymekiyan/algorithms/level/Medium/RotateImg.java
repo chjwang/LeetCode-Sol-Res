@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -38,6 +40,19 @@ class RotateImg {
                 matrix[n-i-1][n-j-1] = matrix[j][n-i-1]; // last col
                 matrix[j][n-i-1] = tmp;
             }
+        }
+    }
+
+    public void rotate2(int[][] matrix) {
+        for (int i = 0, n = matrix.length; i < n; ++i) {
+
+            // intermediate transverse matrix, i,j -> j,i
+            for (int j = i + 1; j < n; ++j)
+                swap(matrix[i][j], matrix[j][i]);
+
+            // reverse row i
+            int len = matrix[i].length;
+            reverse(matrix[i][0], matrix[i][len - 1]);
         }
     }
 }

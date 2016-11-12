@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given a linked list, determine if it has a cycle in it.
  *

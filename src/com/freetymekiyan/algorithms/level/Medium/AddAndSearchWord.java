@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -76,7 +78,7 @@ public class AddAndSearchWord {
 
             // Initialize your data structure here.
             public TrieNode() {
-                links = new TrieNode[26];
+                links = new TrieNode[R];
             }
 
             public boolean hasLink(char ch) {

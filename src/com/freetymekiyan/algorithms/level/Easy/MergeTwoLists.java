@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
+import com.freetymekiyan.algorithms.utils.Utils.ListNode;
+
 /**
  * Merge two sorted linked lists and return it as a new list. The new list
  * should be made by splicing together the nodes of the first two lists.
@@ -45,17 +49,18 @@ public class MergeTwoLists {
             }
             temp = temp.next;
         }
-        // merge remain
-        while (l1 != null) {
-            temp.next = l1;
-            temp = temp.next;
-            l1 = l1.next;
-        }
-        while (l2 != null) {
-            temp.next = l2;
-            temp = temp.next;
-            l2 = l2.next;
-        }
+        // merge remaining, NO NEED!!!
+//        while (l1 != null) {
+//            temp.next = l1;
+//            temp = temp.next;
+//            l1 = l1.next;
+//        }
+//        while (l2 != null) {
+//            temp.next = l2;
+//            temp = temp.next;
+//            l2 = l2.next;
+//        }
+        temp.next = (l1 == null) ? l2 : l1;
         return beforeHead.next.next;
     }
 }

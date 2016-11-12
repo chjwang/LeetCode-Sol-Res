@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
+import com.freetymekiyan.algorithms.utils.Utils.ListNode;
+
 /**
  * Given a sorted linked list, delete all duplicates such that each element
  * appear only once.
@@ -43,14 +47,5 @@ class RemoveDuplicatesFromSortedList {
             if (cur != null) cur = cur.next;
         }
         return dummyHead.next;
-    }
-
-    public class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
     }
 }

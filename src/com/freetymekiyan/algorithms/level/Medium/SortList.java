@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
+import com.freetymekiyan.algorithms.utils.Utils.ListNode;
+
 /**
  * Sort a linked list in O(n log n) time using constant space complexity.
  *
@@ -25,7 +29,7 @@ class SortList {
         head = mergeSort(dummy, head, len);
         return head;
     }
-    
+
     /**
      * Cut into two halves
      * Sort left half first, move to right half's pre head and sort right
@@ -34,14 +38,18 @@ class SortList {
      */
     public ListNode mergeSort(ListNode preHead, ListNode head, int len) {
         if (head == null || len <= 1) return head;
+
         int left = len / 2;
         int right = len - left;
+
         // sort left
         head = mergeSort(preHead, head, left);
+
         // sort right
         ListNode pMid = head;
         for (int i = 0; i < left - 1; i++) pMid = pMid.next;
         mergeSort(pMid, pMid.next, right);
+
         // merge
         ListNode pre1 = preHead;
         ListNode p1 = head;
@@ -67,13 +75,50 @@ class SortList {
         }
         return head;
     }
-    
-    class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
+
+    public ListNode sortList2(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode slow = head, fast = head, firstHalf = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
+        ListNode secondHalf = slow.next;
+        slow.next = null;
+
+        ListNode left = null, right = null;
+        if (firstHalf != secondHalf) {
+            left = sortList(firstHalf);
+            right = sortList(secondHalf);
+        }
+        return mergeTwoLists(left, right);
+    }
+
+    public ListNode mergeTwoLists(ListNode left, ListNode right) {
+        if (right == null)
+            return left;
+        if (left == null)
+            return right;
+
+        ListNode dummy = new ListNode(-1);
+        ListNode ptr = dummy;
+        while (right != null && left != null) {
+            if (right.val < left.val) {
+                ptr.next = right;
+                right = right.next;
+            } else {
+                ptr.next = left;
+                left = left.next;
+            }
+            ptr = ptr.next;
+        }
+
+        if (right != null)
+            ptr.next = right;
+        if (left != null)
+            ptr.next = left;
+
+        return dummy.next;
     }
 }

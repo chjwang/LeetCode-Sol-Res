@@ -83,7 +83,8 @@ class atoi {
      * 214748364, we know that it will overflow only when the current digit is
      * greater than or equal to 8.
      */
-    private static final int maxDiv10 = Integer.MAX_VALUE / 10;
+    private static final int MAX_DIV_10 = Integer.MAX_VALUE / 10;
+    private static final int MAX_LAST_DIGIT = Integer.MAX_VALUE % 10; //8
 
     public int atoi(String str) {
         int n = str.length();
@@ -99,7 +100,7 @@ class atoi {
         int num = 0;
         while (i < n && Character.isDigit(str.charAt(i))) {
             int digit = Character.getNumericValue(str.charAt(i));
-            if (num > maxDiv10 || num == maxDiv10 && digit >= 8) {
+            if (num > MAX_DIV_10 || num == MAX_DIV_10 && digit >= MAX_LAST_DIGIT) {
                 return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
             }
             num = num * 10 + digit;

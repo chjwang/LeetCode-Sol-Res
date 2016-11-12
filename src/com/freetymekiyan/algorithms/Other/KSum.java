@@ -33,7 +33,7 @@ class KSum {
      * Base case when k == 2, use 2 pointers and add it to result
      * If k > 2, from position to the end of array
      * Get k - 1 sum from recursive call first
-     * Then combine current number with results of k-1 sum and add to result
+     * Then dfs current number with results of k-1 sum and add to result
      */
     public List<List<Integer>> kSum(int[] num, int k, int target, int pos) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();

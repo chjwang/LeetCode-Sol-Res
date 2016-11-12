@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +21,7 @@ public class ImplementTrie {
 
         // Initialize your data structure here.
         public TrieNode() {
-            links = new TrieNode[26];
+            links = new TrieNode[R];
         }
 
         public boolean hasLink(char ch) {

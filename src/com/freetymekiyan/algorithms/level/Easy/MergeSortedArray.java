@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Given two sorted integer arrays A and B, merge B into A as one sorted array.
  * 
@@ -17,17 +19,25 @@ class MergeSortedArray {
      * Merge from behind
      */
     private void merge(int A[], int m, int B[], int n) {
-        if (n == 0) return;
-        while (m > 0 && n > 0) {
-            if (A[m - 1] > B[n - 1]) {
-                A[m + n - 1] = A[m - 1];
-                m--;
+        if (n == 0)
+            return;
+
+        int i = n-1, j = m-1;
+
+        while (i > 0 && j > 0) {
+            if (A[i] > B[j]) {
+                A[i + j + 1] = A[i];
+                i--;
             } else {
-                A[m + n - 1] = B[n - 1];
-                n--;
+                A[i + j + 1] = B[j];
+                j--;
             }
         }
-        /*still elements in B*/
-        while (n > 0) A[n - 1] = B[n-- - 1];
+
+        /* remaining elements in B */
+        while (j >= 0) {
+            A[j] = B[j];
+            j--;
+        }
     }
 }

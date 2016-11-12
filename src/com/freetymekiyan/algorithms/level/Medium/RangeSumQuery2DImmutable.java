@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given a 2D matrix <i>matrix</>, find the sum of the elements inside the rectangle defined by its upper left corner
  * (row1,
@@ -29,6 +31,39 @@
  * Similar Problems: (E) Range Sum Query - Immutable, (H) Range Sum Query 2D - Mutable
  */
 public class RangeSumQuery2DImmutable {
+    /**
+     Understand the problem:
+     Construct a 2D array sums[row+1][col+1]
+     (notice: we add additional blank row sums[0][col+1]={0} and blank column sums[row+1][0]={0} to
+     remove the edge case checking), so, we can have the following definition
+
+     sums[i+1][j+1] represents the sum of area from matrix[0][0] to matrix[i][j]
+
+     To calculate sums, the ideas as below
+     +-----+-+-------+     +--------+-----+     +-----+---------+     +-----+--------+
+     |     | |       |     |        |     |     |     |         |     |     |        |
+     |     | |       |     |        |     |     |     |         |     |     |        |
+     +-----+-+       |     +--------+     |     |     |         |     +-----+        |
+     |     | |       |  =  |              |  +  |     |         |  -  |              |
+     +-----+-+       |     |              |     +-----+         |     |              |
+     |               |     |              |     |               |     |              |
+     |               |     |              |     |               |     |              |
+     +---------------+     +--------------+     +---------------+     +--------------+
+
+     sums[i][j]      =    sums[i-1][j]    +     sums[i][j-1]    -   sums[i-1][j-1]   + matrix[i-1][j-1]
+
+     So, we use the same idea to find the specific area's sum.
+     +---------------+   +--------------+   +---------------+   +--------------+   +--------------+
+     |               |   |         |    |   |   |           |   |         |    |   |   |          |
+     |   (r1,c1)     |   |         |    |   |   |           |   |         |    |   |   |          |
+     |   +------+    |   |         |    |   |   |           |   +---------+    |   +---+          |
+     |   |      |    | = |         |    | - |   |           | - |      (r1,c2) | + |   (r1,c1)    |
+     |   |      |    |   |         |    |   |   |           |   |              |   |              |
+     |   +------+    |   +---------+    |   +---+           |   |              |   |              |
+     |        (r2,c2)|   |       (r2,c2)|   |   (r2,c1)     |   |              |   |              |
+     +---------------+   +--------------+   +---------------+   +--------------+   +--------------+
+     *
+      */
     public class NumMatrix {
 
         /**

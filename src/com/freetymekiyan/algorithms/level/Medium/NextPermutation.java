@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -32,11 +34,22 @@ class NextPermutation {
     public void nextPermutation(int[] num) {
         if (num == null || num.length < 2) return;
         for (int i = num.length - 2; i >= 0; i--) {
+
+            // find the partition number (the first number which violates the increasing trend - counting backwards)
             if (num[i] < num[i + 1]) {
                 int j = num.length - 1;
-                for (; j > i; j--) if (num[j] > num[i]) break;
+
+                // find the change number (the first number greater than the partition number - counting backwards)
+                for (; j > i; j--)
+                    if (num[j] > num[i])
+                        break;
+
+                // swap partition number with change number
                 swap(num, i, j);
+
+                // reverse all numbers on right side of partiton index to get the minimum starting with patition index
                 reverse(num, i + 1);
+
                 return;
             }
         }

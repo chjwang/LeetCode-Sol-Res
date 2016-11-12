@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 import java.util.*;
 
 /**
@@ -35,22 +37,24 @@ class LevelOrderBottomUp {
      * addRecursive curLevel to first of result each time to get reverse order
      */
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        List<List<Integer>> res = new LinkedList<List<Integer>>();
+        List<List<Integer>> res = new LinkedList<>();
         if (root == null) return res;
         
         /*store the nodes of thie level*/
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         while (!q.isEmpty()) {
             int size = q.size();
-            List<Integer> curLevel = new ArrayList<Integer>();
+            List<Integer> levelList = new ArrayList<>();
             for (int i = 0; i < size; i++) {
                 TreeNode n = q.poll();
-                curLevel.add(n.val);
-                if (n.left != null) q.add(n.left);
-                if (n.right != null) q.add(n.right);
+                levelList.add(n.val);
+                if (n.left != null)
+                    q.add(n.left);
+                if (n.right != null)
+                    q.add(n.right);
             }
-            result.add(0, curLevel);
+            res.add(0, levelList);
         }
 
         return res; 

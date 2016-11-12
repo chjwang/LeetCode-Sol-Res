@@ -1,3 +1,9 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 import java.util.Stack;
 
 /**
@@ -19,7 +25,7 @@ class EvaluateReversePolish {
         // String[] tokens = {"4", "13", "5", "/", "+"};
         String[] tokens = {"3", "-4", "+"};
         EvaluateReversePolish e = new EvaluateReversePolish();
-        System.out.println(e.evalRPN(tokens));
+        System.out.println(e.evaluateRPN(tokens));
     }
 
     /**
@@ -31,43 +37,59 @@ class EvaluateReversePolish {
      * stack until we encounter an operator, which we pop the top two values
      * from the stack. We then evaluate the operator, with the values as
      * arguments and push the result back onto the stack.
+     *
+     * @param tokens
+     * @return
      */
-    public int evalRPN(String[] tokens) {
-        if (tokens == null || tokens.length == 0) return 0;
-        Stack<String> s = new Stack<String>();
+    public int evaluateRPN(String[] tokens) {
+        if (tokens == null || tokens.length == 0)
+            return 0;
+        Deque<Integer> stack = new ArrayDeque<>();
+
         int len = tokens.length;
         for (int i = 0; i < len; i++) {
             String cur = tokens[i];
-            if (isOperator(cur)) {
-                int t2 = Integer.parseInt(s.pop());
-                int t1 = Integer.parseInt(s.pop());
-                int res = calculate(t1, t2, cur);
-                s.push(Integer.toString(res));
-            } else s.push(cur);
+            try {
+                if (isOperator(cur)) {
+                    int t2 = stack.pop();
+                    int t1 = stack.pop();
+                    int res = calculate(t1, t2, cur);
+                    stack.push(res);
+                } else {
+                    stack.push(Integer.parseInt(cur));
+                }
+            } catch (NoSuchElementException | InvalidOperatorException ex) {
+                throw new IllegalArgumentException("invalid reverse polish exp input");
+            }
         }
-        return Integer.valueOf(s.peek());
+        return stack.peek();
     }
 
     /**
      * Helper function to check whether a token is operator or not
      */
     private boolean isOperator(String c) {
-        if ("+".equalsIgnoreCase(c)) return true;
-        if ("-".equalsIgnoreCase(c)) return true;
-        if ("*".equalsIgnoreCase(c)) return true;
-        if ("/".equalsIgnoreCase(c)) return true;
-        return false;
+        return "+".equals(c) || "-".equals(c) || "*".equals(c) || "/".equals(c);
     }
 
     /**
      * Helper function to do calculation
      */
-    private int calculate(int t1, int t2, String operator) {
+    private int calculate(int t1, int t2, String operator) throws InvalidOperatorException {
         int res = 0;
-        if (operator.equalsIgnoreCase("+")) res = t1 + t2;
-        else if (operator.equalsIgnoreCase("-")) res = t1 - t2;
-        else if (operator.equalsIgnoreCase("*")) res = t1 * t2;
-        else if (operator.equalsIgnoreCase("/")) res = t1 / t2;
+        if ("+".equals(operator))
+            res = t1 + t2;
+        else if ("-".equals(operator))
+            res = t1 - t2;
+        else if ("*".equals(operator))
+            res = t1 * t2;
+        else if ("/".equals(operator))
+            res = t1 / t2;
+        else
+            throw new InvalidOperatorException();
         return res;
+    }
+
+    class InvalidOperatorException extends Exception {
     }
 }

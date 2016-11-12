@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given an array where elements are sorted in ascending order, convert it to a
  * <strong>height balanced</strong> BST.

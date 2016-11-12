@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Say you have an array for which the ith element is the price of a given
  * stock on day i.
@@ -46,12 +48,10 @@ class BestTimeStock {
         int max = 0;
         int len = prices.length;
         int[] history = new int[len];
-        for (int i = 0; i < len - 1; i++) {
+        for (int i = 1; i < len - 1; i++) {
             min = min < prices[i] ? min : prices[i];
-            if (i > 0) { // skip first day
-                history[i] = Math.max(history[i - 1], prices[i] - min);
-                max = history[i] > max ? history[i] : max;
-            }
+            history[i] = Math.max(history[i - 1], prices[i] - min);
+            max = history[i] > max ? history[i] : max;
         }
         return max;
     }

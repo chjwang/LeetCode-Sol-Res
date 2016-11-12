@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given a linked list and a value x, partition it such that all nodes less
  * than x come before nodes greater than or equal to x.
@@ -46,7 +48,7 @@ class PartitionList {
     /**
      * Move greater and equal value nodes to tail
      */
-    public ListNode partition(ListNode head, int x) {
+    public ListNode partition2(ListNode head, int x) {
         if (head == null || head.next == null) return head; // too short
         ListNode dummy = new ListNode(0); // create a dummy node
         dummy.next = head;

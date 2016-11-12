@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -30,7 +32,8 @@ class CombinationSum {
      */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
-        if (candidates == null || candidates.length == 0) return res;
+        if (candidates == null || candidates.length == 0)
+            return res;
         Arrays.sort(candidates);
         helper(candidates, target, 0, new ArrayList<Integer>(), res);
         return res;
@@ -48,9 +51,10 @@ class CombinationSum {
             int newTarget = target - candidates[i];
             if (newTarget >= 0) {
                 comb.add(candidates[i]);
-                helper(candidates, newTarget, i, comb, res); // note i
+                helper(candidates, newTarget, i, comb, res); // note i, which means i can appear multiple times
                 comb.remove(comb.size() - 1);
-            } else break; // too big
+            } else
+                break; // too big
         }
     }
 }

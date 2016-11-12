@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +42,7 @@ public class LargestDivisibleSubset {
      * Finally, recover the list of integers with parent array.
      */
     public List<Integer> largestDivisibleSubset(int[] nums) {
-        if (nums == null) throw new NullPointerException("Input array nums is null");
+        if (nums == null) throw new IllegalArgumentException("Input array nums is null");
         if (nums.length <= 1) throw new IllegalArgumentException("Input array must have at least 2 elements");
 
         Arrays.sort(nums);
@@ -67,5 +69,31 @@ public class LargestDivisibleSubset {
             maxIndex = parent[maxIndex];
         }
         return res;
+    }
+
+    public List<Integer> largestDivisibleSubset2(int[] nums) {
+        List<Integer> ans = new ArrayList<>();
+        if (nums.length == 0) return ans;
+
+        Arrays.sort(nums);
+        int[] dp = new int[nums.length], parent = new int[nums.length];
+        Arrays.fill(dp, 1);
+        Arrays.fill(parent, -1); //当parent数组中某数为-1时，表示这个数自己是一个集合
+        int max_index = 0, max_dp = 1;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i - 1 ; j >= 0 ; j--) {
+                if (nums[i] % nums[j] == 0 && dp[j] + 1 > dp[i]) {
+                    dp[i] = dp[j] + 1;
+                    parent[i] = j;
+                }
+            }
+            if (max_dp < dp[i]) {
+                max_dp = dp[i];
+                max_index = i;
+            }
+        }
+        for (int i = max_index; i != -1; i = parent[i])
+            ans.add(nums[i]);
+        return ans;
     }
 }

@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -18,7 +20,7 @@ class Permutations {
      * 
      */
     public static List<List<Integer>> permute(int[] num) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        List<List<Integer>> res = new ArrayList<>();
         Arrays.sort(num);
         permute(num, 0, res);
         return res;
@@ -27,7 +29,8 @@ class Permutations {
     public static void permute(int[] num, int level, List<List<Integer>> res) {
         if (level == num.length) {
             List<Integer> row = new ArrayList<Integer>();
-            for (int a : num) row.add(a);
+            for (int a : num)
+                row.add(a);
             res.add(row);
             return;
         }

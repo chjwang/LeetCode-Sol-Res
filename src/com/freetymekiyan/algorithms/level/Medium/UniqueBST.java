@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given n, how many structurally unique BST's (binary search trees) that store
  * values 1...n?
@@ -45,7 +47,7 @@ class UniqueBST {
     /**
      * Catalan Number
      */
-    public int numTrees(int n) {
+    public int numTrees2(int n) {
         if (n == 0 || n == 1 || n == 2) return n;
         int res = 2;
         for (int i = 3; i <= n; i++)

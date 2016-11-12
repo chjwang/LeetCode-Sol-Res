@@ -24,7 +24,7 @@ class UniqueBST2 {
      * the left subtree will contain elements 1 to (i-1)
      * and the right subtree will contain elements (i+1) to n. 
      * use recursive calls to get back all possible trees for left and right 
-     * subtrees and combine them in all possible ways with the root.
+     * subtrees and dfs them in all possible ways with the root.
      */
     public List<TreeNode> generateTrees(int n) {
         return genTrees(1, n);

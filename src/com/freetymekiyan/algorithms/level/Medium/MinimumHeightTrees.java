@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -63,6 +65,8 @@ class MinimumHeightTrees {
         }
 
         while (n > 2) {
+            // each loop removes all leaf nodes for current height level
+            // the last one or two left are root
             int numLeaf = leaves.size();
             n -= numLeaf;
             for (int i = 0; i < numLeaf; i++) {

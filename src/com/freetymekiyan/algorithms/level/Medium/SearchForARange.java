@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given a sorted array of integers, find the starting and ending position of a
  * given target value.
@@ -46,9 +48,12 @@ class SearchForARange {
     private int binarySearch(int[] A, int left, int right, int target) {
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            if (A[mid] == target) return mid;
-            else if (A[mid] > target) right = mid - 1;
-            else left = mid + 1;
+            if (A[mid] == target)
+                return mid;
+            else if (A[mid] > target)
+                right = mid - 1;
+            else
+                left = mid + 1;
         }
         return -1;
     }

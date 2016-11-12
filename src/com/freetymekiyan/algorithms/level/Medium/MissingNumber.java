@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given an array containing n distinct numbers taken from 0, 1, 2, ..., n, find the one that is missing from the array.
  *
@@ -19,9 +21,9 @@ public class MissingNumber {
      * Then substract it from the sum of 0 ~ n
      */
     public int missingNumber1(int[] nums) {
-        int res = nums.length * (nums.length + 1) / 2; // may overflow
+        long res = nums.length * (nums.length + 1) / 2; // int may overflow
         for (int n : nums) res -= n;
-        return res;
+        return (int) res;
     }
 
     /**

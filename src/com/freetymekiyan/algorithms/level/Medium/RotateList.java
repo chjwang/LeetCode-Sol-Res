@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
+import com.freetymekiyan.algorithms.utils.Utils.ListNode;
+
 /**
  * Given a list, rotate the list to the right by k places, where k is
  * non-negative.
@@ -22,30 +26,28 @@ class RotateList {
      * Set slow.next to null to unlink the list
      */
     public static ListNode rotateRight(ListNode head, int n) {
-        if (head == null || head.next == null) return head;
+        if (head == null || head.next == null)
+            return head;
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode fast = dummy, slow = dummy;
+
         // get length and move fast to the end of list
         int len;
-        for (len = 0; fast.next != null; len++) fast = fast.next;
+        for (len = 0; fast.next != null; len++)
+            fast = fast.next;
+
         // get the len-n%len th node
-        for (int j = len - n % len; j > 0; j--) slow = slow.next;
+        for (int j = len - n % len; j > 0; j--)
+            slow = slow.next;
+
         fast.next = dummy.next; 
         dummy.next = slow.next;
+
         slow.next = null; // break linkedlist
         return dummy.next;
     }
-    
-    static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-    }
-    
+
     /**
      * My own implementation
      * Calculate length of list, then adjust n in range
@@ -72,7 +74,7 @@ class RotateList {
         return newHead;
     }
     
-    int listLength(ListNode head) {
+    static int listLength(ListNode head) {
         ListNode cur = head;
         int res = 0;
         while (cur != null) {

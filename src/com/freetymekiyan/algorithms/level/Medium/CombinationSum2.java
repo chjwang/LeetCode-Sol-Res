@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,11 +54,13 @@ class CombinationSum2 {
             int newTarget = target - num[i];
             if (newTarget >= 0) {
                 comb.add(num[i]);
-                combinationSum2(num, newTarget, i + 1, comb, result);
+                combinationSum2(num, newTarget, i + 1, comb, result); // i+1, which means i only appear once
                 comb.remove(comb.size() - 1);
-            } else break;
+            } else
+                break;
             // skip dups, note the range
-            while (i < num.length - 1 && num[i] == num[i + 1]) i++;
+            while (i < num.length - 1 && num[i] == num[i + 1])
+                i++;
         }
     }
 }

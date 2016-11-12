@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ class BTInOrder {
      */
     public static List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<Integer>();
-        Stack<TreeNode> s = new Stack<TreeNode>();
+        Stack<TreeNode> s = new Stack<>();
         while (!s.isEmpty() || root != null) {
             // check whether current node is null
             if (root != null) { // current node is not null

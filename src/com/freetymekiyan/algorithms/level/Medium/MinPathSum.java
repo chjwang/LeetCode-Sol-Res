@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Given a m x n grid filled with non-negative numbers, find a path from top
  * left to bottom right which minimizes the sum of all numbers along its path.
@@ -16,7 +18,7 @@ class MinPathSum {
     
     /**
      * DP. bottom-up
-     * row by row, use an array to store values
+     * row by row, left to right, use an array to store values
      */
     public static int minPathSum(int[][] grid) {
         if (grid == null || grid.length == 0) return 0;

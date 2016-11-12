@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Given a binary tree and a sum, determine if the tree has a root-to-leaf path
  * such that adding up all the values along the path equals the given sum.
@@ -31,7 +33,9 @@ class PathSum {
         if (root == null) return false; // root == null
         sum -= root.val; // update sum
         // leaf? sum == 0? left subtree? right subtree?
-        return root.left == null && root.right == null && sum == 0 || hasPathSum(root.left, sum) || hasPathSum(root.right, sum); 
+        return root.left == null && root.right == null && sum == 0 ||
+                hasPathSum(root.left, sum) ||
+                hasPathSum(root.right, sum);
     }
     
     public class TreeNode {

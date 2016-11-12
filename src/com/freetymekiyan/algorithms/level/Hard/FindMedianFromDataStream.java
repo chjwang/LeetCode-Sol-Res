@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -37,23 +36,29 @@ public class FindMedianFromDataStream {
 
     static class MedianFinder {
 
-        // smaller half, max heap
-        private Queue<Integer> small = new PriorityQueue<>(Collections.reverseOrder());
         // larger half, min heap
-        private Queue<Integer> large = new PriorityQueue<>();
+        private Queue<Integer> largeMinHeap = new PriorityQueue<>();
+        // smaller half, max heap
+        private Queue<Integer> smallMaxHeap = new PriorityQueue<>(Collections.reverseOrder());
 
-        // Adds a number into the data structure.
+        /**
+         * Adds a number into the data structure.
+         *
+         * @param num
+         */
         public void addNum(int num) {
-            small.offer(num);
-            large.offer(small.poll());
-            if (small.size() < large.size()) {
-                small.offer(large.poll());
+            smallMaxHeap.offer(num);
+            largeMinHeap.offer(smallMaxHeap.poll());
+            if (smallMaxHeap.size() < largeMinHeap.size()) {
+                smallMaxHeap.offer(largeMinHeap.poll());
             }
         }
 
         // Returns the median of current data stream
         public double findMedian() {
-            return small.size() == large.size() ? small.peek() + (large.peek() - small.peek()) / 2.0 : small.peek();
+            Integer smallMed = smallMaxHeap.peek();
+            Integer largeMed = largeMinHeap.peek();
+            return smallMaxHeap.size() == largeMinHeap.size() ? (largeMed + smallMed) / 2.0 : smallMed;
         }
 
         // Your MedianFinder object will be instantiated and called as such:

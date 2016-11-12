@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Find the total area covered by two rectilinear rectangles in a 2D plane.
  * <p>

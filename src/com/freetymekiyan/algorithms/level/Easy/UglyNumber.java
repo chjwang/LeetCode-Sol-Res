@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

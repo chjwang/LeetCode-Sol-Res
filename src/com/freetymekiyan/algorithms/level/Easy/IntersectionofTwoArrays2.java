@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,17 +29,17 @@ public class IntersectionofTwoArrays2 {
      * Count should be updated when an intersection is found.
      */
     public int[] intersect(int[] nums1, int[] nums2) {
-        Map<Integer, Integer> count = new HashMap<>();
+        Map<Integer, Integer> countMap = new HashMap<>();
         for (int n : nums1) {
-            count.put(n, count.containsKey(n) ? count.get(n) + 1 : 1);
+            countMap.put(n, countMap.containsKey(n) ? countMap.get(n) + 1 : 1);
         }
         List<Integer> intersections = new ArrayList<>(Math.min(nums1.length, nums2.length));
         for (int n : nums2) {
-            if (count.containsKey(n)) {
+            if (countMap.containsKey(n)) {
                 intersections.add(n);
-                count.put(n, count.get(n) - 1);
-                if (count.get(n) == 0)
-                    count.remove(n);
+                countMap.put(n, countMap.get(n) - 1);
+                if (countMap.get(n) == 0)
+                    countMap.remove(n);
             }
         }
         int[] res = new int[intersections.size()];

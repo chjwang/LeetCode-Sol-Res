@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
+import com.freetymekiyan.algorithms.utils.Utils.ListNode;
+
 /**
  * Given a singly linked list L: L0→L1→…→Ln-1→Ln,
  * reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
@@ -44,7 +48,7 @@ class ReorderList {
      * Find mid point, then split list into 2 halves
      * Reverse latter half, then merge two lists
      */
-    private void reorderList(ListNode head) {
+    private void reorderList2(ListNode head) {
         if (head == null || head.next == null) return;
         // find mid point use runner's technique
         ListNode mid = head;
@@ -95,14 +99,5 @@ class ReorderList {
             cur = curNext;
         }
         return;
-    }
-
-    class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
     }
 }

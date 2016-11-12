@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
+import java.util.Arrays;
+
 /**
  * Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
  *
@@ -29,10 +33,10 @@ public class RangeSumQueryImmutable {
         private int[] nums;
 
         public NumArray(int[] nums) {
-            for (int i = 1; i < nums.length; i++) {
-                nums[i] += nums[i - 1];
+            this.nums = Arrays.copyOf(nums, nums.length);
+            for (int i = 1; i < this.nums.length; i++) {
+                this.nums[i] += this.nums[i - 1];
             }
-            this.nums = nums;
         }
 
         public int sumRange(int i, int j) {

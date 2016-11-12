@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Given a non-negative number represented as an array of digits,
  * <strong>plus one</strong> to the number.

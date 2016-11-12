@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Given a string s consists of upper/lower-case alphabets and empty space
  * characters ' ', return the length of last word in the string.
@@ -31,21 +33,25 @@ class LengthOfLastWord {
      * Start counting from non-space char
      * Return when next space is met and length is not zero
      */
-    public int lengthOfLastWord(String s) {
+    public static int lengthOfLastWord(String s) {
         if (s == null || s.length() == 0)  return 0;
 
         int len = s.length();
         int count = 0;
 
         for (int i = len - 1; i >= 0; i--) {
-            if (s.charAt(i) != ' ') count++;
-            if (s.charAt(i) == ' ' && count != 0)  return count;
+            if (s.charAt(i) != ' ')
+                count++;
+            else if (count != 0)
+                return count;
+            else
+                continue;
         }
         return count;
     }
 
     // mine, trim and check from back
-    public static int lengthOfLastWord(String s) {
+    public static int lengthOfLastWord2(String s) {
         s = s.trim(); // remove front and trailing spaces
         char space = ' ';
         if (s.indexOf(space) == -1) return s.length(); // dont have a space

@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
 import java.util.*;
 
 /**
@@ -51,12 +55,5 @@ class BSTIterator {
             s.push(root);
             root = root.left;
         }
-    }
-    
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
     }
 }

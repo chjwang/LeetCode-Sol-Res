@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -48,7 +50,10 @@ class CloneGraph {
         q.add(node);
         while (!q.isEmpty()) { // BFS
             UndirectedGraphNode cur = q.poll();
-            if (!map.containsKey(cur.label)) map.put(cur.label, new UndirectedGraphNode(cur.label)); // put in map to set visited
+            if (!map.containsKey(cur.label))
+                map.put(cur.label, new UndirectedGraphNode(cur.label)); // put in map to set visited
+            UndirectedGraphNode curClone = map.get(cur.label);
+
             if (cur.neighbors != null) {
                 for (UndirectedGraphNode n : cur.neighbors) {
                     if (!map.containsKey(n.label)) {
@@ -56,7 +61,7 @@ class CloneGraph {
                         map.put(n.label, new UndirectedGraphNode(n.label));
                     }
                     // add to neighbors
-                    map.get(cur.label).neighbors.add(map.get(n.label));
+                    curClone.neighbors.add(map.get(n.label));
                 }
             }
         }
@@ -69,7 +74,7 @@ class CloneGraph {
 
          UndirectedGraphNode(int x) {
              label = x;
-             neighbors = new ArrayList<UndirectedGraphNode>();
+             neighbors = new ArrayList<>();
          }
     }
 }

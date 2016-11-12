@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Follow up for "Search in Rotated Sorted Array":
  * What if duplicates are allowed?

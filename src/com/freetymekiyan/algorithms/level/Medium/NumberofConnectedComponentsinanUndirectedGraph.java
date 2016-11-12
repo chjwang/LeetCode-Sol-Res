@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,7 +49,8 @@ public class NumberofConnectedComponentsinanUndirectedGraph {
     }
 
     private int root(int i) {
-        while (i != id[i]) i = id[i];
+        while (i != id[i])
+            i = id[i];
         return i;
     }
 

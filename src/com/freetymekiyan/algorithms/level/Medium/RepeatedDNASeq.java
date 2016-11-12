@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -27,7 +29,7 @@ class RepeatedDNASeq {
      * Design a hash function according to observation
      * A: 0x41, C: 0x43, G: 0x47, T: 0x54, last 3 bits are different
      * 10 chars, each 3 bits, 10 x 3 = 30 bits < 32
-     * 
+     *
      * Key: an int to record the bit mask of current substring, 
      * Value: a boolean, true means showed up before, false means already added
      * Update the map

@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Given a <strong>sorted</strong> array, remove the duplicates in place such 
  * that each element appear only once and return the new length.

@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.easy;
+package com.freetymekiyan.algorithms.level.Easy;
 
 import java.util.HashMap;
 import java.util.Map;

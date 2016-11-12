@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.datastructures;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;

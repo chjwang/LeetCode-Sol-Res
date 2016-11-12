@@ -1,3 +1,12 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
  * Given a binary tree, return the zigzag level order traversal of its nodes'
  * values. (ie, from left to right, then right to left for the next level and
@@ -36,18 +45,20 @@ class BinaryTreeZigZag {
         if (root == null) return res;
         Queue<TreeNode> q = new LinkedList<TreeNode>();
         q.add(root);
-        boolean toggle = false;
+        boolean right2Left = false;
         while (!q.isEmpty()) {
             List<Integer> curLevel = new ArrayList<Integer>();
             int size = q.size();
             for (int i = 0; i < size; i++) {
                 TreeNode n = q.poll();
-                if (!toggle) curLevel.add(n.val);
-                else curLevel.add(0, n.val);
+                if (!right2Left)
+                    curLevel.add(n.val);
+                else
+                    curLevel.add(0, n.val);
                 if (n.left != null) q.add(n.left);
                 if (n.right != null) q.add(n.right);
             }
-            toggle = !toggle;
+            right2Left = !right2Left;
             res.add(curLevel);
         }
         return res;
@@ -59,45 +70,29 @@ class BinaryTreeZigZag {
      * level or not
      * Update flag after each level
      */
-    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        if (root == null) return res;
-        List<TreeNode> nextLevel = new ArrayList<TreeNode>();
-        nextLevel.add(root);
+    public List<List<Integer>> zigzagLevelOrder2(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null)
+            return res;
+
+        List<TreeNode> level = new ArrayList<>();
+        level.add(root);
         boolean toggle = false;
+
         while (!level.isEmpty()) {
-            List<Integer> curLevel = new ArrayList<Integer>();
-            List<TreeNode> nextLevel = new ArrayList<TreeNode>();
+            List<Integer> curLevel = new ArrayList<>();
+            List<TreeNode> nextLevel = new ArrayList<>();
+
             while (!level.isEmpty()) {
                 TreeNode temp = level.remove(0);
-                if (!toggle) curLevel.add(temp.val);
-                else curLevel.add(0, temp.val); // insert to front
+                if (!toggle)
+                    curLevel.add(temp.val);
+                else
+                    curLevel.add(0, temp.val); // insert to front
                 if (temp.left != null) nextLevel.add(temp.left);
                 if (temp.right != null) nextLevel.add(temp.right);
             }
-            res.add(curLevel);
-            level = nextLevel;
-            toggle = toggle ? false : true;
-        }
-        return res;
-    }
-    
-    public List<List<Integer>> zigzagLevelOrderB(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        if (root == null) return res;
-        List<TreeNode> nextLevel = new ArrayList<TreeNode>();
-        nextLevel.add(root);
-        boolean toggle = false;
-        while (!level.isEmpty()) {
-            List<Integer> curLevel = new ArrayList<Integer>();
-            List<TreeNode> nextLevel = new ArrayList<TreeNode>();
-            while (!level.isEmpty()) {
-                TreeNode temp = level.remove(0);
-                if (!toggle) curLevel.add(temp.val);
-                else curLevel.add(0, temp.val); // insert to front
-                if (temp.left != null) nextLevel.add(temp.left);
-                if (temp.right != null) nextLevel.add(temp.right);
-            }
+
             res.add(curLevel);
             level = nextLevel;
             toggle = toggle ? false : true;

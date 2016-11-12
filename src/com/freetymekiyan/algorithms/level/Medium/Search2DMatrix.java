@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Write an efficient algorithm that searches for a value in an m x n matrix.
  * This matrix has the following properties:
@@ -46,20 +48,29 @@ class Search2DMatrix {
         int mid;
         while (left <= right) {
             mid = left + (right - left) / 2;
-            if (matrix[mid][0] == target) return true;
-            else if (matrix[mid][0] > target) right = mid - 1;
-            else left = mid + 1;
+            if (matrix[mid][0] == target)
+                return true;
+            else if (matrix[mid][0] > target)
+                right = mid - 1;
+            else
+                left = mid + 1;
         }
         // row index is left - 1
-        if (left - 1 < 0 || left - 1 >= matrix.length) return false;
+        if (left - 1 < 0 || left - 1 >= matrix.length)
+            return false;
+
         int row = left - 1;
         left = 0;
         right = matrix[row].length - 1;
+
         while (left <= right) {
             mid = left + (right - left) / 2;
-            if (matrix[row][mid] == target) return true;
-            else if (matrix[row][mid] > target) right = mid - 1;
-            else left = mid + 1;
+            if (matrix[row][mid] == target)
+                return true;
+            else if (matrix[row][mid] > target)
+                right = mid - 1;
+            else
+                left = mid + 1;
         }
         return false;
     }
@@ -79,9 +90,12 @@ class Search2DMatrix {
         int mid;
         while (left <= right) {
             mid = left + (right - left) / 2;
-            if (matrix[mid / m][mid % m] == target) return true;
-            else if (matrix[mid / m][mid % m] > target) right = mid - 1;
-            else left = mid + 1;
+            if (matrix[mid / m][mid % m] == target)
+                return true;
+            else if (matrix[mid / m][mid % m] > target)
+                right = mid - 1;
+            else
+                left = mid + 1;
         }
         return false;
     }

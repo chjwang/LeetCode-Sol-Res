@@ -32,17 +32,20 @@ class ValidParenthese {
         Stack<Character> stk = new Stack<>();
         for (Character c : s.toCharArray()) {
             if (!isParenthese(c)) continue;
-            if ("({[".indexOf(c) != -1) { // push left paren
+            if (isaLeftParenthese(c)) { // push left paren
                 stk.push(c);
             } else {
-                if (!stk.isEmpty() && isMatch(stk.peek(), c)) {
+                if (!stk.isEmpty() && isMatch(stk.peek(), c))
                     stk.pop();
-                } else {
+                else
                     return false;
-                }
             }
         }
         return stk.isEmpty();
+    }
+
+    private boolean isaLeftParenthese(Character c) {
+        return "({[".indexOf(c) != -1;
     }
 
     private boolean isParenthese(char c) {

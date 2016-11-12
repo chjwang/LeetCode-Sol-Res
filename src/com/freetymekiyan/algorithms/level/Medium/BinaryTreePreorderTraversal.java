@@ -1,4 +1,6 @@
-package gitLeetCode;
+package com.freetymekiyan.algorithms.level.Medium;
+
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +53,7 @@ public class BinaryTreePreorderTraversal {
         if (root == null) {
             return res;
         }
-        Stack<TreeNode> stack = new Stack<TreeNode>();
+        Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode node = stack.pop();
@@ -67,7 +69,6 @@ public class BinaryTreePreorderTraversal {
     }
 
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
         TreeNode res = new TreeNode(0);
         res.left = new TreeNode(2);
         res.right = new TreeNode(1);

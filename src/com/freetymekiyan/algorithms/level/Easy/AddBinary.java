@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Given two binary strings, return their sum (also a binary string).
  * For example,
