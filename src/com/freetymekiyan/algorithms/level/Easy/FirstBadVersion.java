@@ -43,21 +43,7 @@ public class FirstBadVersion {
     /**
      * Dummy function, just for compilation.
      */
-<<<<<<< HEAD
     public int firstBadVersion2(int n) {
-=======
-    private boolean isBadVersion(int m) {
-        return m > 1;
-    }
-
-    /**
-     * Binary Search. Pruning.
-     * If we know m is a bad version, we can check m - 1 right after that.
-     * If m - 1 is 1, which means that's the only available good version, m would be the first bad version.
-     * If m - 1 is good, then m is the first bad version.
-     */
-    public int firstBadVersionB(int n) {
->>>>>>> 65c45a8ca4844254c0cfb702bf71e83c3c72e0fa
         int l = 1;
         int r = n;
 

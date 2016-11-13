@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 package com.freetymekiyan.algorithms.level.Easy;
-=======
+
 import java.util.Arrays;
->>>>>>> 65c45a8ca4844254c0cfb702bf71e83c3c72e0fa
 
 /**
  * Given a <strong>sorted</strong> array, remove the duplicates in place such 

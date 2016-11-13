@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 package com.freetymekiyan.algorithms.level.Easy;
-=======
-package com.freetymekiyan.algorithms.level.easy;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
->>>>>>> 65c45a8ca4844254c0cfb702bf71e83c3c72e0fa
 
 /**
  * Given two binary strings, return their sum (also ab binary string).

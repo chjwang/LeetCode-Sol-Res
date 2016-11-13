@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 package com.freetymekiyan.algorithms.level.Easy;
-=======
-package com.freetymekiyan.algorithms.level.easy;
->>>>>>> 65c45a8ca4844254c0cfb702bf71e83c3c72e0fa
 
 import org.junit.Test;
 

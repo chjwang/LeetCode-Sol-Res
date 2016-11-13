@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 package com.freetymekiyan.algorithms.level.Hard;
-
-import java.util.*;
-=======
-package com.freetymekiyan.algorithms.level.hard;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
->>>>>>> 65c45a8ca4844254c0cfb702bf71e83c3c72e0fa
 
 /**
  * Given a collection of intervals, merge all overlapping intervals.

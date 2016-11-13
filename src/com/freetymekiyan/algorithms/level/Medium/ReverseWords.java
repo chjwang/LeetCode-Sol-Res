@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 package com.freetymekiyan.algorithms.level.Medium;
-=======
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
->>>>>>> 65c45a8ca4844254c0cfb702bf71e83c3c72e0fa
 
 /**
  * Given an input string, reverse the string word by word.

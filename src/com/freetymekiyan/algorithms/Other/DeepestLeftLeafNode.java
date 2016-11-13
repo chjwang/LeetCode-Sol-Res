@@ -1,10 +1,14 @@
+package com.freetymekiyan.algorithms.Other;
+
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
 /**
  * Given a Binary Tree, find the deepest leaf node that is left child of its 
  * parent.
  * 
  * Tags: Tree, DFS, Backtracking
  */
-class DeepestLeftLeafNode {
+public class DeepestLeftLeafNode {
     public static void main(String[] args) {
         
     }
@@ -12,8 +16,8 @@ class DeepestLeftLeafNode {
     /**
      * 
      */
-    public Node deepestLeftLeaf(Node root) {
-        Node res = null;
+    public TreeNode deepestLeftLeaf(TreeNode root) {
+        TreeNode res = null;
         deepestLeftLeaf(root, 0, 0, false, res);
         return res;
     }
@@ -23,7 +27,7 @@ class DeepestLeftLeafNode {
      * If is left child, is leaf node, and level > maxLevel
      * Update result and maxLevel, then return
      */
-    public void deepestLeftLeaf(Node root, int level, int maxLevel, boolean isLeft, Node res) {
+    public void deepestLeftLeaf(TreeNode root, int level, int maxLevel, boolean isLeft, TreeNode res) {
         if (root == null) return;
         
         if (isLeft && root.left == null && root.right == null && level > maxLevel) {
