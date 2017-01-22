@@ -26,18 +26,17 @@ class Permutations {
         return res;
     }
     
-    public static void permute(int[] num, int level, List<List<Integer>> res) {
-        if (level == num.length) {
-            List<Integer> row = new ArrayList<Integer>();
-            for (int a : num)
-                row.add(a);
+    public static void permute(int[] num, int start, List<List<Integer>> res) {
+        if (start == num.length) {
+            List<Integer> row = new ArrayList<>();
+            for (int a : num) row.add(a);
             res.add(row);
             return;
         }
-        for (int i = level; i < num.length; i++) {
-            swap(num, level, i);
-            permute(num, level + 1, res);
-            swap(num, level, i); // reset
+        for (int i = start; i < num.length; i++) {
+            swap(num, start, i);
+            permute(num, start + 1, res);
+            swap(num, start, i); // backtrack
         }
     }
     
@@ -64,11 +63,11 @@ class Permutations {
         boolean [] isUsed;
         int numLength;
         ArrayList<ArrayList<Integer>> output;
-        ArrayList<Integer> al;
+        ArrayList<Integer> list;
 
         public ArrayList<ArrayList<Integer>> permute(int[] num) {
             numLength = num.length;
-            al = new ArrayList <Integer>();
+            list = new ArrayList <Integer>();
             output = new ArrayList<ArrayList<Integer>>();
             isUsed = new boolean[num.length];
             doPermutation(0, num);
@@ -77,16 +76,18 @@ class Permutations {
         public void doPermutation(int index, int[] num) {
             // base case
             if (index == numLength) {
-                output.add((ArrayList<Integer>)al.clone());
+                output.add((ArrayList<Integer>) list.clone());
                 return;
             }
             for (int i = 0; i < numLength; i++) {
                 if (!isUsed[i]) {
-                    al.add(num[i]); // mark
+                    list.add(num[i]); // mark
                     isUsed[i] = true; // mark
+
                     doPermutation(index + 1, num);
-                    isUsed[i] = false; // reset
-                    al.remove(index); // reset
+
+                    isUsed[i] = false; // backtrack
+                    list.remove(index); // reset
                 }
             }
         }

@@ -30,9 +30,9 @@ public class MyHashtable {
     }
 
     /**
-     * Create a new linkedlist if not in array, add value and set the list
+     * Create a new linkedlist if not in array, addPrereq value and set the list
      * If linkedlist in array, search for the key and update value
-     * If key not found, add a new node with value to the end of list
+     * If key not found, addPrereq a new node with value to the end of list
      */
     public void put(String key, Object value) {
         if (key == null || value == null) throw new IllegalArgumentException();

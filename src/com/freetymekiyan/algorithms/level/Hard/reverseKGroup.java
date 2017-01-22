@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Hard;
+
+import com.freetymekiyan.algorithms.utils.Utils.ListNode;
+
 /**
  * Reverse Nodes in k-Group
  * Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
@@ -13,7 +17,7 @@
  * @author chenshuna
  */
 public class reverseKGroup {
-    public static ListNode reverselist(ListNode pre,ListNode next){
+    public static ListNode reverselist(ListNode pre, ListNode next){
         ListNode last = pre.next;
         ListNode cur = last.next;
         while(cur != next){

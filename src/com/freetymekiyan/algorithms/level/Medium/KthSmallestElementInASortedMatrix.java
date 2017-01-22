@@ -90,10 +90,10 @@ public class KthSmallestElementInASortedMatrix {
         if (i1 > i2 || j1 > j2)
             return false;
 
-        // can be further optimized using binary search to locate j thst satisfies target < matrix[i1][j]
+        // can be further optimized using binary search to locate i thst satisfies target < matrix[i1][i]
 //        int l = Arrays.binarySearch(matrix[i1], j1, j2, target);
 //        if (l < 0) { // -l is the insertion point
-//            return helper(matrix, i1, i2, j1, -l-1, target);
+//            return preOrderHelper(matrix, i1, i2, j1, -l-1, target);
 //        } else
 //            return true;
         for (int j = j1; j <= j2; j++) {

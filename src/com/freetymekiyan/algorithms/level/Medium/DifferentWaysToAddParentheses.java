@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class DifferentWaysToAddParentheses {
     /**
      * Divide and Conquer.
      * Divide the input into sub-strings according to the operator: left and right.
-     * Stop until there is no operator in the string, parse the integer and add it to result list.
+     * Stop until there is no operator in the string, parse the integer and addPrereq it to result list.
      * Then combine left and right result lists with the operator to generate result.
      */
     public List<Integer> diffWaysToCompute(String input) {

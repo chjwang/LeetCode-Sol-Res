@@ -47,7 +47,8 @@ class SortList {
 
         // sort right
         ListNode pMid = head;
-        for (int i = 0; i < left - 1; i++) pMid = pMid.next;
+        for (int i = 0; i < left - 1; i++)
+            pMid = pMid.next;
         mergeSort(pMid, pMid.next, right);
 
         // merge
@@ -55,7 +56,8 @@ class SortList {
         ListNode p1 = head;
         ListNode pre2 = pMid;
         ListNode p2 = pMid.next;
-        if (p1.val > p2.val) head = p2; // switch head
+        if (p1.val > p2.val)
+            head = p2; // switch head
         while (left > 0 && right > 0) {
             // merge second half to first half
             if (p1.val > p2.val) {
@@ -89,8 +91,8 @@ class SortList {
 
         ListNode left = null, right = null;
         if (firstHalf != secondHalf) {
-            left = sortList(firstHalf);
-            right = sortList(secondHalf);
+            left = sortList2(firstHalf);
+            right = sortList2(secondHalf);
         }
         return mergeTwoLists(left, right);
     }
@@ -102,22 +104,22 @@ class SortList {
             return right;
 
         ListNode dummy = new ListNode(-1);
-        ListNode ptr = dummy;
+        ListNode curr = dummy;
         while (right != null && left != null) {
             if (right.val < left.val) {
-                ptr.next = right;
+                curr.next = right;
                 right = right.next;
             } else {
-                ptr.next = left;
+                curr.next = left;
                 left = left.next;
             }
-            ptr = ptr.next;
+            curr = curr.next;
         }
 
         if (right != null)
-            ptr.next = right;
-        if (left != null)
-            ptr.next = left;
+            curr.next = right;
+        else if (left != null)
+            curr.next = left;
 
         return dummy.next;
     }

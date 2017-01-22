@@ -23,7 +23,7 @@ class SearchForARange {
     }
     
     /**
-     * Suppose we have a binary search helper method
+     * Suppose we have a binary search preOrderHelper method
      * With array, start index, end index, and target as arguments
      * We can first search for the target in the whole array
      * If found, then search for its starting position

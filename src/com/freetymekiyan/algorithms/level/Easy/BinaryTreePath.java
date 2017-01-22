@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +29,8 @@ public class BinaryTreePath {
      * Use helper function to do DFS
      */
     public List<String> binaryTreePath1(TreeNode root) {
-        if (root == null) return Collections.emptyList();
+        if (root == null)
+            return Collections.emptyList();
         List<String> res = new ArrayList<>();
         dfs(res, Integer.toString(root.val), root);
         return res;
@@ -35,8 +40,10 @@ public class BinaryTreePath {
         if (root.left == null && root.right == null)
             res.add(path);
 
-        if (root.left != null) dfs(res, path + "->" + root.left.val, root.left);
-        if (root.right != null) dfs(res, path + "->" + root.right.val, root.right);
+        if (root.left != null)
+            dfs(res, path + "->" + root.left.val, root.left);
+        if (root.right != null)
+            dfs(res, path + "->" + root.right.val, root.right);
     }
 
     /**
@@ -65,12 +72,5 @@ public class BinaryTreePath {
         }
 
         return paths;
-    }
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
     }
 }

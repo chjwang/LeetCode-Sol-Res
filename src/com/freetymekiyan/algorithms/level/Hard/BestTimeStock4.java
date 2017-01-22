@@ -21,8 +21,8 @@ class BestTimeStock4 {
         // 2, [3,2,6,5,0,3]
         // 2, [3,3,5,0,0,3,1,4]
         BestTimeStock4 b = new BestTimeStock4();
-        int[] A = new int[]{3, 3, 5, 0, 0, 3, 1, 4};
-        int[] B = new int[]{3, 2, 6, 5, 0, 3};
+        int[] A = {3, 3, 5, 0, 0, 3, 1, 4};
+        int[] B = {3, 2, 6, 5, 0, 3};
         System.out.println(b.maxProfitOpt(2, A));
         System.out.println(b.maxProfit(2, A));
         System.out.println(b.maxProfitOpt(2, B));

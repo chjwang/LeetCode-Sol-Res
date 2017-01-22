@@ -1,44 +1,46 @@
 package com.freetymekiyan.algorithms.level.Medium;
 
+import com.freetymekiyan.algorithms.utils.Utils.ListNode;
+
 /**
  * Sort a linked list using insertion sort.
- * 
+ *
  * Tags: Linkedlist, Sort
  */
 class InsertionSortList {
     public static void main(String[] args) {
-        
+
     }
-    
+
     /**
-     * Check the list one by one to find a node that has smaller value than 
+     * Check the list one by one to find a node that has smaller value than
      * nodes before it and swap
      */
-    public static ListNode insertionSortList(ListNode head) {
-        if (head == null || head.next == null) return head;
-        ListNode pre = new ListNode(0);
-        pre.next = head;
-        
-        for (ListNode p = head.next, prev = head; p != null; prev = p, p = p.next) {
-            for (ListNode c = pre; c.next != p; c = c.next) {
-                if (c.next.val > p.val) { 
-                    prev.next = p.next; // skip p
-                    p.next = c.next; // insert between cur and cur.next
-                    c.next = p;
-                    p = prev; // p is inserted to somewhere in the front, reset
-                    break;
-                }
+    public ListNode insertionSortList(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        ListNode prev = dummy;
+        ListNode node = head;
+
+        while (node != null) {
+            ListNode temp = node.next;
+
+        /* Before insert, the prev is at the last node of the sorted list.
+           Only the last node's value is larger than the current inserting node
+           should we move the temp back to the head*/
+            if (prev.val >= node.val)
+                prev = dummy;
+
+            while (prev.next != null && prev.next.val < node.val) {
+                prev = prev.next;
             }
+
+            // insert between prev and prev.next
+            node.next = prev.next;
+            prev.next = node;
+
+            // prev = dummy; // Don't set prev to the head of the list after insert
+            node = temp;
         }
-        return pre.next;
-    }
-    
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
+        return dummy.next;
     }
 }

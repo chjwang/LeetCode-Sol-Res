@@ -1,7 +1,14 @@
 package com.freetymekiyan.algorithms.level.Medium;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
 
 /**
  * There are a total of n courses you have to take, labeled from 0 to n - 1.
@@ -37,7 +44,7 @@ import java.util.List;
  * Topological Sort.
  * 3. Topological sort could also be done via BFS.
  * <p>
- * Tags: Depth-first Search, Breadth-first Search, Graph, Topological Sort
+ * Tags: Depth-first Search, Breadth-first Search, GraphPrintAllPaths, Topological Sort
  * Similar Problems: (M) Course Schedule, (H) Alien Dictionary, (M) Minimum Height Trees
  */
 public class CourseSchedule2 {
@@ -45,41 +52,42 @@ public class CourseSchedule2 {
     /** Label the topological sort result */
     private int currentLabel;
 
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
-        int[] result = new int[numCourses];
+    public int[] topSort(int numCourses, int[][] prerequisites) {
+        int[] res = new int[numCourses];
         Course[] courses = new Course[numCourses];
         for (int i = 0; i < numCourses; i++) {
             courses[i] = new Course(i);
         }
-        for (int[] prerequisite : prerequisites) {
-            courses[prerequisite[0]].add(courses[prerequisite[1]]);
+        for (int[] prereq : prerequisites) {
+            courses[prereq[0]].addPrereq(courses[prereq[1]]);
         }
 
         for (int i = 0; i < numCourses; i++) {
-            if (isCyclic(courses[i], result)) {
+            if (! isAcyclic(courses[i], res)) {
                 return new int[0];
             }
         }
-        return result;
+        return res;
     }
 
     /**
-     * Check whether a node is cyclic or not
-     * If yes, return true and this graph is not a DAG
-     * If no, go ahead and do the DFS topological sort
+     * Check whether a node is acyclic or not starting DFS from course
+     * If no, return true and this graph is not a DAG
+     * If yes, go ahead and do the DFS topological sort
      */
-    private boolean isCyclic(Course cur, int[] result) {
-        if (cur.tested) return false;
-        if (cur.visited) return true;
-        cur.visited = true;
-        for (Course c : cur.pre) {
-            if (isCyclic(c, result)) { // DFS
-                return true;
+    private boolean isAcyclic(Course course, int[] result) {
+        if (course.validated) return true;
+        if (course.visited) return false;
+
+        course.visited = true;
+        for (Course c : course.prereq) {
+            if (! isAcyclic(c, result)) { // DFS
+                return false;
             }
         }
-        cur.tested = true; // Mark as tested
-        result[currentLabel++] = cur.number; // Add course number to output
-        return false;
+        course.validated = true; // Mark as validated
+        result[currentLabel++] = course.number; // Add course number to output
+        return true;
     }
 
     /**
@@ -88,19 +96,152 @@ public class CourseSchedule2 {
     class Course {
         /** Keep track of whether we already visited this node */
         boolean visited = false;
-        /** Keep track of whether we already tested it's cyclic */
-        boolean tested = false;
+        /** Keep track of whether we already validated it's acyclic starting DFS from this node */
+        boolean validated = false;
         /** Course number */
         int number;
         /** Prerequisite courses */
-        List<Course> pre = new ArrayList<>();
+        List<Course> prereq = new ArrayList<>();
 
         public Course(int i) {
             number = i;
         }
 
-        public void add(Course c) {
-            pre.add(c);
+        public void addPrereq(Course c) {
+            prereq.add(c);
         }
+    }
+
+    // DFS
+    public int[] findOrder1(int numCourses, int[][] prerequisites) {
+        if (numCourses <= 0) return new int[0];
+
+        currentLabel = numCourses - 1;
+
+        int[] result = new int[numCourses];
+
+        // No prerequisites
+        if (prerequisites == null || prerequisites.length == 0) {
+            for (int i = 0; i < numCourses; i++) {
+                result[i] = i;
+            }
+
+            return result;
+        }
+
+        // Convert the edge list to adj. list
+        Map<Integer, List<Integer>> adjList = new HashMap<>();
+        for (int[] edge : prerequisites) {
+            if (adjList.containsKey(edge[1])) {
+                List<Integer> neighbors = adjList.get(edge[1]);
+                neighbors.add(edge[0]);
+                adjList.put(edge[1], neighbors);
+            } else {
+                List<Integer> neighbors = new ArrayList<Integer>();
+                neighbors.add(edge[0]);
+                adjList.put(edge[1], neighbors);
+            }
+        }
+
+        int[] visited = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            if (! toplogicalSorting(i, visited, adjList, result)) {
+                return new int[0];
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     *
+     * @param vertexId
+     * @param visited
+     * @param adjList
+     * @param result
+     * @return false if no topological order exists - cycle exists
+     */
+    private boolean toplogicalSorting(int vertexId, int[] visited,
+                                      Map<Integer, List<Integer>> adjList,
+                                      int[] result) {
+        // on stack
+        if (visited[vertexId] == -1) return false;
+
+        // Has been added into the list (means no cycle doing DFS from this node)
+        if (visited[vertexId] == 1) return true;
+
+        visited[vertexId] = -1;
+        List<Integer> neighbors = adjList.get(vertexId);
+        if (neighbors != null) {
+            for (int neighbor : neighbors) {
+                if (! toplogicalSorting(neighbor, visited, adjList, result))
+                    return false;
+            }
+        }
+
+        result[currentLabel--] = vertexId; // add node to result list
+        visited[vertexId] = 1;
+
+        return true;
+    }
+
+    // BFS
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> adjLists = new ArrayList<List<Integer>>();
+        for (int i = 0; i < numCourses; i++) {
+            adjLists.add(new ArrayList<Integer>());
+        }
+
+        int[] indegrees = new int[numCourses];
+        for (int i = 0; i < prerequisites.length; i++) {
+            adjLists.get(prerequisites[i][1]).add(prerequisites[i][0]);
+            indegrees[prerequisites[i][0]]++;
+        }
+
+        Queue<Integer> q = new LinkedList<Integer>(); // storing vertices whose indegree==0
+        for (int i = 0; i < numCourses; i++) {
+            if (indegrees[i] == 0) q.offer(i);
+        }
+
+        int count = numCourses;
+        while (!q.isEmpty()) {
+            // remove a node from q, remove all edges starting from the node
+            int cur = q.poll();
+            for (int i : adjLists.get(cur)) {
+                indegrees[i]--;
+                if (indegrees[i] == 0) q.offer(i);
+            }
+            count--;
+        }
+
+        return count == 0; // all nodes have been removed
+    }
+
+    // BFS
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> adjLists = new ArrayList<List<Integer>>();
+        for (int i = 0; i < numCourses; i++) adjLists.add(new ArrayList<Integer>());
+
+        int[] indegrees = new int[numCourses];
+        for (int i = 0; i < prerequisites.length; i++) {
+            adjLists.get(prerequisites[i][1]).add(prerequisites[i][0]);
+            indegrees[prerequisites[i][0]]++;
+        }
+
+        Queue<Integer> q = new LinkedList<Integer>();
+        for (int i = 0; i < numCourses; i++) if (indegrees[i] == 0) q.offer(i);
+
+        int[] res = new int[numCourses];
+        int count = 0;
+        while (!q.isEmpty()) {
+            int cur = q.poll();
+            for (int x : adjLists.get(cur)) {
+                indegrees[x]--; if (indegrees[x] == 0) q.offer(x);
+            }
+            res[count++] = cur;
+        }
+
+        if (count == numCourses) return res;
+        return new int[0];
     }
 }

@@ -51,7 +51,7 @@ class EvaluateReversePolish {
             String cur = tokens[i];
             try {
                 if (isOperator(cur)) {
-                    int t2 = stack.pop();
+                    int t2 = stack.pop(); // notice the pop order
                     int t1 = stack.pop();
                     int res = calculate(t1, t2, cur);
                     stack.push(res);

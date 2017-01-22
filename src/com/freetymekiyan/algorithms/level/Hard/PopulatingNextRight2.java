@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Hard;
+
 /**
  * Follow up for problem "Populating Next Right Pointers in Each Node".
  * 
@@ -43,19 +45,27 @@ class PopulatingNextRight2 {
         while (cur != null) {
             nextHead = null;
             prev = null;
+
+            //process level
             while (cur != null) {
                 if (cur.left != null) { // left child
-                    if (prev != null) prev.next = cur.left;
-                    else nextHead = cur.left; // set nextHead
+                    // can introduce dummy node to simplify
+                    if (prev != null)
+                        prev.next = cur.left;
+                    else
+                        nextHead = cur.left; // set nextHead
                     prev = cur.left; // move right
                 }
                 if (cur.right != null) { // right child
-                    if (prev != null) prev.next = cur.right;
-                    else nextHead = cur.right; // set nextHead
+                    if (prev != null)
+                        prev.next = cur.right;
+                    else
+                        nextHead = cur.right; // set nextHead
                     prev = cur.right; // move right
                 }
                 cur = cur.next; // move right to next node in same level
             }
+
             // move to next level
             cur = nextHead;
         }
@@ -100,6 +110,37 @@ class PopulatingNextRight2 {
             }
         }
     }
+
+    public void connect3(TreeLinkNode root) {
+        if (root == null) {
+            return;
+        }
+
+        TreeLinkNode leftEnd = root;
+
+        // Bug 1: don't need " && leftEnd.left != null"
+        while (leftEnd != null) {
+            TreeLinkNode cur = leftEnd;
+
+            TreeLinkNode dummy = new TreeLinkNode(0);
+            TreeLinkNode pre = dummy;
+            while (cur != null) {
+                if (cur.left != null) {
+                    pre.next = cur.left;
+                    pre = cur.left;
+                }
+
+                if (cur.right != null) {
+                    pre.next = cur.right;
+                    pre = cur.right;
+                }
+
+                cur = cur.next;
+            }
+            leftEnd = dummy.next;
+        }
+    }
+
     
     public class TreeLinkNode {
         int val;

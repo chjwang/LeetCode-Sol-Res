@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.Other;
+
 import java.util.*;
 
 /**
@@ -30,10 +32,10 @@ class KSum {
     
     /**
      * Backtracking
-     * Base case when k == 2, use 2 pointers and add it to result
+     * Base case when k == 2, use 2 pointers and addPrereq it to result
      * If k > 2, from position to the end of array
      * Get k - 1 sum from recursive call first
-     * Then dfs current number with results of k-1 sum and add to result
+     * Then dfs current number with results of k-1 sum and addPrereq to result
      */
     public List<List<Integer>> kSum(int[] num, int k, int target, int pos) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
@@ -65,8 +67,8 @@ class KSum {
             List<List<Integer>> k1Sum = kSum(num, k-1, target - num[i], i+1); // get k-1 sum from recursive calls
             for (List<Integer> s : k1Sum) {
                 List<Integer> tuple = new ArrayList<Integer>();
-                tuple.add(num[i]); // add current element
-                tuple.addAll(s); // add k-1 sum
+                tuple.add(num[i]); // addPrereq current element
+                tuple.addAll(s); // addPrereq k-1 sum
                 res.add(tuple);
             }
         }

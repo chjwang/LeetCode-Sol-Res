@@ -25,7 +25,7 @@ class DivideTwoIntegers {
         if (divisor == 1) return dividend;
         if (divisor == -1) return dividend == Integer.MIN_VALUE ? Integer.MAX_VALUE : -dividend;
         final boolean neg = (dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0);
-        long ldividend = Math.abs((long)dividend); // convert to abstract long
+        long ldividend = Math.abs((long)dividend); // convertPostfix2Infix to abstract long
         final long ldivisor = Math.abs((long)divisor);
         int res = 0;
         for (int bit = Integer.SIZE - 1; bit >= 0 && ldividend >= ldivisor; bit--) { // bit from 31 to 0, dividend >= divisor

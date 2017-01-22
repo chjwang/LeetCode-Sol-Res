@@ -1,3 +1,4 @@
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
 /**
  * Given a binary tree containing digits from 0-9 only, each root-to-leaf path
  * could represent a number.
@@ -29,7 +30,7 @@ class SumRootToLeafNo {
     
     /**
      * Recursive, DFS
-     * Build a helper function to pass cur result
+     * Build a preOrderHelper function to pass cur result
      * If its leaf node, just return the val
      * Otherwise, goes to left root first then right root with current value
      */

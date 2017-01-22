@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -10,7 +10,7 @@ import org.junit.Test;
  * <p>
  * Formally the function should:
  * Return true if there exists i, j, k
- * such that arr[i] < arr[j] < arr[k] given 0 ≤ i < j < k ≤ n-1 else return false.
+ * such that arr[i] < arr[i] < arr[k] given 0 ≤ i < i < k ≤ n-1 else return false.
  * Your algorithm should run in O(n) time complexity and O(1) space complexity.
  * <p>
  * Examples:

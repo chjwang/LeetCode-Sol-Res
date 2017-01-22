@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.easy;
+package com.freetymekiyan.algorithms.level.Easy;
 
 /**
  * The string "PAYPALISHIRING" is written in a zigzag pattern on a given number
@@ -13,8 +13,8 @@ package com.freetymekiyan.algorithms.level.easy;
  * Write the code that will take a string and make this conversion given a
  * number of rows:
  * <p>
- * string convert(string text, int nRows);
- * convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
+ * string convertPostfix2Infix(string text, int nRows);
+ * convertPostfix2Infix("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
  * <p>
  * Tags: String
  */

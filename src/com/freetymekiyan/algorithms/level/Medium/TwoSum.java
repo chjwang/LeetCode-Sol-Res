@@ -1,10 +1,11 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,7 @@ public class TwoSum {
         for (int i = 0; i < nums.length; i++) {
             int newTarget = target - nums[i];
             if (map.containsKey(newTarget) && i != map.get(newTarget)) {
+                // found in map and it's not itself
                 return new int[]{i, map.get(newTarget)};
             }
         }
@@ -58,7 +60,7 @@ public class TwoSum {
     /**
      * Hash Table. One loop.
      * Just put numbers into the map as looping through.
-     * So we can search numbers already looped in O(1).
+     * So we can search numbers already processed in O(1).
      * Note that if we find an answer, we current index will be larger than the index in map.
      * So put it behind.
      */
@@ -72,6 +74,63 @@ public class TwoSum {
             map.put(nums[i], i);
         }
         return null;
+    }
+
+    /**
+     * 又碰到敏感的关键字array和target，自然而然想到二分查找法。
+     * 但是这道题不能像传统二分查找法那样舍弃一半在另外一半查找，需要一点点挪low和high指针，所以时间复杂度为O(n)。
+
+     首先先将整个list拷贝并排序，使用Arrays.Sort()函数，时间复杂度O(nlogn)
+
+     然后利用二分查找法，判断target和numbers[low]+numbers[high]。
+     target == numbers[low]+numbers[high]， 记录copy[low]和copy[high]；
+     target > numbers[low]+numbers[high]，说明最大的和最小的加一起还小于target，所以小值要取大一点，即low++；
+     target > numbers[low]+numbers[high], 说明最大的和最小的加一起大于target，那么大值需要往下取一点，即high--。
+
+     再把找到的两个合格值在原list中找到对应的index，返回即可。
+
+     总共的时间复杂度为O(n+nlogn+n+n) = O(nlogn)。
+     * @param numbers
+     * @param target
+     * @return
+     */
+    public int[] twoSumC(int[] numbers, int target) {
+        int [] res = new int[2];
+        if(numbers==null || numbers.length<2)
+            return res;
+
+        //copy original list and sort
+        int[] copylist = new int[numbers.length];
+        System.arraycopy(numbers, 0, copylist, 0, numbers.length);
+        Arrays.sort(copylist);
+
+        int low = 0;
+        int high = copylist.length-1;
+
+        while (low < high){
+            if (copylist[low] + copylist[high] < target)
+                low++;
+            else if (copylist[low] + copylist[high] > target)
+                high--;
+            else{
+                res[0] = copylist[low];
+                res[1] = copylist[high];
+                break;
+            }
+        }
+
+        //find index from original list
+        int index1 = -1, index2 = -1;
+        for(int i = 0; i < numbers.length; i++){
+            if(numbers[i] == res[0] && index1 == -1)
+                index1 = i;
+            else if(numbers[i] == res[1] && index2 == -1)
+                index2 = i;
+        }
+        res[0] = index1;
+        res[1] = index2;
+        Arrays.sort(res);
+        return res;
     }
 
     @Before

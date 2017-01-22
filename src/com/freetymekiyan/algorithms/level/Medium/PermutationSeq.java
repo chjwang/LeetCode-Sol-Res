@@ -56,7 +56,7 @@ class PermutationSeq {
     /**
      * Divide into subgroups and locate it
      */
-    public static String getPermutationB(int n, int k) {
+    public static String getPermutationB(ArrayList<Integer> nums, int n, int k) {
         ArrayList<Integer> digits = new ArrayList<Integer>();
         for (int i = 0; i < n; i++) nums.add(i + 1);
         return helper(nums, n, k - 1); // note it's k - 1 here, start from 0

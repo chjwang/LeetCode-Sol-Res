@@ -1,0 +1,198 @@
+1) TCP based session establishment
+   (process based system where each request is handled by a forking/preforking a new process instance.)
+2) Per user session created. Session class can look like:
+   class HMSession {
+                 string userid;
+                 string word;
+                 int [] correct_guesses;  // positions guessed already
+                 int chances_left;
+                 bool isGuessCorrect(char c);
+             public:
+                 string getRandomWord();
+                 bool guessChar(char c);
+                 bool guessWord(string word);
+   };
+3) Basic operations expected will be
+    - searching for presence of given char in the string to be guessed and
+    - updating number of turns left.
+4) I think the request-responses can be synchronous. Operations to be done are pretty basic.
+   Single server should be able to serve 100s of users concurrently without any significant latency.
+5) Since the user data is confined in the process'es address space boundaries concurrency issues
+   should not come in picture.
+6) Session info will be in-memory (if scores are to be kept, those can be written to disk).
+   User info should also be saved as cookies, so if connection is lost the game can be resumed easily.
+7) These Hangman servers can be behind a load-balancer who can simply serve in requests in a
+   round-robin manner or sophisticated monitoring system can be built for health checking and keeping
+   track of current load on a system.
+8) New hosts can be added to the load balancer or inactive/dead hosts can be removed without the
+   needing any special configuration.
+
+
+
+
+Assume we are designing just this game and none other, otherwise we would have a generic Game class
+and a Hangman class would implement the IGame interface.
+
+Also lets design such that Hangman can be played both with and without a hint.
+
+Required classes and their purpose:
+- Hangman
+  Main class that plays the game. It will have both the startgame and startgamewith hint option.
+- WordHintTable
+  Class that keeps track of words and their hints. Most likely a dictionary of some sort
+- IWordHint
+  Interface that implements the WordHintTable class method signatures
+- IDraw
+  An interface that is responsible for drawing different objects
+- AlphabetBoard
+  Responsible for the letters chosen by the player to guess the word.
+  Also implements IDraw since it would handle drawing of the letters and alphabet board differently.
+- Word
+  The actual word, its state, current pointer and its storage during the game. Implements IWordHint and IDraw
+
+
+
+Project: Design a Game
+
+Designed a scalable game(hangman) app using Google App Engine backed by Google Datastore.
+
+How to play 'Hangman'
+
+Hangman is a paper and pencil guessing game for two or more players. One player thinks of a word,
+phrase or sentence and the other tries to guess it by suggesting letters or numbers, within a certain
+number of guesses.
+
+This implementation is a one player game. The word is provided by the app and player has to guess
+char in every step, if user is unable to guess the word in 6 steps player looses.
+
+For more information on game, check wikipedia page
+
+For actual 'Hangman' game app (consuming these APIs), checkout hangman_game_frontend project.
+
+- Scoring
+
+As of now scoring logic of the game is simple, no. of guesses left when player guesses the word is
+his/her score. For e.g. if player guesses the word when 'guesses left' is 5, the score of that game
+is 5.
+
+The maximum player can score in a game is 6 and minimum is 1. Player scores 0 for lost or aborted games.
+
+- Ranking
+
+Ranking of players on the other hand is very complex and it uses python module TrueSkill for ranking
+of players.
+
+TrueSkill is a rating system among game players. It was developed by Microsoft Research and has been
+used on Xbox LIVE for ranking and matchmaking service. This system quantifies players’ TRUE skill
+points by the Bayesian inference algorithm. It also works well with any type of match rule including
+N:N team game or free-for-all.
+
+Player is ranked using TrueSkill's 'A Bayesian Skill Rating System', it is difficult to explain how
+it is done in this readme file so to further understand the algorithm read 'Further More' section in trueskill.org.
+
+- How to access APIs
+
+Read full API usage
+
+- Cron Job
+
+/crons/send_email_reminders
+Send reminders to players who have not made any move in past 24 hrs.
+Scheduled everyday at: 06:00 GMT
+
+- Frontend to test APIs
+
+Refer hangman_game_frontend backbone.js UI project which is designed using APIs exposed by this project.
+
+Design Document
+
+=====
+NDB Models
+
+Code Path: /fullstack-nanodegree-design-a-game/design-game/models.py
+
+- Enum: GameStatus
+
+Value	Number
+IN_SESSION 1
+WON	       2
+LOST	   3
+ABORTED	   4
+
+- Model: User
+
+Key	Property
+user_name	StringProperty
+email	StringProperty
+display_name	StringProperty
+mu	FloatProperty
+sigma	FloatProperty
+
+- Model: Score
+
+Key	Property
+score_id	IntegerProperty
+game_key	KeyProperty
+timestamp	DateTimeProperty
+game_score	IntegerProperty
+
+- Model: Game
+
+Key	Property
+game_id	IntegerProperty
+game_name	StringProperty
+word	StringProperty
+guessed_chars_of_word	StringProperty
+guesses_left	IntegerProperty
+game_over	BooleanProperty
+game_status	EnumProperty
+timestamp	DateTimeProperty
+
+- Model: GameHistory
+
+Key	Property
+step_timestamp	DateTimeProperty
+step_char	StringProperty
+game_snapshot	StructuredProperty
+
+=====
+Messages/Resource Containers
+
+- For Contributors:
+All response messages and forms for resource container can be referred in messages.py
+Code Path: /fullstack-nanodegree-design-a-game/design-game/messages.py
+
+- For API Consumers/Developers:
+To know the request/response params details, please refer to API usage document
+
+=====
+Endpoints
+
+For the 'Hangman Game', I have exposed 3 APIs:
+
+API	Path	Version	Endpoints
+User	/user	/v1	/create_user, /get_user, /update_user, /delete_user
+Score	/score	/v1	/get_game_score, /get_user_scores, /get_all_scores, /get_user_ranking, /get_leaderboard
+Game	/game	/v1	/new_game, /get_game, /guess_char, /get_user_games, /get_user_completed_games, /cancel_game, /get_game_history
+
+Full API usage here
+
+=====
+Scoring Impl
+
+Current scoring logic is straight forward, no. of guesses left when player guesses the word is his/her score. But down the path we will have score game depending upon the word length/toughness.
+
+=====
+Ranking Impl
+
+For ranking players, game is using TrueSkill.
+
+TrueSkill is a rating system among game players. It was developed by Microsoft Research and has been used on Xbox LIVE for ranking and matchmaking service. This system quantifies players’ TRUE skill points by the Bayesian inference algorithm. It also works well with any type of match rule including N:N team game or free-for-all.
+
+The game is using Head-to-head (1 vs. 1) match rule to rank players.
+
+=====
+Game Word Generator
+
+For generating game words, project is using RandomWords python module.
+

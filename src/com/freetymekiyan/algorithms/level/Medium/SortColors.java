@@ -92,7 +92,7 @@ class SortColors {
      The problem was posed with three colours, here `0′, `1′ and `2′. The array is divided into four sections:
 
      a[1..Lo-1] zeroes (red)
-     a[Lo..Mid-] ones (white)
+     a[Lo..Mid-1] ones (white)
      a[Mid..Hi] unknown
      a[Hi+1..N] twos (blue)
 
@@ -112,36 +112,92 @@ class SortColors {
      place. The section of unknown elements, a[Mid..Hi], is shrunk by examining a[Mid]
 
      * @param a
-     * @param arr_size
      */
-    // Sort the input array, the array is assumed to
-    // have values in {0, 1, 2}
-    public static void sort012(int a[], int arr_size) {
+    // Sort the input array, the array is assumed to have values in {0, 1, 2}
+    public void sort012(int a[]) {
         int lo = 0;
-        int hi = arr_size - 1;
-        int mid = 0,temp=0;
+        int hi = a.length - 1;
+        int mid = 0;
         while (mid <= hi) {
             switch (a[mid]) {
-                case 0:  {
-                    temp   =  a[lo];
-                    a[lo]  = a[mid];
-                    a[mid] = temp;
-                    lo++;
-                    mid++;
+                case 0: {
+                    swap(a, lo, mid);
+                    lo++; mid++;
                     break;
                 }
                 case 1:
                     mid++;
                     break;
-                case 2:  {
-                    temp = a[mid];
-                    a[mid] = a[hi];
-                    a[hi] = temp;
+                case 2: {
+                    swap(a, mid, hi);
                     hi--;
                     break;
                 }
             }
         }
+    }
+
+    public void sortColors1Pass(int[] nums) {
+        int lastZero = -1;
+        int lastOne = -1;
+        int cur = 0;
+        while (cur < nums.length) {
+            if (nums[cur] == 1) {
+                swap(nums, lastOne + 1, cur);
+                lastOne++;
+            } else if (nums[cur] == 0) {
+                swap(nums, lastZero + 1, cur);
+                lastZero++;
+                lastOne++;
+                if (lastOne > lastZero) {
+                    swap(nums, lastOne, cur);
+                }
+            }
+            cur++;
+        }
+        return;
+    }
+
+    /**
+     * Given an array of n objects with k different colors (numbered from 1 to k),
+     * sort them so that objects of the same color are adjacent, with the colors in the order 1, 2, … k.
+     *
+     * Each time sort the array into three parts:
+     [all min] [all unsorted others] [all max],
+     then update min and max and sort the [all unsorted others] with the same method.
+     * @param colors
+     * @param k
+     */
+    public void sortColors2(int[] colors, int k) {
+        int pl = 0;
+        int pr = colors.length - 1;
+
+        int i = 0;
+        int min = 1, max = k;
+
+        while (min < max) {
+            while (i <= pr) {
+                if (colors[i] == min) {
+                    swap(colors, pl, i);
+                    i++;
+                    pl++;
+                } else if (colors[i] == max) {
+                    swap(colors, pr, i);
+                    pr--;
+                } else {
+                    i++;
+                }
+            }
+            i = pl;
+            min++;
+            max--;
+        }
+    }
+
+    private void swap(int[] colors, int i, int j) {
+        int temp = colors[i];
+        colors[i] = colors[j];
+        colors[j] = temp;
     }
 
 }

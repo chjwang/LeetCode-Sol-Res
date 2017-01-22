@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import com.freetymekiyan.algorithms.utils.Utils;
 import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
@@ -42,7 +42,8 @@ public class KthSmallestElementInABst {
     private int count;
 
     /**
-     * Recursive solution with in-order traversal helper.
+     * Recursive solution with in-order traversal
+     * time: O(h + k).
      */
     public int kthSmallest(TreeNode root, int k) {
         count = k;

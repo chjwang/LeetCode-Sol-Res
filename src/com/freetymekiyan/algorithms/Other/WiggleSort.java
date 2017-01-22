@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.Other;
+
 /**
  * Given a sorted array, and re-arrange it to wiggle style in one pass.
  * i.e.
@@ -20,6 +22,10 @@ class WiggleSort {
         for (int i = 0; i < A.length - 1; i += 2) {
             swap(A, i, i + 1);
         }
+    }
+
+    private void swap(int[] a, int i, int i1) {
+        return;
     }
 
     /**

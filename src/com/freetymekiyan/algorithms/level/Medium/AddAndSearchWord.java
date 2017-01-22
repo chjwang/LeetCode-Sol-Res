@@ -123,7 +123,7 @@ public class AddAndSearchWord {
                     return node.isEnd();
                 }
 
-                if (word.charAt(k) == '.') {
+                if (word.charAt(k) == '.') { // regex match any char
                     for (int i = 0; i < node.links.length; i++) {
                         if (node.links[i] != null) {
                             if (searchPrefix(word, k + 1, node.links[i])) {

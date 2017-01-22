@@ -44,17 +44,21 @@ class PopulatingNextRight {
     }
     
     /**
-     * Iterative
+     * Iterative, only works for perfect binary tree
      * Store node in previous level
+     *
+     * Time: O(n) Space: O(1)
      */
     public void connect(TreeLinkNode root) {
         if (root == null) return;
 
-        TreeLinkNode pre = root;
-        TreeLinkNode cur = null;
+        TreeLinkNode prev = root; // prev node on current level
+        TreeLinkNode cur = null; // current node on current level
 
-        while (pre.left != null && pre.right != null) { // no more level if left and child are both null
-            cur = pre;
+        while (prev.left != null && prev.right != null) {
+            // no more level if left and child are both null - assumption works only for perfect binary tree
+
+            cur = prev;
             while (cur != null) { // work on next level
 
                 cur.left.next = cur.right; // connect left and right
@@ -65,12 +69,14 @@ class PopulatingNextRight {
 
                 cur = cur.next; // move current to next node
             }
-            pre = pre.left; // move to next level
+            prev = prev.left; // move to next level
         }
     }
 
     /**
      * Use 4 pointers to move towards right on two levels
+     *
+     * Time: O(n) Space: O(1)
      *
      * @param root
      */
@@ -111,10 +117,130 @@ class PopulatingNextRight {
     }
 
     /**
-     * Use two Qs: one for DFS, another to keep the corresponding node depth
-     * @param root
+     * 3 pointers: cur, head, prev. Most elegant solution.
+     *
+     * Use dummy node, whose next pointer points to next level's first node but itself is a dummy node
+     *
+     * Time: O(n) Space: O(1)
+     *
+     * @param root root
      */
     public void connect2(TreeLinkNode root) {
+        //dummy is the leading node on the next level
+        TreeLinkNode dummy = new TreeLinkNode();
+
+        //prev is the node before on the next level
+        TreeLinkNode prev = dummy;
+
+        TreeLinkNode cur = root;
+
+        while(cur != null) {
+            if(cur.left != null) {
+                prev.next = cur.left;
+                prev = prev.next;
+            }
+            if(cur.right != null) {
+                prev.next = cur.right;
+                prev = prev.next;
+            }
+            cur = cur.next;
+
+            if(cur == null) { // done with current level
+                // move on to next level
+                cur = dummy.next;
+
+                // reset prev and dummy pointers to default values
+                prev = dummy;
+                dummy.next = null;
+            }
+        }
+
+    }
+
+    /**
+     * based on level order traversal, 3 pointers. Similar to connect2 but not as elegant
+     *
+     * Time: O(n) Space: O(1)
+     *
+     * @param root
+     */
+    public void connect3(TreeLinkNode root) {
+
+        TreeLinkNode head = null; //head of the next level, not a dummy node
+        TreeLinkNode prev = null; //the leading node on the next level
+        TreeLinkNode cur = root;  //current node of current level
+
+        while (cur != null) {
+
+            while (cur != null) { //iterate on the current level
+                //left child
+                if (cur.left != null) {
+                    if (prev != null) {
+                        prev.next = cur.left;
+                    } else {
+                        head = cur.left;
+                    }
+                    prev = cur.left;
+                }
+                //right child
+                if (cur.right != null) {
+                    if (prev != null) {
+                        prev.next = cur.right;
+                    } else {
+                        head = cur.right;
+                    }
+                    prev = cur.right;
+                }
+                //move to next node
+                cur = cur.next;
+            }
+
+            //move to next level
+            cur = head;
+            head = null;
+            prev = null;
+        }
+
+    }
+
+    /**
+     * 3 pointers
+     * @param root
+     * Time: O(n) Space: O(1)
+     */
+    public void connect4(TreeLinkNode root) {
+        TreeLinkNode cur = root;  //current node of current level
+        TreeLinkNode dummy = null; // dummy node on next level, whose next points to head of next level
+        TreeLinkNode prev = null; //the prev node on the next level
+
+        while (root != null) {
+            dummy = new TreeLinkNode();
+            prev = dummy;
+
+            while (cur != null) { // process current level
+                if (cur.left != null) {
+                    prev.next = cur.left;
+                    prev = prev.next;
+                }
+                if (cur.right != null) {
+                    prev.next = cur.right;
+                    prev = prev.next;
+                }
+                cur = cur.next;
+            }
+            cur = dummy.next; // move on to next level
+        }
+    }
+
+    /**
+     * Use two Qs: one for BFS, another to keep the corresponding node depth
+     *
+     * Time: O(n) Space: O(n)
+     * So it doesn't meet this requirement: You may only use constant extra space.
+     *
+     * @param root
+     */
+    public void connect5(TreeLinkNode root) {
         if(root==null)
             return;
 
@@ -130,7 +256,8 @@ class PopulatingNextRight {
             TreeLinkNode topNode = nodeQueue.poll();
             int depth = depthQueue.poll();
 
-            if (depthQueue.isEmpty() || depthQueue.peek() > depth) { // last node of the tree or last node on this depth level
+            if (depthQueue.isEmpty() || depthQueue.peek() > depth) {
+                // last node of the tree or last node on this depth level
                 topNode.next = null;
             } else {
                 topNode.next = nodeQueue.peek(); // next sibling on this depth level

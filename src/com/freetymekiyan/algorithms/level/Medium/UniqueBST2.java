@@ -1,3 +1,10 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Given n, <strong>generate</strong> all structurally unique BST's (binary
  * search trees) that store values 1...n.
@@ -31,7 +38,7 @@ class UniqueBST2 {
     }
     
     public List<TreeNode> genTrees (int start, int end) {
-        List<TreeNode> list = new ArrayList<TreeNode>();
+        List<TreeNode> list = new ArrayList<>();
         if (start > end) { // base case
             list.add(null);
             return list;
@@ -47,7 +54,7 @@ class UniqueBST2 {
                     TreeNode root = new TreeNode(i);
                     root.left = lnode; // attach root of left subtree
                     root.right = rnode; // attach root of right subtree
-                    list.add(root); // add tree to result
+                    list.add(root); // addPrereq tree to result
                 }
             }
         }

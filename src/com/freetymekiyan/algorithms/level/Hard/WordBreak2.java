@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Given a string s and a dictionary of words dict, add spaces in s to
+ * Given a string s and a dictionary of words dict, addPrereq spaces in s to
  * construct a sentence where each word is a valid dictionary word.
  * <p>
  * Return all such possible sentences.
@@ -34,12 +34,12 @@ class WordBreak2 {
      * Get prefix
      * If not in dictionary, just ignore
      * If in dictionary, check current position
-     * If reaches the end, add prefix to a solution
+     * If reaches the end, addPrereq prefix to a solution
      * If within length do the following:
      * Check whether the rest of the string is already decomposed
      * If not, backtracking the rest of the string
      * If yes, get the result from memory function
-     * If there is an result, add each word to current solution with front in
+     * If there is an result, addPrereq each word to current solution with front in
      */
     public List<String> wordBreak(String s, Set<String> dict) {
         List<String> words = new ArrayList<String>();
@@ -59,7 +59,7 @@ class WordBreak2 {
                         for (String w : remainDecomp) {
                             words.add(pref + " " + w);
                         }
-                        res.put(remain, remainDecomp); // add to cache
+                        res.put(remain, remainDecomp); // addPrereq to cache
                     }
                 }
             }
@@ -71,7 +71,7 @@ class WordBreak2 {
      * Backtracking
      * Get prefix first
      * If prefix is in dictionary, check current length
-     * If reaches the end, add prefix to result
+     * If reaches the end, addPrereq prefix to result
      * If not, go ahead and decompose the remain string
      * Get the result list, and concat prefix with those results
      * addRecursive the concatenated string to result and return

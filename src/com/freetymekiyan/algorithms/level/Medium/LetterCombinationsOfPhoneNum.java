@@ -1,5 +1,9 @@
 package com.freetymekiyan.algorithms.level.Medium;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,11 +43,11 @@ public class LetterCombinationsOfPhoneNum {
 
     /**
      * Backtracking. DFS.
-     * Create a result collection and pass it into a backtracking helper.
-     * The helper is like a DFS function that generates all possible combinations by:
+     * Create a result collection and pass it into a backtracking preOrderHelper.
+     * The preOrderHelper is like a DFS function that generates all possible combinations by:
      * 1) Assign one letter at current level
-     * 2) Call the helper recursively to generate the rest
-     * Stop when we reach the end of the digits string, and add the combination to result.
+     * 2) Call the preOrderHelper recursively to generate the rest
+     * Stop when we reach the end of the digits string, and addPrereq the combination to result.
      */
     public List<String> letterCombinations(String digits) {
         List<String> res = new ArrayList<>();

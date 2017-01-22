@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,8 +33,8 @@ public class TopKFrequentElements {
         if (nums == null || nums.length == 0) return Collections.emptyList();
         // Build frequency map
         Map<Integer, Integer> frequencyMap = new HashMap<>();
-        for (int n : nums) {
-            frequencyMap.put(n, frequencyMap.getOrDefault(n, 0) + 1);
+        for (int i : nums) {
+            frequencyMap.put(i, frequencyMap.getOrDefault(i, 0) + 1);
         }
         // Build frequency buckets
         List<Integer>[] lists = new List[nums.length + 1];

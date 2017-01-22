@@ -1,13 +1,15 @@
+package com.freetymekiyan.algorithms.Other;
+
 import java.util.*;
 
 /**
  * Dijkstra's Algorithm
- * Find the shortest weighted path from some starting vertex to all vertices.
+ * Find the shortest weighted getPath from some starting vertex to all vertices.
  * Edges have non-negative weight
  * 
- * Tags: Graph
+ * Tags: GraphPrintAllPaths
  */
-class Dijkstra {
+public class Dijkstra {
     
     public static void main(String[] args) {
         
@@ -57,7 +59,7 @@ class Dijkstra {
                 Vertex w = e.dest;
                 double cvw = e.cost; // cost between v and w
                 if (cvw < 0) {
-                    // throw new GraphException("Graph has negative edges");
+                    // throw new GraphException("GraphPrintAllPaths has negative edges");
                 }
                 
                 if (w.dist > v.dist + cvw) {

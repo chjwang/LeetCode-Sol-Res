@@ -1,9 +1,11 @@
+package com.freetymekiyan.algorithms.Other;
+
 /**
  * x = [0, 1, 2, 3, -1, 4, 5, 6, 7, 8, -2, 9, 10, 11, 12, 13]
  * f(x) = [4, 5, ...... 13]
  * An+1 = An + 1
  * <p>
- * Follow iup, allow only one mistake: [0,1,2,3,-5,-4,-3,-2,-1]
+ * Follow up, allow only one mistake: [0,1,2,3,-5,-4,-3,-2,-1]
  */
 public class LongestIncresingSubsequence {
 

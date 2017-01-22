@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * Check whether a given graph is a tree
  * 
- * Tags: Graph, Tree, DFS
+ * Tags: GraphPrintAllPaths, Tree, DFS
  */
 class IsGraphTree<T> {
     public static void main(String[] args) {

@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.Other;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -32,30 +34,36 @@ public class LongestContiguousSubstring {
      * We can reduce the space to O(1) if change the map to an array of all characters
      */
     public String findLongestContiguous(String s, int M) {
-        if (s == null || s.length() <= M) return s;
+        if (s == null || s.length() <= M)
+            return s;
+
         Map<Character, Integer> map = new HashMap<>();
-        String res = "";
+        String maxsubStr = "";
         int start = 0;
         int end = 0;
         while (start <= end && end < s.length()) {
             char c = s.charAt(end);
-            // Update map
+            // Update map to store the count of each char
             map.put(c, map.containsKey(c) ? map.get(c) + 1 : 1);
+
             // Move start pointer
             while (map.size() > M) {
                 char toRemove = s.charAt(start);
-                if (map.containsKey(toRemove)) map.put(toRemove, map.get(toRemove) - 1);
-                if (!map.containsKey(toRemove) || map.get(toRemove) <= 0) map.remove(toRemove);
+                if (map.containsKey(toRemove))
+                    map.put(toRemove, map.get(toRemove) - 1);
+                if (!map.containsKey(toRemove) || map.get(toRemove) <= 0)
+                    map.remove(toRemove);
                 start++;
             }
+
             // Update result
             String temp = s.substring(start, end + 1);
-            if (res.length() < temp.length()) {
-                res = temp;
+            if (maxsubStr.length() < temp.length()) {
+                maxsubStr = temp;
             }
             end++;
         }
-        return res;
+        return maxsubStr;
     }
 
     @Before

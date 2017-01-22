@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
 
@@ -63,5 +63,32 @@ public class FindLeavesOfBinaryTree {
         res.get(level).add(node.val);
         // root.left = root.right = null;
         return level;
+    }
+
+    /**
+     * Actually remove the leaves. Runing DFS multiple times to remove leaves multiple times (height of the root)
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> findLeaves2(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        while (root != null) {
+            List<Integer> leaves = new ArrayList<>();
+            root = remove(root, leaves);
+            res.add(leaves);
+        }
+        return res;
+    }
+    private TreeNode remove(TreeNode node, List<Integer> leaves) {
+        if (node == null) return null;
+
+        if (node.left == null && node.right == null) {
+            leaves.add(node.val);
+            return null;
+        }
+        node.left = remove(node.left, leaves);
+        node.right = remove(node.right, leaves);
+        return node;
     }
 }

@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Hard;
+
 import java.util.*;
 
 /**
@@ -35,8 +37,8 @@ class InsertInterval {
         for (Interval i : intervals) {
             int a = res.get(res.size() - 1).start;
             int b = res.get(res.size() - 1).end;
-            if (i.end < a) res.add(res.size() - 1, i); // no overlap, add to second last
-            else if (b < i.start) res.add(i); // no overlap, add to last
+            if (i.end < a) res.add(res.size() - 1, i); // no overlap, addPrereq to second last
+            else if (b < i.start) res.add(i); // no overlap, addPrereq to last
             else {
                 a = Math.min(a, i.start);
                 b = Math.max(b, i.end);
@@ -50,7 +52,7 @@ class InsertInterval {
      * In place solution
      * Find start and end point of the interval to be merged
      */
-    public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+    public List<Interval> insert2(List<Interval> intervals, Interval newInterval) {
         List<Interval> results = new ArrayList<Interval>();
         if (intervals == null||intervals.size() == 0){
             results.add(newInterval);
@@ -68,12 +70,12 @@ class InsertInterval {
             results.add(start, newInterval);
             return results;
         }
-        // add intervals from 0 to start
+        // addPrereq intervals from 0 to start
         for (int i = 0; i < start; i++) results.add(intervals.get(i));
-        // build and add overlapped interval
+        // build and addPrereq overlapped interval
         Interval interval = new Interval(Math.min(newInterval.start, intervals.get(start).start), Math.max(newInterval.end, intervals.get(end - 1).end)); // note that it's end - 1
         results.add(interval);
-        // add remainning intervals
+        // addPrereq remainning intervals
         for (int i = end; i < intervals.size(); i++) results.add(intervals.get(i));
         return results;
     }

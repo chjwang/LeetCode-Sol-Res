@@ -1,0 +1,214 @@
+Database Design
+To build the message conversation system, you have to create three tables such as
+    1. Users,
+    2. Conversation and,
+    3. Conversation_Reply.
+
+Users Table
+User table contains all the users registration details.
+CREATE TABLE `users` (
+`user_id` int NOT NULL PRIMARY KEY AUTO_INCREMENT ,
+`username` varchar(25) NOT NULL UNIQUE,
+`password` varchar(50) NOT NULL ,
+`email` varchar(100) NOT NULL
+);
+
+Data will store in following way, here the password data encrypted with MD5 format.
+
+Message Conversation Database Design.
+
+Conversation Table
+
+This table contains conversation relation data between registered users. Here user_one and user_two
+are FOREIGN KEY to REFERENCES users.user_id
+
+CREATE TABLE   `conversation` (
+`c_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`user_one` int(11) NOT NULL,
+`user_two` int(11) NOT NULL,
+`ip` varchar(30) DEFAULT NULL,
+`time` int(11) DEFAULT NULL,
+FOREIGN KEY (user_one) REFERENCES users(user_id),
+FOREIGN KEY (user_two) REFERENCES users(user_id)
+);
+
+Conversation Reply Table
+
+Contains all user conversation replys data.
+Here user_id_fk is FOREIGN KEY to REFERENCES users.user_id and c_id_fk is FOREIGN KEY to REFERENCES conversation.c_id
+
+CREATE TABLE `conversation_reply` (
+`cr_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`reply` text,
+`user_id_fk` int(11) NOT NULL,
+`ip` varchar(30) NOT NULL,
+`time` int(11) NOT NULL,
+`c_id_fk` int(11) NOT NULL,
+FOREIGN KEY (user_id_fk) REFERENCES users(user_id),
+FOREIGN KEY (c_id_fk) REFERENCES conversation(c_id)
+);
+
+Conversation List
+Data relations between users and conversation tables.
+Take a look at the following SQL statement users table object as U and conversation table object as C .
+Here user_one = '13' and user_two='13' refers to users table user_id value.
+
+SELECT U.user_id,C.c_id,U.username,U.email
+FROM users U,conversation C, conversation_reply R
+WHERE
+CASE
+
+WHEN C.user_one = '13'
+THEN C.user_two = U.user_id
+WHEN C.user_two = '13'
+THEN C.user_one= U.user_id
+END
+
+AND
+C.c_id=R.c_id_fk
+AND
+(C.user_one ='13' OR C.user_two ='13') ORDER BY C.c_id DESC
+
+Message Conversation Database Design.
+
+Conversation Last Message
+Getting the reply results for conversation c_id='2' from conversation_reply table.
+SELECT cr_id,time,reply
+FROM conversation_reply
+WHERE c_id_fk='2'
+ORDER BY cr_id DESC LIMIT 1
+
+PHP Code
+Contains PHP code. Displaying username arun conversation results
+
+<?php
+$query= mysqli_query("SELECT u.user_id,c.c_id,u.username,u.email
+ FROM conversation c, users u
+ WHERE CASE
+ WHEN c.user_one = '$user_one'
+ THEN c.user_two = u.user_id
+ WHEN u.user_two = '$user_one'
+ THEN c.user_one= u.user_id
+ END
+ AND (
+ c.user_one ='$user_one'
+ OR c.user_two ='$user_one'
+ )
+ Order by c.c_id DESC Limit 20") or die(mysql_error());
+
+while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+{
+$c_id=$row['cid'];
+$user_id=$row['user_id'];
+$username=$row['username'];
+$email=$row['email'];
+$cquery= mysqli_query("SELECT R.cr_id,R.time,R.reply FROM conversation_reply R WHERE R.c_id_fk='$c_id' ORDER BY R.cr_id DESC LIMIT 1") or die(mysql_error());
+$crow=mysqli_fetch_array($cquery,MYSQLI_ASSOC);
+$cr_id=$crow['cr_id'];
+$reply=$crow['reply'];
+$time=$crow['time'];
+//HTML Output.
+
+}
+?>
+
+Conversation Updates
+Data relations between users and conversation_reply tables.
+The following SQL statement users table object as U and conversation_reply table object as R .
+Here c_id_fk = '2' refers to convesation table c_id value.
+
+SELECT R.cr_id,R.time,R.reply,U.user_id,U.username,U.email
+FROM users U, conversation_reply R
+WHERE R.user_id_fk=U.user_id AND R.c_id_fk='2'
+ORDER BY R.cr_id DESC
+
+Message Conversation Database Design.
+
+PHP Code
+Contains PHP code, displaying conversation c_id=2 reply results.
+<?php
+$query= mysqli_query("SELECT R.cr_id,R.time,R.reply,U.user_id,U.username,U.email FROM users U,
+conversation_reply R WHERE R.user_id_fk=U.user_id and R.c_id_fk='$c_id' ORDER BY R.cr_id ASC LIMIT 20")
+or die(mysqli_error());
+
+while($row=mysqli_fetch_array($query,MYSQLI_ASSOC))
+{
+$cr_id=$row['cr_id'];
+$time=$row['time'];
+$reply=$row['reply'];
+$user_id=$row['user_id'];
+$username=$row['username'];
+$email=$row['email'];
+//HTML Output
+
+}
+?>
+
+Message Conversation Database Design.
+
+Conversation Check
+Following query will verify conversation already exists or not.
+SELECT c_id
+FROM conversation
+WHERE
+(user_one='13' AND user_two='16')
+OR
+(user_one='16' AND user_two='13')
+
+Creating Conversation
+//Creating Conversation
+INSERT INTO conversation
+(user_one,user_two,ip,time)
+VALUES
+('13','16','122.3.3.7','122.3.3.7');
+
+//Conversation Reply Insert
+INSERT INTO conversation_reply
+(user_id_fk,reply,ip,time,c_id_fk)
+VALUES
+('13,'How are you','122.3.3.7','122.3.3.7','2');
+
+PHP Code Creating Conversation.
+<?php
+$user_one=mysqli_real_escape_string($db,$_GET['user_session']);
+$user_two=mysqli_real_escape_string($db,$_GET['user_two']);
+if($user_one!=$user_two)
+{
+$q= mysqli_query("SELECT c_id FROM conversation WHERE (user_one='$user_one' and user_two='$user_two') or (user_one='$user_two' and user_two='$user_one') ") or die(mysql_error());
+$time=time();
+$ip=$_SERVER['REMOTE_ADDR'];
+if(mysql_num_rows($q)==0)
+{
+$query = mysqli_query("INSERT INTO conversation (user_one,user_two,ip,time) VALUES ('$user_one','$user_two','$ip','$time')") or die(mysql_error());
+$q=mysqli_query("SELECT c_id FROM conversation WHERE user_one='$user_one' ORDER BY c_id DESC limit 1");
+$v=mysql_fetch_array($q,MYSQLI_ASSOC);
+return $v['c_id'];
+}
+else
+{
+$v=mysqli_fetch_array($q,MYSQLI_ASSOC);
+return $v['c_id'];
+}
+}
+?>
+
+PHP Code - Inserting Reply
+<?php
+$reply=mysqli_real_escape_string($db,$_POST['reply']);
+$cid=mysqli_real_escape_string($db,$_POST['cid']);
+$uid=mysqli_real_escape_string($db,$uid_session);
+$time=time();
+$ip=$_SERVER['REMOTE_ADDR'];
+$q= mysqli_query("INSERT INTO conversation_reply (user_id_fk,reply,ip,time,c_id_fk) VALUES ('$uid','$reply','$ip','$time','$cid')") or die(mysqli_error());
+?>
+
+db.php
+Database configuration file, modify username, password and database values.
+<?php
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'username');
+define('DB_PASSWORD', 'password');
+define('DB_DATABASE', 'database');
+$db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+?>
+

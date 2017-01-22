@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import java.util.Random;
 
@@ -41,8 +41,8 @@ public class ShuffleAnArray {
          * Returns a r shuffling of the array.
          * Proof of probability:
          * Assume that all numbers from 0 to i have same probability of 1 / (1 + i).
-         * If j = i, numbers won't change, so the probability  remains the same.
-         * If j != i, a[j] and a[i] will swap.
+         * If i = i, numbers won't change, so the probability  remains the same.
+         * If i != i, a[i] and a[i] will swap.
          * Suppose x is the number in [0, i-1] that is going to swap with i.
          * The probability of this number shows at i is p(x at [0, i-1]) * p(i not in i)
          * (1 / i) * (1 - 1 / (i + 1)).

@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to
  * guess what the number is. Each time your friend makes a guess, you provide a hint that indicates how many digits in
@@ -39,7 +41,8 @@ public class BullsAndCows {
         int cows = 0;
         int[] count = new int[10];
         for (int i = 0; i < secret.length(); i++) {
-            if (secret.charAt(i) == guess.charAt(i)) bulls++;
+            if (secret.charAt(i) == guess.charAt(i))
+                bulls++;
             else {
                 /*
                  * If count is less than zero before we increase it, it means that it was decreased by guess already.

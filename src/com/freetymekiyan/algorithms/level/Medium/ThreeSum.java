@@ -90,24 +90,35 @@ class ThreeSum {
         Arrays.sort(num);
 
         for (int i = 0; i < num.length - 2; i++) {
-            if (num[i] > 0) {
-                break;
+
+            if (i > 0 && num[i] == num[i - 1]) {
+                continue; // Skip duplicate
             }
-            if (i == 0 || (i > 0 && num[i] != num[i - 1])) { // Skip duplicate
-                int lo = i + 1, hi = num.length - 1, sum = 0 - num[i];
-                while (lo < hi) {
-                    if (num[lo] + num[hi] == sum) {
-                        res.add(Arrays.asList(num[i], num[lo], num[hi]));
-                        while (lo < hi && num[lo] == num[lo + 1]) lo++;
-                        while (lo < hi && num[hi] == num[hi - 1]) hi--;
-                        lo++; hi--;
-                    } else if (num[lo] + num[hi] < sum) {
-                        while (lo < hi && num[lo] == num[lo + 1]) lo++;
+
+            if (num[i] > 0) {
+                break; // Stop at positive integers
+            }
+
+            int lo = i + 1;
+            int hi = num.length - 1;
+            int target = 0 - num[i];
+            while (lo < hi) {
+                if (num[lo] + num[hi] == target) {
+                    res.add(Arrays.asList(num[i], num[lo], num[hi]));
+                    while (lo < hi && num[lo] == num[lo + 1])
                         lo++;
-                    } else {
-                        while (lo < hi && num[hi] == num[hi - 1]) hi--;
+                    while (lo < hi && num[hi] == num[hi - 1])
                         hi--;
-                    }
+                    lo++;
+                    hi--;
+                } else if (num[lo] + num[hi] < target) {
+                    while (lo < hi && num[lo] == num[lo + 1])
+                        lo++;
+                    lo++;
+                } else {
+                    while (lo < hi && num[hi] == num[hi - 1])
+                        hi--;
+                    hi--;
                 }
             }
         }

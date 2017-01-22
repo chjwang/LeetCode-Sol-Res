@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Hard;
+
 /**
  * Implement wildcard pattern matching with support for '?' and '*'.
  * '?' Matches any single character.
@@ -58,6 +60,11 @@ class WildcardMatching {
 
     /**
      * DP, two pointers
+     *
+     * The basic idea is to have one pointer for the string and one pointer for the pattern.
+     * This algorithm iterates at most length(string) + length(pattern) times, for each iteration,
+     * at least one pointer advance one step.
+     *
      * remember the index of * and matched sequence
      * advance only pattern pointer when * is found
      * match the sequence after * in pattern with the rest of the string
@@ -66,17 +73,19 @@ class WildcardMatching {
         if (str == null && pattern == null) return true;
         if (str == null || pattern == null) return false;
         
-        int s = 0, p = 0, match = 0, astroIdx = -1; // must be -1
+        int s = 0, p = 0, match = 0, starIdx = -1; // must be -1
         while (s < str.length()) {
-            if (p < pattern.length()  && (pattern.charAt(p) == '?' || str.charAt(s) == pattern.charAt(p))){ // found ? or same chars
+            if (p < pattern.length()  &&
+                    (pattern.charAt(p) == '?' ||
+                            str.charAt(s) == pattern.charAt(p))){ // found ? or same chars
                 s++; // move both pointers
                 p++;
             } else if (p < pattern.length() && pattern.charAt(p) == '*') { // found *
-                astroIdx = p; // save astroid index in pattern
+                starIdx = p; // save star index in pattern
                 match = s; // save current index of string
                 p++; // only move pattern pointer forward
-            } else if (astroIdx != -1){ // try to find last astroid
-                p = astroIdx + 1; // move to * one char behind astroid
+            } else if (starIdx != -1){ // try to find last star
+                p = starIdx + 1; // move to * one char behind star
                 match++; // move current index of string
                 s = match;
             } else return false; // not ?, not same char, not *, don't match
@@ -84,5 +93,35 @@ class WildcardMatching {
         // check remaining characters in pattern, can only be astroid
         while (p < pattern.length() && pattern.charAt(p) == '*') p++;
         return p == pattern.length(); // no remaining
+    }
+
+    public boolean isMatch2(String s, String p) {
+        int i = 0;
+        int j = 0;
+        int starIndex = -1;
+        int iIndex = -1;
+
+        while (i < s.length()) {
+            if (j < p.length() && (p.charAt(j) == '?' || p.charAt(j) == s.charAt(i))) {
+                ++i;
+                ++j;
+            } else if (j < p.length() && p.charAt(j) == '*') {
+                starIndex = j;
+                iIndex = i;
+                j++;
+            } else if (starIndex != -1) {
+                j = starIndex + 1;
+                i = iIndex+1;
+                iIndex++;
+            } else {
+                return false;
+            }
+        }
+
+        while (j < p.length() && p.charAt(j) == '*') {
+            ++j;
+        }
+
+        return j == p.length();
     }
 }

@@ -76,8 +76,8 @@ class Search2DMatrix {
     }
     
     /**
-     * n * m matrix convert to an array => matrix[x][y] => a[x * m + y]
-     * an array convert to n * m matrix => a[x] =>matrix[x / m][x % m];
+     * n * m matrix convertPostfix2Infix to an array => matrix[x][y] => a[x * m + y]
+     * an array convertPostfix2Infix to n * m matrix => a[x] =>matrix[x / m][x % m];
      * 
      * disadvantage: 1. m * n may overflow 2. / and % are expensive
      */

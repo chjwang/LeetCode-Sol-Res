@@ -1,5 +1,7 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
- * Implement atoi to convert a string to an integer.
+ * Implement atoi to convertPostfix2Infix a string to an integer.
  * Hint: Carefully consider all possible input cases. If you want a challenge,
  * please do not see below and ask yourself what are the possible input cases.
  * 
@@ -44,10 +46,14 @@ class atoi {
      */
     public static int atoi(String str) {
         /*validate input*/
-        if (str == null || str.length() == 0) return 0;
+        if (str == null || str.length() == 0)
+            return 0;
+
         long longRes = 0; // result can be out of range
+
         /*whitespaces*/
         str = str.trim(); // remove front and trailing whitespaces
+
         /*sign*/
         boolean neg = false; // is negative or not
         if (str.charAt(0) == '-') {
@@ -56,16 +62,20 @@ class atoi {
         } else if (str.charAt(0) == '+') {
             str = str.substring(1, str.length());
         }
+
         /*calculation*/
         int i = 0;
         while (i < str.length()) { // calculate without sign
             char c = str.charAt(i);
             if (c >= '0' && c <= '9') {
                 longRes = longRes * 10 + (c - '0');
-            } else break; // break when not a digit
+            } else
+                break; // break when not a digit
             i++;
         }
+
         longRes = neg ? longRes * (-1) : longRes; // add sign
+
         /*out of range*/
         if (longRes > Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
@@ -89,7 +99,10 @@ class atoi {
     public int atoi2(String str) {
         int n = str.length();
         int i = 0;
-        while (i < n && Character.isWhitespace(str.charAt(i))) i++;
+
+        while (i < n && Character.isWhitespace(str.charAt(i)))
+            i++;
+
         int sign = 1;
         if (i < n && str.charAt(i) == '+') {
             i++;
@@ -97,6 +110,7 @@ class atoi {
             sign = -1;
             i++;
         }
+
         int num = 0;
         while (i < n && Character.isDigit(str.charAt(i))) {
             int digit = Character.getNumericValue(str.charAt(i));

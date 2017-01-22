@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import com.freetymekiyan.algorithms.utils.Utils;
 import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Stack;
 
 /**
  * Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
@@ -42,6 +43,20 @@ public class LowestCommonAncestorOfABinaryTree {
      * If both are found, it means the two nodes are in different subtrees, root should be their LCA.
      * If one of them is null, it means not possible LCA found for p or q.
      * Then the one that is not null should be their LCA.
+     *
+     *
+     * Using a bottom-up approach, we can improve over the top-down approach by avoiding traversing
+     * the same nodes over and over again.
+     *
+     * We traverse from the bottom, and once we reach a node which matches one of the two nodes,
+     * we pass it up to its parent. The parent would then test its left and right subtree if each
+     * contain one of the two nodes.
+     * If yes, then the parent must be the LCA and we pass its parent up to the root.
+     * If not, we pass the lower node which contains either one of the two nodes (if the left or
+     * right subtree contains either p or q), or NULL (if both the left and right subtree does not
+     * contain either p or q) up.
+     *
+     * Sounds complicated? Surprisingly the code appears to be much simpler than the top-down one.
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) {
@@ -94,6 +109,109 @@ public class LowestCommonAncestorOfABinaryTree {
         }
         return lca;
     }
+
+    public TreeNode lowestCommonAncestorC(TreeNode root, TreeNode p, TreeNode q) {
+        Stack<TreeNode> sp = new Stack<>();
+        Stack<TreeNode> sq = new Stack<>();
+
+        findNode(root, p, sp);
+        findNode(root, q, sq);
+        TreeNode target = root;
+        TreeNode temp;
+
+        // root is top of both stacks
+        while (!sp.isEmpty() && !sq.isEmpty()){
+            temp = sp.pop();
+            if (temp == sq.pop()) {
+                target = temp;
+            }
+            else{
+                // find the first one from two stacks which are not equal
+                break;
+            }
+        }
+        return target;
+    }
+
+    /**
+     * Preorder traversal, otherwise known as depth-first search can find the path from root to a node.
+
+     If you implement preorder traversal recursively, then when you reach the desired node, you can
+     unwind your stack (of recursive calls) and construct your path in reverse.
+
+     If you implement the preorder traversal non-recursively, then you will be building a stack
+     directly, so in this case once you reach your desired node you have your path already.
+
+     * @param root
+     * @param p
+     * @param s
+     * @return
+     */
+    public boolean findNode(TreeNode root, TreeNode p, Stack<TreeNode> s) {
+        if(root == null) {
+            return false;
+        }
+        if(root == p) {
+            s.push(root);
+            return true;
+        }else if(findNode(root.left, p, s) || findNode(root.right, p,s)) {
+            s.push(root);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /* Python solution 1
+class Solution:
+    # @param {TreeNode} root
+    # @param {TreeNode} p
+    # @param {TreeNode} q
+    # @return {TreeNode}
+    def lowestCommonAncestor(self, root, p, q):
+        pathP, pathQ = self.findPath(root, p), self.findPath(root, q)
+        lenP, lenQ = len(pathP), len(pathQ)
+        ans, x = None, 0
+        while x < min(lenP, lenQ) and pathP[x] == pathQ[x]:
+            ans, x = pathP[x], x + 1
+        return ans
+
+    def findPath(self, root, target):
+        stack = []
+        lastVisit = None
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                peek = stack[-1]
+                if peek.right and lastVisit != peek.right:
+                    root = peek.right
+                else:
+                    if peek == target:
+                        return stack
+                    lastVisit = stack.pop()
+                    root = None
+        return stack
+
+
+ Python solution 2: If we can addPrereq a parent pointer to binary tree nodes:
+
+ def LCA(root, p, q):
+    vis = set()
+    while p or q:
+        if p:
+            if p in vis:
+                return p
+            vis.addPrereq(p)
+            p = p.parent
+        if q:
+            if q in vis:
+                return q
+            vis.addPrereq(q)
+            q = q.parent
+    return None
+     */
 
     @Before
     public void setUp() {

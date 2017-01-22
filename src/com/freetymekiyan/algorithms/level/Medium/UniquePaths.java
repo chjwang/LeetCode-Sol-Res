@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * A robot is located at the top-left corner of a m x n grid (marked 'Start' in
  * the diagram below).
@@ -41,12 +43,12 @@ class UniquePaths {
      * base cases are, when m <= 0 or n <= 0, no way
      * when m == 1 or n == 1, only 1 way (straight down or straight right)
      */
-    static int[][] paths = new int[101][101];
-    public static int uniquePathsDP(int m, int n) {
+//    static int[][] paths = new int[101][101];
+    public static int uniquePathsDP(int m, int n, int[][] paths) {
         if (m <= 0 || n <= 0) return 0;
         if (m == 1 || n == 1) return 1;
         if (paths[m][n] == 0) 
-            paths[m][n] = uniquePathsDP(m - 1, n) + uniquePathsDP(m, n - 1);
+            paths[m][n] = uniquePathsDP(m - 1, n, paths) + uniquePathsDP(m, n - 1, paths);
         return paths[m][n];
     }
     

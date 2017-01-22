@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.other;
+package com.freetymekiyan.algorithms.Other;
 
 /**
  * Run Length Encoding

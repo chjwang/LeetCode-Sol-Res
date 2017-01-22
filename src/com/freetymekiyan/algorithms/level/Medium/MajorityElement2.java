@@ -1,5 +1,6 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,12 +14,33 @@ import java.util.List;
  * <p>
  * Tags: Array
  * Similar Problems: (E) Majority Element
+ *
+ * https://gregable.com/2013/10/majority-vote-algorithm-find-majority.html
+ * https://discuss.leetcode.com/topic/65042/my-understanding-of-boyer-moore-majority-vote
+ *
+ * Consider 3 cases:
+ *
+ * 1. there are no elements that appears more than n/3 times, then whatever the algorithm
+ * got from 1st round wound be rejected in the second round.
+ *
+ * 2. there are only one elements that appears more than n/3 times, after 1st round one of
+ * the candidate must be that appears more than n/3 times(<2n/3 other elements could only
+ * pair out for <n/3 times), the other candidate is not necessarily be the second most frequent
+ * but it would be rejected in 2nd round.
+ *
+ * 3. there are two elments appears more than n/3 times, candidates would contain both of
+ * them. (<n/3 other elements couldn't pair out any of the majorities.)
+ *
+ * We would only think about the fully pairing situation. If the over one third majority
+ * exists, it should be left after pairing. Why would we use three elements as a pair?
+ * Because it makes sure that in fully pairing the count of majority element equals n/3.
+ *
  */
 public class MajorityElement2 {
 
     public List<Integer> majorityElement(int[] nums) {
         if (nums == null || nums.length == 0) {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
         int num1 = 0;
         int count1 = 0;

@@ -35,7 +35,7 @@ class DupWithinKDistance {
      * Go through the array
      * If not in map, put it and its index in map
      * If in map, return true
-     * Otherwise, add arr[i] to map and remove arr[i - k]
+     * Otherwise, addPrereq arr[i] to map and remove arr[i - k]
      */
     public static boolean checkDuplicatesWithinK(int[] arr, int k) {
         if (arr == null || arr.length == 0 || arr.length < k) return false;

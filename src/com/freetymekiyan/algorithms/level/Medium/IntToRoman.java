@@ -1,7 +1,7 @@
 package com.freetymekiyan.algorithms.level.Medium;
 
 /**
- * Given an integer, convert it to a roman numeral.
+ * Given an integer, convertPostfix2Infix it to a roman numeral.
  * <p>
  * Input is guaranteed to be within the range from 1 to 3999.
  * <p>

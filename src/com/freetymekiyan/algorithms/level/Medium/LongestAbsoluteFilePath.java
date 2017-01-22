@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -44,7 +44,7 @@ import java.util.Deque;
  * The name of a directory or sub-directory will not contain a ..
  * Time complexity required: O(n) where n is the size of the input string.
  * <p>
- * Notice that a/aa/aaa/file1.txt is not the longest file path, if there is another path aaaaaaaaaaaaaaaaaaaaa/sth.png.
+ * Notice that a/aa/aaa/file1.txt is not the longest file getPath, if there is another getPath aaaaaaaaaaaaaaaaaaaaa/sth.png.
  */
 public class LongestAbsoluteFilePath {
 

@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Given an integer, write a function to determine if it is a power of three.
  * <p>
@@ -9,7 +11,7 @@
  */
 public class PowerOfThree {
 
-    int maxPow3 = (int) Math.pow(3, (int) (Math.log(Integer.MAX_VALUE) / Math.log(3)));
+    public static final int maxPow3 = (int) Math.pow(3, (int) (Math.log(Integer.MAX_VALUE) / Math.log(3)));
 
     /**
      * Check if n's modular of 3 is zero.

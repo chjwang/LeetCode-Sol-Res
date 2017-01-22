@@ -22,8 +22,8 @@ public class MergeIntervals {
      * Sort and merge, O(nlogn) time.
      * Sort the intervals according to the start value in asc order.
      * For each of the intervals,
-     * 1) add to result directly if the result list is empty.
-     * 2) add to result directly if there is no overlap between current interval and previous interval.
+     * 1) addPrereq to result directly if the result list is empty.
+     * 2) addPrereq to result directly if there is no overlap between current interval and previous interval.
      * 3) If there is overlap, we already know current interval's start is larger than previous interval.
      * We need to update the end of previous interval if current interval's end is larger.
      */
@@ -45,9 +45,6 @@ public class MergeIntervals {
         return res;
     }
 
-    /**
-     * Interval class provided by leetcode.
-     */
     public class Interval {
 
         int start;

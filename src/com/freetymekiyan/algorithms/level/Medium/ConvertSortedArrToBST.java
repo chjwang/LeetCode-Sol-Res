@@ -1,7 +1,7 @@
 package com.freetymekiyan.algorithms.level.Medium;
 
 /**
- * Given an array where elements are sorted in ascending order, convert it to a
+ * Given an array where elements are sorted in ascending order, convertPostfix2Infix it to a
  * <strong>height balanced</strong> BST.
  * 
  * Tags: Tree, DFS

@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
 
@@ -104,12 +104,12 @@ public class BinaryTreeVerticalOrderTraversal {
             if (n.left != null) {
                 queue.add(n.left);
                 cols.add(level - 1);
-                min = Math.min(min, level - 1);
+                min = Math.min(min, level - 1); // keep record of lowest level
             }
             if (n.right != null) {
                 queue.add(n.right);
                 cols.add(level + 1);
-                max = Math.max(max, level + 1);
+                max = Math.max(max, level + 1); // keep record of highest level
             }
         }
 

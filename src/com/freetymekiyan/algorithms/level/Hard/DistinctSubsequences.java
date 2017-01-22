@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Hard;
+
 /**
  * Given a string S and a string T, count the number of distinct subsequences
  * of T in S.
@@ -23,10 +25,12 @@ class DistinctSubsequences {
     
     /**
      * DP, 2d array as table, Time O(mn), Space O(mn)
-     * We keep a m*n matrix and scanning through string S, while
-     * m = T.length() + 1 and n = S.length() + 1
-     * and each cell in matrix dp[i][j] means the number of distinct
-     * subsequences of T.substr(1...i) in S(1...j)
+     *
+     * When you see string problem that is about subsequence or matching, dynamic programming method
+     * should come to your mind naturally.
+     *
+     * We keep a m*n matrix and scanning through string S, while m = T.length() + 1 and n = S.length() + 1
+     * and each cell in matrix dp[i][j] means the number of distinct subsequences of T.substr(1...i) in S(1...j)
      * 
      * Initialization, dp[0][0] = 1, 
      * dp[0][j] = 1, means T is empty, and there is always 1 substring
@@ -43,11 +47,13 @@ class DistinctSubsequences {
         if (m > n) return 0;
         
         int[][] dp = new int[m + 1][n + 1];
-        for (int i = 0; i <= n; i++) dp[0][i] = 1;
-        
+//        for (int i = 1; i <= m; i++) dp[i][0] = 0; // S is empty
+        for (int i = 0; i <= n; i++) dp[0][i] = 1; // T is empty
+
         for (int i = 1; i <= m; i++)
             for (int j = 1; j <= n; j++)
-                dp[i][j] = dp[i][j - 1] + (t.charAt(i - 1) == s.charAt(j - 1) ? dp[i - 1][j - 1] : 0);
+                dp[i][j] = dp[i][j - 1] + // no S[j-1]
+                        (t.charAt(i - 1) == s.charAt(j - 1) ? dp[i - 1][j - 1] : 0); // S[j-1] == T[i-1]
         
         return dp[m][n];
     }
@@ -66,7 +72,7 @@ class DistinctSubsequences {
         
         for (int i = 1; i <= n; i++)
             for (int j = m; j >= 1; j--)
-                // same: path[i] = path[i] + (T[i-1] == S[j-1] ? path[i-1] : 0);
+                // same: getPath[i] = getPath[i] + (T[i-1] == S[j-1] ? getPath[i-1] : 0);
                 if (t.charAt(j - 1) == s.charAt(i - 1)) dp[j] += dp[j - 1];
         return dp[m];
     }

@@ -29,7 +29,7 @@ struct ListNode {
 class Solution {
 public:
     ListNode *reverseBetween(ListNode *head, int m, int n) {
-        if (m == n) return head;
+        if (m >= n) return head;
         n -= m;
         ListNode dumbnode(0);
         dumbnode.next = head;

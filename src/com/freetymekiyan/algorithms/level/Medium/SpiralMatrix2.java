@@ -38,10 +38,10 @@ class SpiralMatrix2 {
         int num = 1;
         int lv = 0;
         while (2 * lv < n) {
-            for (int i = lv; i < n - lv; i++) ans[lv][i] = num++;
-            for (int i = lv + 1; i < n - lv; i++) ans[i][n - lv - 1] = num++;
-            for (int i = n - lv - 2; i >= lv; i--) ans[n - lv - 1][i] = num++;
-            for (int i = n - lv - 2; i >= lv + 1; i--) ans[i][lv] = num++;
+            for (int i = lv; i < n - lv; i++) ans[lv][i] = num++;  //top
+            for (int i = lv + 1; i < n - lv; i++) ans[i][n - lv - 1] = num++; // right
+            for (int i = n - lv - 2; i >= lv; i--) ans[n - lv - 1][i] = num++; // bottom
+            for (int i = n - lv - 2; i >= lv + 1; i--) ans[i][lv] = num++; // left
             lv++;
         }
         return ans;

@@ -1,5 +1,7 @@
 package com.freetymekiyan.algorithms.level.Medium;
 
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
 /**
  * Given a complete binary tree, count the number of nodes.
  *
@@ -38,15 +40,51 @@ public class CountCompleteTreeNodes {
         return res;
     }
 
-    public class TreeNode {
+    /** This function checks if the binary tree is complete or not
+     *
+     * Call it like this: isComplete(root, 0, countNodes2(root));
+     */
+    boolean isComplete(TreeNode root, int index, int numberNodes)
+    {
+        // An empty tree is complete
+        if (root == null)
+            return true;
 
-        int val;
-        TreeNode left;
-        TreeNode right;
+        // If index assigned to current node is more than
+        // number of nodes in tree, then tree is not complete
+        if (index >= numberNodes)
+            return false;
 
-        TreeNode(int x) {
-            val = x;
-        }
+        // Recur for left and right subtrees
+        return (isComplete(root.left, 2 * index + 1, numberNodes)
+                && isComplete(root.right, 2 * index + 2, numberNodes));
+
     }
 
+    /* This function counts the number of nodes in a binary tree */
+    int countNodes2(TreeNode root)
+    {
+        if (root == null)
+            return (0);
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+
+    public static boolean isFull(TreeNode  root)
+// prereq: root of tree, 0 or more nodes
+// post: returns true if the input tree is a full tree; false otherwise
+    {
+
+        if (root!=null)
+        {
+            if(root.right == null && root.left == null)
+            {
+                return true;
+            }
+            if ((root.right != null && root.left != null))
+            {
+                return isFull(root.left) && isFull(root.right);
+            }
+        }
+        return false;
+    }
 }

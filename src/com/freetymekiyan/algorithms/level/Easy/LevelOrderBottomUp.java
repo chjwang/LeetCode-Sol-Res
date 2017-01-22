@@ -32,7 +32,7 @@ class LevelOrderBottomUp {
     /**
      * Use a level list to store the nodes of this level
      * addRecursive root to it to begin
-     * Build next level with current level, add current level value to result
+     * Build next level with current level, addPrereq current level value to result
      * Assign next level to current level
      * addRecursive curLevel to first of result each time to get reverse order
      */

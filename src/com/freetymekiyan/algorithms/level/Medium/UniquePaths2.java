@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Follow up for "Unique Paths":
  * 
@@ -31,15 +33,15 @@ class UniquePaths2 {
      * DP, bottom-up approach
      * build from end point to start point
      * for the grid paths at the rth row and cth column
-     * paths[r][c] = obstacleGrid[r][c] == 1 ? 0 
-     * : paths[r + 1][c] + paths[r][c + 1];
+     *      paths[r][c] = obstacleGrid[r][c] == 1 ? 0 : paths[r + 1][c] + paths[r][c + 1];
      */
     public static int uniquePathsWithObstacles(int[][] obstacleGrid) {
         if (obstacleGrid == null) return 0;
         int m = obstacleGrid.length;
         if (m == 0) return 0;
         int n = obstacleGrid[0].length;
-        int[][] paths = new int[m + 1][n + 1];
+
+        int[][] paths = new int[m + 1][n + 1]; // add extra space to faciliate calculation
         
         paths[m - 1][n] = 1;
         for (int r = m - 1; r >= 0; r--) {

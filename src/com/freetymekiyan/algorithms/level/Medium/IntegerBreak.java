@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 /**
  * Given a positive integer n, break it into the sum of at least two positive integers and maximize the product of those

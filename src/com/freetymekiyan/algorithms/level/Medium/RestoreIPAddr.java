@@ -31,7 +31,7 @@ class RestoreIPAddr {
     
     /**
      * @param s current string for this backtrack
-     * @param dot how many dots left, when equals 0, add last value to result
+     * @param dot how many dots left, when equals 0, addPrereq last value to result
      * @param res result list of strings
      * @param ip current ip for this backtrack
      */

@@ -2,7 +2,7 @@ package com.freetymekiyan.algorithms.level.Medium;
 
 /**
  * Integer to Roman
- * Given an integer, convert it to a roman numeral.
+ * Given an integer, convertPostfix2Infix it to a roman numeral.
  * Input is guaranteed to be within the range from 1 to 3999.
  * Tags: Math String
  * Similar Problems: (E) Roman to Integer (H) Integer to English Words

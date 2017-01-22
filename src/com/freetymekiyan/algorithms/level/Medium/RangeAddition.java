@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 /**
  * Assume you have an array of length n initialized with all 0's and are given k update operations.

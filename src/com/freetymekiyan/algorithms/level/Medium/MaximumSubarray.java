@@ -66,7 +66,8 @@ class MaximumSubarray {
     }
 
     /**
-     * Not asking sum, but the range
+     * Return not just sum, but also the range begin/end index
+     *
      * If A[i] < 0, current sum + A[i] >= 0, we can continue addition because 
      * the positive sum would still contribute to positiveness of the subarray. 
      * If A[i] < 0, current sum + A[i] < 0, the current subarray has to end.
@@ -79,7 +80,7 @@ class MaximumSubarray {
         int maxEndingHere = A[0]; // max sum of this group
 
         for (int i = 1; i < A.length; i++) {
-            if (maxEndingHere < 0) { // last A[i] is too small
+            if (maxEndingHere < 0) { // discard previous negative maxEndingHere
                 maxEndingHere = A[i];
                 beginTemp = i; // update begin temp
             } else {
@@ -93,5 +94,34 @@ class MaximumSubarray {
             }
         }
         return new int[]{begin, end, maxSoFar};
+    }
+
+    /**
+     * this problem was discussed by Jon Bentley (Sep. 1984 Vol. 27 No. 9 Communications of the ACM P885)
+     *
+     * the paragraph below was copied from his paper (with a little modifications)
+     *
+     * algorithm that operates on arrays: it starts at the left end (element A[1]) and scans through
+     * to the right end (element A[n]), keeping track of the maximum sum subvector seen so far.
+     *
+     * The maximum is initially A[0]. Suppose we've solved the problem for A[1 .. i - 1];
+     * how can we extend that to A[1 .. i]?
+     *
+     * The maximum sum in the first I elements is either the maximum sum in the first i - 1 elements
+     * (which we'll call MaxSoFar), or it is that of a subvector that ends in position i (which we'll
+     * call MaxEndingHere).
+     *
+     * MaxEndingHere is either A[i] plus the previous MaxEndingHere, or just A[i], whichever is larger.
+     * @param A
+     * @return
+     */
+    public static int maxSubArray3(int[] A) {
+        int maxSoFar = A[0], maxEndingHere = A[0];
+
+        for (int i = 1; i < A.length; ++i){
+            maxEndingHere = Math.max(maxEndingHere + A[i], A[i]);
+            maxSoFar = Math.max(maxSoFar, maxEndingHere);
+        }
+        return maxSoFar;
     }
 }

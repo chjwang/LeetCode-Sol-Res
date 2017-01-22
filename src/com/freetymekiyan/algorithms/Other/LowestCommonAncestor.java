@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.Other;
+
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
 /**
  * Given a binary tree (not a binary search tree) and two values say n1 and n2, 
  * write a program to find the least common ancestor.
@@ -18,25 +22,19 @@ class LowestCommonAncestor {
      * return root
      * If one is not null, return that one
      */
-    public Node findLca(Node root, int n1, int n2) {
-        if (root == null) return null;
-        if (root.val == n1 || root.val == n2) return root;
+    public TreeNode findLca(TreeNode root, int n1, int n2) {
+        if (root == null)
+            return null;
+
+        if (root.val == n1 || root.val == n2)
+            return root;
         
-        Node leftLca = findLca(root.left, n1, n2);
-        Node rightLca = findLca(root.right, n1, n2);
-        if (leftLca != null && rightLca != null) return root;
+        TreeNode leftLca = findLca(root.left, n1, n2);
+        TreeNode rightLca = findLca(root.right, n1, n2);
+
+        if (leftLca != null && rightLca != null)
+            return root;
+
         return leftLca != null ? leftLca : rightLca;
-    }
-    
-    class Node {
-        int val;
-        Node left;
-        Node right;
-        
-        public Node() {}
-            
-        public Node(int v) {
-            val = v;
-        }
     }
 }

@@ -14,7 +14,56 @@ class LongestPalindromicSubstring {
         String s = "abba";
         System.out.println(l.longestPalindrome(s));
     }
-    
+
+    /**
+     * Let s be the input string, i and j are two indices of the string.
+     * Define a 2-dimension array "dp" and let dp[i][j] denote whether substring from i to j is palindrome.
+
+     Changing condition:
+
+     dp[i+1][j-1] == 1 && s.charAt(i) == s.charAt(j)
+     =>
+     dp[i][j] == 1
+
+     For example, if the input string is "dabcba", the final matrix would be the following:
+
+     1 0 0 0 0 0
+     0 1 0 0 0 1
+     0 0 1 0 1 0
+     0 0 0 1 0 0
+     0 0 0 0 1 0
+     0 0 0 0 0 1
+
+     From the table dp, we can clearly see that the longest string is in cell dp[1][5].
+
+     Time O(n^2) Space O(n^2)
+     */
+    public String longestPalindromeDP(String s) {
+        if (s == null || s.length() <= 1)
+            return s;
+
+        int n = s.length();
+        int maxLen = 1;
+        boolean[][] dp = new boolean[n][n];
+
+        String longest = null;
+        for (int gap = 0; gap < s.length(); gap++) { // gap represents gap between i and j.
+            for (int i = 0; i < n - gap; i++) {
+                int j = i + gap;
+                if (s.charAt(i) == s.charAt(j) && (j - i <= 2 || dp[i + 1][j - 1])) {
+                    dp[i][j] = true;
+
+                    if (j - i + 1 > maxLen) {
+                        maxLen = j - i + 1;
+                        longest = s.substring(i, j + 1);
+                    }
+                }
+            }
+        }
+
+        return longest;
+    }
+
     /**
      * Manacher's Algorithm, O(n) Time.
      * Insert a special character between each character in a string, and also both at the start and the end.
@@ -30,7 +79,8 @@ class LongestPalindromicSubstring {
         
         for (int i = 1; i <= 2 * len - 1; i++) { // skip two #s
             int count = 1;
-            while (i - count >= 0 && i + count <= 2 * len && get(s, i - count) == get(s, i + count)) count++;
+            while (i - count >= 0 && i + count <= 2 * len && get(s, i - count) == get(s, i + count))
+                count++;
             count--; // there will be one extra count for the outbound #
             if (count > max) { // update max and result when longer is found
                 res = s.substring((i - count) / 2, (i + count) / 2);

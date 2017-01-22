@@ -38,6 +38,6 @@ class MajorityEle {
      * be the one bit that has the greater count.
      */
     public static int majorityElement2(int[] num) {
-        
+        return 0;
     }
 }

@@ -63,7 +63,7 @@ class RemoveDuplicatesFromSortedList2 {
     }
     
     /**
-     * Set a pre pointer
+     * Set a prereq pointer
      */
     public static ListNode deleteDuplicates(ListNode head) {
         if (head == null || head.next == null) return head;

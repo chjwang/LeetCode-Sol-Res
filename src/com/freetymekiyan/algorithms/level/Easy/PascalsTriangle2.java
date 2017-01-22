@@ -30,7 +30,7 @@ class PascalsTriangle2 {
      * i = 3, [1, 3, 3, 1]
      */
     public List<Integer> getRow(int k) {
-        List<Integer> row = new ArrayList<Integer>(k + 1);
+        List<Integer> row = new ArrayList<>(k + 1);
         row.add(1);
         for (int i = 1; i <= k; i++) { // repeat k times
             for (int j = i - 1; j >= 1; j--) { // do it backwards

@@ -35,7 +35,7 @@ public class PeekingIterator implements Iterator<Integer> {
     private Iterator<Integer> iter;
 
     /**
-     * Store result in next
+     * Pre-fetch, cache result in next
      * @param iterator
      */
     public PeekingIterator(Iterator<Integer> iterator) {

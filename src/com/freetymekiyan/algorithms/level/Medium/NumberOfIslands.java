@@ -31,7 +31,7 @@ import java.util.Queue;
  * <p>
  * Tags: Depth-first Search, Breadth-first Search, Union Find
  * Similar Problems: (M) Surrounded Regions, (M) Walls and Gates, (H) Number of Islands II, (M) Number of Connected
- * Components in an Undirected Graph
+ * Components in an Undirected GraphPrintAllPaths
  */
 public class NumberOfIslands {
 

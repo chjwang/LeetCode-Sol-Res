@@ -20,7 +20,7 @@ class ReadNGivenRead4 {
      * Can reach n or end of file
      * if read4 returns size smaller than 4, it means end of file
      * the # of bytes read is the minimum of n - readBytes and size of read4
-     * Copy things in read4 buffer to output buffer
+     * copy things in read4 buffer to output buffer
      * Update readBytes
      */
     public int read(char[] buf, int n) {
@@ -37,5 +37,9 @@ class ReadNGivenRead4 {
             readBytes += bytes;
         }
         return readBytes; // can be n or smaller
+    }
+
+    private int read4(char[] buffer) {
+        return 0;
     }
 }

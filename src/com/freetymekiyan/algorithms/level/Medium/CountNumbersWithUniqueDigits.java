@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 /**
  * Given a non-negative integer n, count all numbers with unique digits, x, where 0 ≤ x < 10^n.
@@ -19,7 +19,7 @@ package com.freetymekiyan.algorithms.level.medium;
  * <p>
  * Tags: Dynamic Programming, Backtracking, Math
  */
-public class CountingNumbersWithUniqueDigits {
+public class CountNumbersWithUniqueDigits {
 
     /**
      * DP.

@@ -1,5 +1,7 @@
 package com.freetymekiyan.algorithms.level.Easy;
 
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
 /**
  * Given a binary tree, find its maximum depth.
  *
@@ -26,11 +28,5 @@ class MaxDepth {
         int left = maxDepth(root.left);
         int right = maxDepth(root.right);
         return Math.max(left, right) + 1;
-    }
-    
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
     }
 }

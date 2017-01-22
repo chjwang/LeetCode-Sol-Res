@@ -17,7 +17,7 @@ import java.util.*;
  * Return:
  * ["AAAAACCCCC", "CCCCCAAAAA"].
  * 
- * Tags: Bit Manipulation
+ * Tags: Bit Manipulation, LinkedIn
  */
 class RepeatedDNASeq {
     public static void main(String[] args) {
@@ -57,9 +57,9 @@ class RepeatedDNASeq {
      * O(n) Space
      */
     public List<String> findRepeatedDnaSequencesB(String s) {
-        List<String> res = new ArrayList<String>();
+        List<String> res = new ArrayList<>();
         if (s == null || s.length() < 10) return res;
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         for (int i = 0; i < s.length() - 10; i++) {
             String sub = s.substring(i, i + 10);
             if (set.contains(sub)) {

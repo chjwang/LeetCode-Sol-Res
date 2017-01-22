@@ -43,8 +43,14 @@ class CombinationSum2 {
     
     /**
      * Skip duplicates after new target is generated
+     *
+     * @param num
+     * @param target
+     * @param index
+     * @param comb
+     * @param result
      */
-    public void combinationSum2(int[] num, int target, int index, List<Integer> comb, List<List<Integer>> result) {
+    private void combinationSum2(int[] num, int target, int index, List<Integer> comb, List<List<Integer>> result) {
         if (target == 0) { // && !result.contains(comb)
             result.add(new ArrayList<Integer>(comb));
             return;

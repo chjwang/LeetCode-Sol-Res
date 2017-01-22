@@ -27,7 +27,7 @@ public class AdditiveNumber {
     /**
      * Recursive.
      * Generate the first and second of the sequence, check if the rest of the string match the sum recursively.
-     * i is the length of first number, j is the length of thgste second.
+     * i is the length of first number, i is the length of thgste second.
      */
     public boolean isAdditiveNumber(String num) {
         int n = num.length();
@@ -38,7 +38,7 @@ public class AdditiveNumber {
             }
             BigInteger num1 = new BigInteger(num.substring(0, i));
             for (int j = 1; Math.max(i, j) <= n - i - j;
-                 j++) { // The remaining length should not be shorter than i or j
+                 j++) { // The remaining length should not be shorter than i or i
                 if (num.charAt(i) == '0' && j > 1) { // Cannot start with zero if length is larger than 2, skip
                     break;
                 }

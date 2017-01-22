@@ -3,16 +3,16 @@ package com.freetymekiyan.algorithms.level.Medium;
 import java.util.*;
 
 /**
- * Given an absolute path for a file (Unix-style), simplify it.
+ * Given an absolute getPath for a file (Unix-style), simplify it.
  * 
  * For example,
- * path = "/home/", => "/home"
- * path = "/a/./b/../../c/", => "/c"
+ * getPath = "/home/", => "/home"
+ * getPath = "/a/./b/../../c/", => "/c"
  * 
  * Corner Cases:
- * Did you consider the case where path = "/../"?
+ * Did you consider the case where getPath = "/../"?
  * In this case, you should return "/".
- * Another corner case is the path might contain multiple slashes '/' together,
+ * Another corner case is the getPath might contain multiple slashes '/' together,
  * such as "/home//foo/".
  * In this case, you should ignore redundant slashes and return "/home/foo".
  * 

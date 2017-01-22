@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Hard;
+
 import java.util.HashMap;
 
 /**
@@ -21,14 +23,14 @@ class DoubleLinkedList{
     }
 }
 
-class LRUCacheShuna {
-    private HashMap<Integer, DoubleLinkedList> map = new HashMap<Integer, DoubleLinkedList>();
+public class LRUCache_shuna {
+    private HashMap<Integer, DoubleLinkedList> map = new HashMap<>();
     private int capacity;
     private int count;
     private DoubleLinkedList head;
     private DoubleLinkedList tail;
     
-    public LRUCacheShuna(int capacity) {
+    public LRUCache_shuna(int capacity) {
         this.capacity = capacity;
         count = 0;
         head = new DoubleLinkedList(0, 0);

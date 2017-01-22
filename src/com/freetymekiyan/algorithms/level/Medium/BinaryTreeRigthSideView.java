@@ -28,8 +28,8 @@ public class BinaryTreeRigthSideView {
     /**
      * BFS.
      * Do a level order traversal with queue.
-     * For each level, traverse each node and add children to the queue.
-     * If it's at the end of current level, add node's value to result.
+     * For each level, traverse each node and addPrereq children to the queue.
+     * If it's at the end of current level, addPrereq node's value to result.
      * <p>
      * Easy to understand, but queue.poll() and queue.offer() can be slow.
      */
@@ -61,7 +61,7 @@ public class BinaryTreeRigthSideView {
     /**
      * DFS. Backtracking.
      * Base case: if current node is null, just return.
-     * Visit: if depth equals result size, means that it's at the correct level, add current node's value to result.
+     * Visit: if depth equals result size, means that it's at the correct level, addPrereq current node's value to result.
      * Next: recurse down next level with right node first and depth + 1. Then left node.
      * <p>
      * Faster than BFS since there is no enqueue or dequeue.

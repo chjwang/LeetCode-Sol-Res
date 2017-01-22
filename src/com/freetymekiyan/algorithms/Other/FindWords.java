@@ -67,7 +67,7 @@ public class FindWords {
         if (isWord(str))
             ans.add(str);
 
-        // Traverse 8 adjacent cells of boggle[i][j]
+        // Traverse 8 adjacent Cell of boggle[i][j]
         for (int row = i - 1; row <= i + 1 && row < M; row++)
             for (int col = j - 1; col <= j + 1 && col < N; col++)
                 if (row >= 0 && col >= 0 && !visited[row][col])

@@ -30,7 +30,7 @@ class MergeSort {
     }
     
     /**
-     * Copy items from low to high to a helper array
+     * copy items from low to high to a preOrderHelper array
      * Init 2 pointers 
      * Compare value of 2 pointers, and overwrite original array, and move on
      * Stop when left reach middle or right reach high

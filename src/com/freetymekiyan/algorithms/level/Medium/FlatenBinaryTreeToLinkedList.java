@@ -30,7 +30,7 @@ import java.util.Stack;
  * 
  * Hints:
  * If you notice carefully in the flattened tree, each node's right child
- * points to the next node of a pre-order traversal.
+ * points to the next node of a prereq-order traversal.
  * 
  * Tags: Tree, DFS
  */
@@ -40,7 +40,7 @@ class FlatenBinaryTreeToLinkedList {
     }
     
     /**
-     * add root's right subtree to left subtree's rightmost child
+     * addPrereq root's right subtree to left subtree's rightmost child
      * Then set that subtree as root's right subtree
      * And set root's left child to null
      * Move root to its right child and repeat
@@ -85,7 +85,7 @@ class FlatenBinaryTreeToLinkedList {
     }
 
     /**
-     * each node's right child points to the next node of a pre-order traversal.
+     * each node's right child points to the next node of a prereq-order traversal.
      *
      * 时间O(n)。空间上是栈的大小，O(logn)
      *

@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +25,11 @@ import java.util.Map;
  * Tags: Hash Table
  * Similar Problems: (M) Minimum Size Subarray Sum, (E) Range Sum Query - Immutable
  */
-public class MaximumSizeSubarraySum {
+public class MaximumSizeSubarraySumEqualsK {
 
     /**
      * For 0 <= i < j < nums.length,
-     * Find max(i, j) for sum[j] - sum[i-1] = k.
+     * Find max(i, i) for sum[i] - sum[i-1] = k.
      * Except when i = 0.
      * The brute-force way is we loop through the array, keep updating sum.
      * Then subtract with each previous sum to see if it's k.

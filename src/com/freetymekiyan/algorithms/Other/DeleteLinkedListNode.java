@@ -10,7 +10,7 @@ class DeleteLinkedListNode {
     }
     
     /**
-     * Copy the data from the next node to the node to be deleted and delete 
+     * copy the data from the next node to the node to be deleted and delete
      * the next node
      */
     void delete(Node n) {

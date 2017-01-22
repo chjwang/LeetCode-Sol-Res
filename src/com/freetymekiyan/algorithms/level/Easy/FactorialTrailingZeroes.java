@@ -28,6 +28,6 @@ class FactorialTrailingZeroes {
      * Recursive
      */
     public static int trailingZeroesB(int n) {
-        return n <= 0 ? 0 : n / 5 + trailingZeroes(n / 5);
+        return n <= 0 ? 0 : n / 5 + trailingZeroesB(n / 5);
     }
 }

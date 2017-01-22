@@ -49,7 +49,7 @@ class ValidPalindrome {
     }
 
     /**
-     * Put letters and numbers in a new string and convert to lowercase
+     * Put letters and numbers in a new string and convertPostfix2Infix to lowercase
      * O(2n) Time, O(n) Space
      */
     public static boolean isPalindrome(String s) {

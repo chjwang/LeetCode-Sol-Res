@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.hard;
+package com.freetymekiyan.algorithms.level.Hard;
 
 /**
  * Validate if a given string is numeric.
@@ -17,6 +17,9 @@ package com.freetymekiyan.algorithms.level.hard;
 class ValidNumber {
 
     public static void main(String[] args) {
+        String s = " -.12 ";
+        boolean b = isNumeric(s);
+        System.out.print(s + " " + b);
 
     }
 
@@ -26,13 +29,15 @@ class ValidNumber {
     public boolean isNumber(String s) {
         int len = s.length();
         int i = 0, e = len - 1;
-        // whitespace
+        // ltrim whitespace
         while (i <= e && Character.isWhitespace(s.charAt(i))) {
             i++;
         }
         if (i > len - 1) {
+            // pure white space
             return false;
         }
+        // rtrim
         while (e >= i && Character.isWhitespace(s.charAt(e))) {
             e--;
         }
@@ -84,50 +89,89 @@ class ValidNumber {
             return false;
         }
         char[] c = s.trim().toCharArray();
-        if (c.length == 0) {
-            return false; // all whitespaces
-        }
+        int n = c.length;
+        if (n == 0) return false; // all whitespaces
+
         int i = 0;
         int num = 0;
-        if (c[0] == '+' || c[0] == '-') {
+        if (c[0] == '+' || c[0] == '-')
             i++; // skip sign
-        }
-        for (; i < c.length && (c[i] >= '0' && c[i] <= '9'); i++) {
+
+        for (; i < n && (c[i] >= '0' && c[i] <= '9'); i++)
             num++;
-        }
-        if (i < c.length && c[i] == '.') {
+
+        if (i < n && c[i] == '.')
             i++; // skip point
-        }
 
-        for (; i < c.length && (c[i] >= '0' && c[i] <= '9'); i++) {
+
+        for (; i < n && (c[i] >= '0' && c[i] <= '9'); i++)
             num++; // !
-        }
-        if (num == 0) {
-            return false; // no digit before or after point
-        }
 
-        if (i == c.length) {
+        if (num == 0)
+            return false; // no digit before or after point
+
+
+        if (i == n)
             return true; // no point or e
-        } else if (i < c.length && c[i] != 'e') {
+        else if (i < n && c[i] != 'e')
             return false; // last letter not e
-        } else {
+        else
             i++; // skip e
-        }
 
         num = 0; // reset num and check numbers after e
-        if (i < c.length && (c[i] == '+' || c[i] == '-')) {
+        if (i < n && (c[i] == '+' || c[i] == '-'))
             i++;
-        }
-        for (; i < c.length && (c[i] >= '0' && c[i] <= '9'); i++) {
+
+        for (; i < n && (c[i] >= '0' && c[i] <= '9'); i++)
             num++;
-        }
-        if (num == 0) {
+
+        if (num == 0)
             return false; // no more numbers after e
-        }
-        if (i == c.length) {
+
+        if (i == n)
             return true; // no other letter except e
-        } else {
+        else
             return false; // other letter shows up
+    }
+
+    /*
+    simpler version: handle + - .
+     */
+    public static boolean isNumeric(String s) {
+        if (s == null || s.length() == 0) return false;
+
+        char[] c = s.trim().toCharArray();
+        if (c.length == 0) return false; // all whitespaces
+
+        int i = 0;
+        int num = 0;
+        if (c[0] == '+' || c[0] == '-') i++; // skip sign
+
+        for (; i < c.length && Character.isDigit(c[i]); i++)
+            num++; // number of digits before .
+
+        if (i < c.length && c[i] == '.') i++; // skip point
+
+        for (; i < c.length && Character.isDigit(c[i]); i++)
+            num++; // number of digits after .
+
+        if (num == 0) return false; // no digits before or after point
+
+        if (i == c.length)
+            return true; // no point
+        else
+            return false; // other letter shows up
+    }
+
+    public static boolean isNum(String strNum) {
+        boolean ret = true;
+        try {
+
+            Double.parseDouble(strNum);
+
+        }catch (NumberFormatException e) {
+            ret = false;
         }
+        return ret;
     }
 }

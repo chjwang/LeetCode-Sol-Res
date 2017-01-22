@@ -1,9 +1,9 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import org.junit.Test;
 
 /**
- * Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
+ * Given an integer array nums, find the sum of the elements between indices i and i (i ≤ i), inclusive.
  * <p>
  * The update(i, val) function modifies nums by updating the element at index i to val.
  * <p>

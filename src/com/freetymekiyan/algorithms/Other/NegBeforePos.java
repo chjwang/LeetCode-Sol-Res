@@ -37,6 +37,7 @@ class NegBeforePos {
 
         int negIndex = 0;
         int posIndex = negCount; // positive value will be moved after neg count
+        int n = A.length;
         while (posIndex < n && negIndex < negCount) {
             if (A[negIndex] < 0) negIndex++;
             else { // current value > 0, swap

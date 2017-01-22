@@ -29,7 +29,7 @@ import java.util.*;
  *          / \
  *          \_/
  *
- * Tags: DFS, BFS, Graph
+ * Tags: DFS, BFS, GraphPrintAllPaths
  */
 class CloneGraph {
     public static void main(String[] args) {
@@ -60,7 +60,7 @@ class CloneGraph {
                         q.add(n);
                         map.put(n.label, new UndirectedGraphNode(n.label));
                     }
-                    // add to neighbors
+                    // addPrereq to neighbors
                     curClone.neighbors.add(map.get(n.label));
                 }
             }

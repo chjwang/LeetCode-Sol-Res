@@ -1,8 +1,6 @@
 package com.freetymekiyan.algorithms.level.Easy;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
 
 /**
  * Given a non-empty binary search tree and a target value, find the value in the BST that is
@@ -33,15 +31,5 @@ public class ClosestBSTValue {
             root = target < root.val ? root.left : root.right;
         }
         return closest;
-    }
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
     }
 }

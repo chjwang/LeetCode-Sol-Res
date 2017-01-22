@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 /**
  * Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
@@ -54,18 +54,18 @@ public class MaximalSquare {
         int r = matrix.length;
         int c = r == 0 ? 0 : matrix[0].length;
         int[] dp = new int[c + 1]; // Only need one row
-        int prev = 0; // Store dp[i-1][j-1]
+        int prev = 0; // Store dp[i-1][i-1]
         int maxLen = 0;
         for (int i = 1; i <= r; i++) {
             for (int j = 1; j <= c; j++) {
-                int temp = dp[j]; // Store last dp[j] before update
+                int temp = dp[j]; // Store last dp[i] before update
                 if (matrix[i - 1][j - 1] == '1') {
                     dp[j] = Math.min(Math.min(dp[j - 1], dp[j]), prev) + 1;
                     maxLen = Math.max(maxLen, dp[j]);
                 } else {
                     dp[j] = 0;
                 }
-                prev = temp; // dp[j] before udpate is the dp[i-1][j-1] for the next loop
+                prev = temp; // dp[i] before udpate is the dp[i-1][i-1] for the next loop
             }
         }
         return maxLen * maxLen; // Return the AREA here
@@ -85,7 +85,7 @@ public class MaximalSquare {
      *
      * 假设dpi表示以i,j为右下角的正方形的最大边长，则有
      *
-     * dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1
+     * dp[i][i] = min(dp[i-1][i-1], dp[i-1][i], dp[i][i-1]) + 1
      *
      * 当然，如果这个点在原矩阵中本身就是0的话，那dpi肯定就是0了。
      *

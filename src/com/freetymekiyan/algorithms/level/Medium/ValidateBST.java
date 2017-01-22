@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -46,9 +48,12 @@ class ValidateBST {
         return isValidBSTB(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
     
-    // add range of current value and do recursive check
+    // addPrereq range of current value and do recursive check
     public boolean isValidBSTB(TreeNode root, int min, int max) {
-        return root == null || root.val > min && root.val < max && isValidBSTB(root.left, min, root.val) && isValidBSTB(root.right, root.val, max);
+        return root == null ||
+                root.val > min && root.val < max &&
+                        isValidBSTB(root.left, min, root.val) &&
+                        isValidBSTB(root.right, root.val, max);
     }
     
     /**

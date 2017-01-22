@@ -25,10 +25,10 @@ class MatrixColor {
      * addRecursive the start point to a queue, and set it as visited
      * Convert 2d coordinate to 1d integer and store it in queue
      * While the queue is not empty, get an integer from the queue
-     * Convert it back to 2d and search the 4 cells around it
-     * If within board, and not visited, add it to queue and set visited
-     * If not same color, add edge count
-     * If not within board, add edge count
+     * Convert it back to 2d and search the 4 Cell around it
+     * If within board, and not visited, addPrereq it to queue and set visited
+     * If not same color, addPrereq edge count
+     * If not within board, addPrereq edge count
      */
     public int findPerimeter(int[][] mat, int x, int y) {
         if (mat == null || mat.length == 0 || mat[0].length == 0) return 0;

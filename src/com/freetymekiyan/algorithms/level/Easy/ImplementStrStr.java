@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Implement strStr().
  *
@@ -27,22 +29,31 @@ class ImplementStrStr {
      * if not returned during loop, return null
      */
     public static String strStr(String haystack, String needle) {
-        if (haystack == null || needle == null || haystack.length() < needle.length()) return null;
-        if (needle.length() == 0) return haystack;
+        if (haystack == null || needle == null || haystack.length() < needle.length())
+            return null;
+        if (needle.length() == 0)
+            return haystack;
+
         int len = haystack.length();
-        int tarLen = needle.length();
-        for (int i = 0; i < len - tarLen + 1; i++) { // iteration times reduced
+        int needleLen = needle.length();
+        for (int i = 0; i < len - needleLen + 1; i++) {
             int j = 0;
             int k = i;
             while (k < len && haystack.charAt(k) == needle.charAt(j)) {
                 k++;
                 j++;
-                if (j == tarLen) return haystack.substring(k - j);
+                if (j == needleLen) return haystack.substring(i);
             }
         }
         return null;
     }
 
+    /**
+     * Naive and simple way: get substring of haystack with len of needle, compare it with needle
+     * @param haystack
+     * @param needle
+     * @return
+     */
     public static String strStr2(String haystack, String needle) {
         if ((haystack == null) || (needle == null)) {
             return null;

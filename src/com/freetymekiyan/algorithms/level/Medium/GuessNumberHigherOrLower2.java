@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 /**
  * We are playing the Guess Game. The game is as follows:
@@ -79,8 +79,8 @@ public class GuessNumberHigherOrLower2 {
     /**
      * DP, bottom-up.
      * Build result of i from 1 to n.
-     * For each number, get the global min of j from i - 1 to 1.
-     * To get the global min, calculate the local max of k from j + 1 to i.
+     * For each number, get the global min of i from i - 1 to 1.
+     * To get the global min, calculate the local max of k from i + 1 to i.
      * Finally, return dp[1][n] as the result.
      */
     public int getMoneyAmountB(int n) {
@@ -92,7 +92,7 @@ public class GuessNumberHigherOrLower2 {
                     int localMax = k + Math.max(dp[i][k - 1], dp[k + 1][j]);
                     globalMin = Math.min(globalMin, localMax);
                 }
-                dp[i][j] = i + 1 == j ? i : globalMin; // If i + 1 == j means there are only two numbers to choose
+                dp[i][j] = i + 1 == j ? i : globalMin; // If i + 1 == i means there are only two numbers to choose
             }
         }
         return dp[1][n];

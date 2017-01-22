@@ -40,7 +40,7 @@ class FractionToRecurringDeci {
         if (numerator == 0) return "0";
         
         StringBuilder res = new StringBuilder();
-        Long n = new Long(numerator); // convert to long
+        Long n = new Long(numerator); // convertPostfix2Infix to long
         Long d = new Long(denominator);
         if ((n < 0 && d > 0) || (n > 0 && d < 0)) res.append("-"); // negative
         
@@ -49,7 +49,7 @@ class FractionToRecurringDeci {
         res.append(n / d); // before dot 
         if (n % d == 0) return res.toString(); // no fraction
         
-        res.append("."); // add dot
+        res.append("."); // addPrereq dot
         HashMap<Long, Integer> map = new HashMap<Long, Integer>();
         Long r = n % d; // get first remainder
         while (r > 0) {

@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 /**
  * Given an unsorted array nums, reorder it in-place such that nums[0] <= nums[1] >= nums[2] <= nums[3]....
@@ -19,22 +19,22 @@ public class WiggleSort {
      * <p>
      * Proof: suppose if nums[0...i-1] is already wiggle.
      * If i is odd, then nums[i - 2] >= nums[i - 1], nums[i - 1] should <= nums[i]
-     * So if nums[i - 1] > nums[i], swap them. And because nums[i - 2] >= nums[i - 1], nums[i - 2] > nums[i].
+     * So if nums[i - 1] > nums[i], swapWithPrevious them. And because nums[i - 2] >= nums[i - 1], nums[i - 2] > nums[i].
      * Then nums[i - 2] > nums[i] < nums[i - 1]
      */
     public void wiggleSort(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             if ((i & 1) > 0) {
                 if (nums[i - 1] > nums[i]) {
-                    swap(nums, i);
+                    swapWithPrevious(nums, i);
                 }
             } else if (i != 0 && nums[i - 1] < nums[i]) {
-                swap(nums, i);
+                swapWithPrevious(nums, i);
             }
         }
     }
 
-    private void swap(int[] nums, int i) {
+    private void swapWithPrevious(int[] nums, int i) {
         int temp = nums[i];
         nums[i] = nums[i - 1];
         nums[i - 1] = temp;
@@ -47,8 +47,8 @@ public class WiggleSort {
         for (int i = 0; i < nums.length; i++) {
             int a = nums[i - 1];
             /*
-             * When i is odd, left is true, and if nums[i - 1] > nums[i], we need to swap
-             * When i is even, left is false, and if nums[i - 1] < nums[i], we need to swap
+             * When i is odd, left is true, and if nums[i - 1] > nums[i], we need to swapWithPrevious
+             * When i is even, left is false, and if nums[i - 1] < nums[i], we need to swapWithPrevious
              */
             if ((i % 2 == 1) == (a > nums[i])) {
                 nums[i - 1] = nums[i];

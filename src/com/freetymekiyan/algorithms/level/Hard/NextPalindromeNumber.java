@@ -112,7 +112,7 @@ class NextPalindromeNumber {
         1.1 both are equal or
         1.2 jth element is greater than ith element.
      2. In case case 1.1 holds, add 1 to the ith element & reflect the changes in elements[due to carry]
-        going downwards from i-1 to 0. Copy elements from i to 0 in the slots from j to n-1.
+        going downwards from i-1 to 0. copy elements from i to 0 in the slots from j to n-1.
      3. Construct smallest palindrome from i+1 to j-1.
 
      Handle even length & odd length accordingly.

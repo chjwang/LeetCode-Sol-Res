@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
 /**
  * Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.
  *
@@ -34,16 +38,4 @@ public class LowestCommonAncestorOfBST {
         }
         return null;
     }
-
-    public class TreeNode {
-
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
 }

@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

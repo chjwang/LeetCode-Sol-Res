@@ -37,7 +37,7 @@ class reverseLinkedList2 {
 
         ListNode pre = dummy;
         for (int i = 1; i < m; i++)
-            pre = pre.next; // move pre to before m
+            pre = pre.next; // move prereq to before m
         
         ListNode cur = pre.next;
         for (int i = m; i < n; i++) { // insert next to head to reverse
@@ -50,11 +50,11 @@ class reverseLinkedList2 {
     }
 
     public ListNode reverseBetween2(ListNode head, int m, int n) {
+        if (head == null || head.next == null)
+            return head;
+
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-
-        if (head == null || head.next == null)
-            return dummy.next;
 
         ListNode startpoint = dummy;//startpoint指向需要开始reverse的前一个
         ListNode node1 = null;//需要reverse到后面去的节点
@@ -67,7 +67,7 @@ class reverseLinkedList2 {
                 node1 = startpoint.next;
                 node2 = node1.next;
             } else {
-                node1.next = node2.next;//node1交换到node2的后面
+                node1.next = node2.next;//node1交换111    a到node2的后面
                 node2.next = startpoint.next;//node2交换到最开始
                 startpoint.next = node2;//node2作为新的点
                 node2 = node1.next;//node2回归到node1的下一个，继续遍历

@@ -4,7 +4,7 @@ import com.freetymekiyan.algorithms.utils.Utils.*;
 
 /**
  * Given a singly linked list where elements are sorted in ascending order,
- * convert it to a height balanced BST.
+ * convertPostfix2Infix it to a height balanced BST.
  * 
  * Tags: DFS, Linked list
  */
@@ -13,7 +13,7 @@ class ConvertSortedListToBST {
         
     }
     
-    private ListNode cur;
+    private static ListNode cur;
     
     public static TreeNode sortedListToBST(ListNode head) {
         if (head == null) return null;

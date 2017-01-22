@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.Other;
+
 /**
  * Similar to Read N Characters Given Read4, but the read 
  * function may be called multiple times
@@ -46,5 +48,9 @@ class ReadNMultipleRead4 {
             readBytes += bytes; // update readBytes
         }
         return readBytes;
+    }
+
+    private int read4(char[] buffer) {
+        return 0;
     }
 }

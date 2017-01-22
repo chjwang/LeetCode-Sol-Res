@@ -44,10 +44,10 @@ class Subsets {
     }
 
     /**
-     * DFS backtrack, recursive down to s.length branches: with each element not already in path.
+     * DFS backtrack, recursive down to s.length branches: with each element not already in getPath.
      * @param s
      * @param start
-     * @param path path is the DFS path, contains result elements before start index
+     * @param path getPath is the DFS getPath, contains result elements before start index
      * @param result
      */
     public static void subsetsB(int[] s, int start, List<Integer> path, List<List<Integer>> result) {
@@ -55,7 +55,7 @@ class Subsets {
         for (int i = start; i < s.length; i++) {
             path.add(s[i]); // with i
             subsetsB(s, i + 1, path, result); // DFS
-            path.remove(path.size() - 1); // remove last element
+            path.remove(path.size() - 1); // remove last element, backtrack
         }
     }
     
@@ -63,7 +63,7 @@ class Subsets {
         List<List<Integer>> res = new ArrayList<>();
         Arrays.sort(s); // unnecessary
         subsetsA(s, 0, new ArrayList<>(), res);
-        res.add(new ArrayList<>()); // add blank set
+        res.add(new ArrayList<>()); // addPrereq blank set
         return res;
     }
     
@@ -114,4 +114,18 @@ class Subsets {
         return result;
     }
 
+    public List<List<Integer>> subsetsC(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        res.add(new ArrayList<>());
+
+        for (int num: nums) {
+            List<List<Integer>> resDup = new ArrayList<>(res);
+            for (List<Integer> list:resDup) {
+                List<Integer> tmpList = new ArrayList<>(list);
+                list.add(num);
+                res.add(tmpList);
+            }
+        }
+        return res;
+    }
 }

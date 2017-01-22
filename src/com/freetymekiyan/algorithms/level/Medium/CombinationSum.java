@@ -31,7 +31,7 @@ class CombinationSum {
      * Sort the array
      */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        List<List<Integer>> res = new ArrayList<>();
         if (candidates == null || candidates.length == 0)
             return res;
         Arrays.sort(candidates);
@@ -41,18 +41,24 @@ class CombinationSum {
 
     /**
      * Bakctracking
+     *
+     * @param candidates
+     * @param target remaining to be added
+     * @param pos starting point
+     * @param partialSol
+     * @param res
      */
-    private void helper(int[] candidates, int target, int pos, List<Integer> comb, List<List<Integer>> res) {
+    private void helper(int[] candidates, int target, int pos, List<Integer> partialSol, List<List<Integer>> res) {
         if (target == 0) {
-            res.add(new ArrayList<Integer>(comb)); // dereference
+            res.add(new ArrayList<Integer>(partialSol)); // dereference
             return;
         }
         for (int i = pos; i < candidates.length; i++) {
             int newTarget = target - candidates[i];
             if (newTarget >= 0) {
-                comb.add(candidates[i]);
-                helper(candidates, newTarget, i, comb, res); // note i, which means i can appear multiple times
-                comb.remove(comb.size() - 1);
+                partialSol.add(candidates[i]);
+                helper(candidates, newTarget, i, partialSol, res); // note i, which means i can appear multiple times
+                partialSol.remove(partialSol.size() - 1);
             } else
                 break; // too big
         }

@@ -44,13 +44,14 @@ class TrappingRainWater {
     }
     
     public int trap2(int[] A) {
-        int n = A.legnth;
+        int n = A.length;
 
         if (n < 3) return 0;
 
         // scan from both left and right
         int left = 0, right = n - 1, highest = 0, water = 0;
         while (left < right) {
+            int[] height = A;
             int curr = height[left] < height[right] ? height[left++] : height[right--];
             if (curr < highest) {
                 // add trapped water

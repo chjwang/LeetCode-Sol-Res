@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,7 +48,8 @@ public class HappyNumber {
      * loop detection using Set, use more space
      */
     public boolean isHappy2(int n) {
-        if (n < 1) return false;
+        if (n < 1)
+            return false;
 
         int num = n;
         Set<Integer> results = new HashSet<>();
@@ -60,10 +63,10 @@ public class HappyNumber {
 
     public int digitSquareSum(int n) {
         int res = 0;
-        int digit;
-        for (; n > 0; n /= 10) {
-            digit = n % 10;
+        while (n > 0) {
+            int digit = n % 10;
             res += digit * digit;
+            n /= 10;
         }
         return res;
     }

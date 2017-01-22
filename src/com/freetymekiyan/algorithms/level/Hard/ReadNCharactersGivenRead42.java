@@ -23,8 +23,8 @@ public class ReadNCharactersGivenRead42 {
      */
     public class Solution extends Reader4 {
 
-        private int bufferPointer = 0;
-        private int bufferCounter = 0;
+        private int bufPtr = 0;
+        private int bufCnt = 0;
         private char[] buffer = new char[4];
 
         /**
@@ -33,25 +33,30 @@ public class ReadNCharactersGivenRead42 {
          * If that buffer is used up, read from file again.
          * If that buffer still has characters, keep for the next time.
          * Return when we reach the end of file, or we reach n.
-         *
-         * @param buf Destination buffer
-         * @param n   Maximum number of characters to read
-         * @return The number of characters read
+         * | readBytes -> 0
+         * | while readBytes < n:
+         * |   if bufPtr == 0:
+         * |     Refill buffer and update bufCnt.
+         * |   if bufCnt == 0, end of file and break.
+         * |   while readBytes < n and bufPtr < bufCnt, means n not reached, buffer not used up.
+         * |     Write from cache to outside buffer.
+         * | If bufPtr == bufCnt, reach the end:
+         * |   Reset bufPtr for the next refill.
          */
         public int read(char[] buf, int n) {
             int readBytes = 0;
             while (readBytes < n) {
-                if (bufferPointer == 0) { // Refill intermediate buffer if needed.
-                    bufferCounter = read4(buffer);
+                if (bufPtr == 0) { // Refill intermediate buffer if needed.
+                    bufCnt = read4(buffer);
                 }
-                if (bufferCounter == 0) { // End of file
+                if (bufCnt == 0) { // End of file.
                     break;
                 }
-                while (readBytes < n && bufferPointer < bufferCounter) { // Copy to outside buffer
-                    buf[readBytes++] = buffer[bufferPointer++];
+                while (readBytes < n && bufPtr < bufCnt) { // Copy to outside buffer.
+                    buf[readBytes++] = buffer[bufPtr++];
                 }
-                if (bufferPointer == bufferCounter) { // Outside buffer used up
-                    bufferPointer = 0;
+                if (bufPtr == bufCnt) { // Intermediate buffer used up.
+                    bufPtr = 0;
                 }
             }
             return readBytes;

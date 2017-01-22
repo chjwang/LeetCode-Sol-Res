@@ -56,4 +56,22 @@ class ExcelSheetColTitle {
     public static String convertToTitleRec(int n) {
         return n <= 0 ? "" : convertToTitleRec(--n / 26) + (char)('A' + (n % 26));
     }
+
+    public String convertToTitle2(int n) {
+        if (n <= 0){
+            throw new IllegalArgumentException("Input is not valid!");
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        while (n > 0){
+            n--;
+            char ch = (char) (n % 26 + 'A');
+            n /= 26;
+            sb.append(ch);
+        }
+
+        sb.reverse();
+        return sb.toString();
+    }
 }

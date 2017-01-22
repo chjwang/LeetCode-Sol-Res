@@ -1,4 +1,5 @@
-import java.rmi.MarshalledObject;
+package com.freetymekiyan.algorithms.level.Easy;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,16 +21,45 @@ import java.util.Map;
  * Similar Problems: (E) Isomorphic Strings (H) Word Pattern II
  */
 class WordPattern {
+    // O(n)
     public boolean wordPattern(String pattern, String str) {
-        if (pattern == null || str == null) return false;
+        if (pattern == null || str == null)
+            return false;
         String[] words = str.split(" ");
-        if (words.length != pattern.length()) return false;
+        if (words.length != pattern.length())
+            return false;
 
         Map<Object, Integer> map = new HashMap<>(pattern.length());
 
-        for (Integer i = 0; i < words.length; i++) { // use Integer to avoid autoboxing-same-value-to-different-objects-problem
-            if (map.put(pattern.charAt(i), i) != map.put(words[i], i)) // check previous put value
+        for (Integer i = 0; i < words.length; i++) {
+            // use Integer to avoid autoboxing-same-value-to-different-objects-problem
+            if (map.put(pattern.charAt(i), i) != map.put(words[i], i)) // check previous put's value
                 return false;
+        }
+
+        return true;
+    }
+
+    public boolean wordPattern2(String pattern, String str) {
+        if (pattern == null || str == null)
+            return false;
+        String[] arr = str.split(" ");
+        //prevent out of boundary problem
+        if (arr.length != pattern.length())
+            return false;
+
+        HashMap<Character, String> map = new HashMap<>();
+        for (int i = 0; i < pattern.length(); i++) {
+            char c = pattern.charAt(i);
+            if (map.containsKey(c)) {
+                String value = map.get(c);
+                if (!value.equals(arr[i])) {
+                    return false;
+                }
+            } else if (map.containsValue(arr[i])) { // O(n)
+                return false;
+            }
+            map.put(c, arr[i]);
         }
 
         return true;

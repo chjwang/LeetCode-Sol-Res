@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Hard;
+
 import java.util.*;
 
 /**
@@ -36,7 +38,7 @@ class PalindromePartition {
      * Each cut at i+j is calculated by scanning (i-j)'s minimum cut + 1 if
      * s[i-j, i+j] is a palindrome. 
      */
-    public int minCut(String s) {
+    public static int minCut(String s) {
         if(s == null || s.length() == 0) return 0;
         int len = s.length();
         int[] cuts = new int[len + 1]; // store results
@@ -64,7 +66,7 @@ class PalindromePartition {
      * s[j+1...n-1]) is 1+d[j+1], compare it to the exisiting minCut num d[i],
      * repalce if smaller.
      */
-    public int minCut(String s) {
+    public int minCut3(String s) {
         if (s == null || s.length() == 0) return 0;
         int len = s.length();
         boolean[][] p = new boolean[len][len];
@@ -80,7 +82,7 @@ class PalindromePartition {
                         p[start][end] = p[start + 1][end - 1];
                 }
                 if (p[start][end]) {
-                    if (end = len - 1) results[start] = 0;
+                    if (end == len - 1) results[start] = 0;
                     else results[start] = Math.min(results[start], results[end + 1] + 1);
                 }
             }
@@ -91,7 +93,7 @@ class PalindromePartition {
     /**
      * Backtracking, generate all cuts
      */
-    public static int minCut(String s) {
+    public static int minCut2(String s) {
         Set<String> palin = new HashSet<String>();
         return minCut(s, 0, palin);
     }
@@ -107,7 +109,7 @@ class PalindromePartition {
         for (int i = s.length() - 1; i >= 0; i--) {
             if (isPalindrome(s.substring(0, i))) {
                 palin.add(s.substring(0, i));
-                // add DP here
+                // addPrereq DP here
                 int result = palin.contains(s.substring(i)) ? count : minCut(s.substring(i), count + 1, palin);;
                 min = Math.min(min, result);
             }

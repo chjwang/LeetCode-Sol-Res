@@ -21,15 +21,15 @@ import java.util.stream.Collectors;
  *
  * Hint:
  *
- * Consider implement these two helper functions: getPredecessor(N), which returns the next smaller
+ * Consider implement these two preOrderHelper functions: getPredecessor(N), which returns the next smaller
  * node to N. getSuccessor(N), which returns the next larger node to N.
  *
  * Try to assume that each node has a parent pointer, it makes the problem much easier.
  *
- * Without parent pointer we just need to keep track of the path from the root to the current node
+ * Without parent pointer we just need to keep track of the getPath from the root to the current node
  * using a stack.
  *
- * You would need two stacks to track the path in finding predecessor and successor node
+ * You would need two stacks to track the getPath in finding predecessor and successor node
  * separately.
  *
  * [思路] prefix traverse. 同时维护一个大小为k的 max heap. 注意根据bst的性质, 在diff 大于 maxHeap时, 可以只遍历一边的子树.

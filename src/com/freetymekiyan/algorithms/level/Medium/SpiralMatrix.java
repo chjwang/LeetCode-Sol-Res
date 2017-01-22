@@ -83,7 +83,7 @@ class SpiralMatrix {
     }
 
     /**
-     * Remember which level it is right now
+     * Remember which level it is right now. Level => Spiral
      * Do level by level till reach center
      */
     public List<Integer> spiralOrder(int[][] matrix) {
@@ -100,8 +100,8 @@ class SpiralMatrix {
             for (int i = lv; i < n - lv; i++) {
                 res.add(matrix[lv][i]); // right
             }
-            for (int i = lv + 1; i < m - lv; i++) {
-                res.add(matrix[i][n - lv - 1]); // down
+            for (int j = lv + 1; j < m - lv; j++) {
+                res.add(matrix[j][n - lv - 1]); // down
             }
             if (2 * lv == m - 1 || 2 * lv == n - 1) {
                 break; // reach last row/col
@@ -109,8 +109,8 @@ class SpiralMatrix {
             for (int i = n - lv - 2; i >= lv; i--) {
                 res.add(matrix[m - lv - 1][i]);
             }
-            for (int i = m - lv - 2; i >= lv + 1; i--) {
-                res.add(matrix[i][lv]);
+            for (int j = m - lv - 2; j >= lv + 1; j--) {
+                res.add(matrix[j][lv]);
             }
             lv++;
         }
@@ -120,7 +120,7 @@ class SpiralMatrix {
     /**
      * Use rMin, rMax, cMin, cMax, to store the boundries
      * Use i, j to track the position
-     * Move i, j around to add elements
+     * Move i, j around to addPrereq elements
      * Break whenever out of bounds to avoid duplicate traversal
      */
     public List<Integer> spiralOrderB(int[][] matrix) {

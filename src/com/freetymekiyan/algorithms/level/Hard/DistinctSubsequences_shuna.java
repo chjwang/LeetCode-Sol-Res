@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.hard;
+package com.freetymekiyan.algorithms.level.Hard;
 
 /**
 * Distinct Subsequences

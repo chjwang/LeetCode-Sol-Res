@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 /**
  * According to the Wikipedia's article: "The Game of Life, also known simply as Life, is a cellular automaton devised
@@ -42,7 +42,7 @@ public class GameOfLife {
                         lives += board[k][l] & 1;
                     }
                 }
-                if ((lives | board[i][j]) == 3) { // lives = 2 or 3, board[i][j] = 1, or lives = 3, board[i][j] = 0
+                if ((lives | board[i][j]) == 3) { // lives = 2 or 3, board[i][i] = 1, or lives = 3, board[i][i] = 0
                     board[i][j] |= 2;
                 }
             }

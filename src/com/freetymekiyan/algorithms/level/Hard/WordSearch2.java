@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Hard;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +57,11 @@ public class WordSearch2 {
         TrieNode root = new TrieNode();
         for (String w : words) {
             TrieNode node = root;
-            for (char c : w.toCharArray()) {
+            char[] charArray = w.toCharArray();
+            for (char c : charArray) {
                 int i = c - 'a';
-                if (node.next[i] == null) node.next[i] = new TrieNode();
+                if (node.next[i] == null)
+                    node.next[i] = new TrieNode();
                 node = node.next[i];
             }
             node.word = w;
@@ -77,21 +81,23 @@ public class WordSearch2 {
      * Set visited and backtrack adjacent nodes
      * Reset visited mark
      */
-    private void dfs(char[][] board, int i, int j, TrieNode node, List<String> res) {
+    private void dfs(char[][] board, int i, int j, TrieNode trieNode, List<String> res) {
         char c = board[i][j];
-        if (c == '#' || node.next[c - 'a'] == null) return;
-        node = node.next[c - 'a'];
-        if (node.word != null) { // Found one
-            res.add(node.word);
-            node.word = null; // De-dup
+        if (c == '#' || trieNode.next[c - 'a'] == null)
+            return;
+
+        trieNode = trieNode.next[c - 'a'];
+        if (trieNode.word != null) { // Found one
+            res.add(trieNode.word);
+            trieNode.word = null; // De-dup
         }
 
         board[i][j] = '#'; // Mark as visited
-        if (i > 0) dfs(board, i - 1, j, node, res);
-        if (j > 0) dfs(board, i, j - 1, node, res);
-        if (i < board.length - 1) dfs(board, i + 1, j, node, res);
-        if (j < board[i].length - 1) dfs(board, i, j + 1, node, res);
-        board[i][j] = c; // Reset mark
+        if (i > 0) dfs(board, i - 1, j, trieNode, res);
+        if (j > 0) dfs(board, i, j - 1, trieNode, res);
+        if (i < board.length - 1) dfs(board, i + 1, j, trieNode, res);
+        if (j < board[i].length - 1) dfs(board, i, j + 1, trieNode, res);
+        board[i][j] = c; // Reset mark, backtrack
     }
 
     class TrieNode {

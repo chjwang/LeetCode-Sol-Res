@@ -39,7 +39,7 @@ import java.util.Set;
  *
  * (2) The height of a rooted tree is the number of edges on the longest downward path between the root and a leaf.
  *
- * Tags: BFS, Graph Similar Problems: (M) Course Schedule, (M) Course Schedule II
+ * Tags: BFS, GraphPrintAllPaths Similar Problems: (M) Course Schedule, (M) Course Schedule II
  */
 class MinimumHeightTrees {
 

@@ -1,5 +1,7 @@
 package com.freetymekiyan.algorithms.level.Medium;
 
+import com.freetymekiyan.algorithms.utils.Utils.TreeNode;
+
 /**
  Given a binary tree, find the length of the longest consecutive sequence path.
  The path refers to any sequence of nodes from some starting node to any node in the tree along the
@@ -9,15 +11,15 @@ package com.freetymekiyan.algorithms.level.Medium;
  \
  3
  / \
- 2   4
- \
- 5
+ 2  4
+     \
+     5
  Longest consecutive sequence path is 3-4-5, so return 3.
- 2
- \
- 3
- /
- 2
+    2
+     \
+     3
+   /
+  2
  /
  1
  Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
@@ -26,7 +28,7 @@ package com.freetymekiyan.algorithms.level.Medium;
  递归, 连续就+1.
  */
 public class BinaryTreeLongestConsecutiveSequence {
-    int max = 1;
+    int max = 1; // global variable to store the longest seq number so far
 
     public int longestConsecutive(TreeNode root) {
         if (root == null) return 0;
@@ -51,15 +53,4 @@ public class BinaryTreeLongestConsecutiveSequence {
                 longestConsecutiveHelper(n.right, 1);
         }
     }
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
 }

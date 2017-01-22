@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Easy;
+
 /**
  * Compare two version numbers version1 and version1.
  * If version1 > version2 return 1, if version1 < version2 return -1, otherwise
@@ -27,7 +29,7 @@ class CompareVersionNums {
      * Compare each level and compare the rest
      * Note the input can be complex than the example, more dots, more zeros
      */
-    int compareVersion(String version1, String version2) {
+    public static int compareVersion(String version1, String version2) {
         if (version1 == null && version2 == null) return 0; // same
         if (version1 == null || version2 == null) return version1 == null ? -1 : 1;
         String[] list1 = version1.split("\\."); // back slash

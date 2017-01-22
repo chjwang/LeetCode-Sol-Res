@@ -25,7 +25,7 @@ public class DeepestLeftLeafNode {
     /**
      * Backtracking
      * If is left child, is leaf node, and level > maxLevel
-     * Update result and maxLevel, then return
+     * Then update result and maxLevel, then return
      */
     public void deepestLeftLeaf(TreeNode root, int level, int maxLevel, boolean isLeft, TreeNode res) {
         if (root == null) return;

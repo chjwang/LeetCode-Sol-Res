@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 import java.util.*;
 
 /**
@@ -36,7 +38,7 @@ class SurroundedRegions {
      * Create an integer list for points to change
      * Check points around to see whether there is an 'O' point within the board
      * and not visited
-     * If so, add it to queue, set visited true
+     * If so, addPrereq it to queue, set visited true
      * If not, it's not surrounded
      */
     public static void solve(char[][] board) {
@@ -53,7 +55,7 @@ class SurroundedRegions {
                 if (board[i][j] == 'O' && !visited[i][j]) {
                     boolean surround = true;
                     List<Integer> pointsToChange = new ArrayList<Integer>();
-                    q.add(i * n + j); // add root
+                    q.add(i * n + j); // addPrereq root
                     visited[i][j] = true; // set root visited
                     while (q.size() > 0) { // BFS
                         int point = q.poll(); // get from queue
@@ -65,7 +67,7 @@ class SurroundedRegions {
                             int nextX = x + dir[k][0];
                             int nextY = y + dir[k][1];
                             if (nextX >= 0 && nextX < m && nextY >= 0 && nextY < n) { // within board
-                                if (board[nextX][nextY] == 'O' && !visited[nextX][nextY]) // add to queue
+                                if (board[nextX][nextY] == 'O' && !visited[nextX][nextY]) // addPrereq to queue
                                     q.add(nextX * n + nextY);
                                 visited[nextX][nextY] = true; // set visited
                             } else surround = false; // false if on the boundry

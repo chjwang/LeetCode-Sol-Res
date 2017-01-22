@@ -55,4 +55,12 @@ class RotateImg {
             reverse(matrix[i][0], matrix[i][len - 1]);
         }
     }
+
+    private void reverse(int i, int i1) {
+        return;
+    }
+
+    private void swap(int i, int i1) {
+        return;
+    }
 }

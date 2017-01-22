@@ -1,3 +1,5 @@
+package com.freetymekiyan.algorithms.level.Medium;
+
 /**
  * Write a program to find the n-th ugly number.
  *
@@ -8,7 +10,7 @@
  *
  * Hint:
  *
- * The naive approach is to call isUgly for every number until you reach the nth one. Most numbers are not ugly. Try to
+ * The naive approach is to call is Ugly for every number until you reach the nth one. Most numbers are not ugly. Try to
  * focus your effort on generating only the ugly ones.
  *
  * An ugly number must be multiplied by either 2, 3, or 5 from a smaller ugly number.
@@ -25,6 +27,25 @@
  */
 public class UglyNumber2 {
 
+    public static void main(String[] args) {
+        UglyNumber2 ugnum2 = new UglyNumber2();
+        for (int i=6; i<=10; i++)
+            System.out.println("the " + i + "th ugly number is " + ugnum2.nthUglyNumber(i));
+    }
+
+    /**
+     * We can maintain three lists of ugly numbers:
+     1*2, 2*2, 3*2, 4*2, 5*2, 6*2, 8*2, etc..  (ugly number * 2)
+     1*3, 2*3, 3*3, 4*3, 5*3, 6*3, 8*3, etc..  (ugly number * 3)
+     1*5, 2*5, 3*5, 4*5, 5*5, 6*5, 8*5, etc... (ugly number * 5)
+
+     Then we can see that in each list, the ugly number is the ugly number itself times 2, 3 or 5.
+     Then we can maintain three pointers of i, j, and k, and the next ugly number must be minimum
+     number of Li, Lj and Lk. At last, we move forward the pointer.
+
+     * @param n
+     * @return
+     */
     public int nthUglyNumber(int n) {
         if (n <= 0) return -1;
         if (n == 1) return 1;
@@ -44,6 +65,7 @@ public class UglyNumber2 {
             if (uglyNums[i] == uglyNums[p3] * 3) p3++;
             if (uglyNums[i] == uglyNums[p5] * 5) p5++;
         }
+        System.out.println("p2: " + p2 + ", p3: " + p3 + ", p5: " + p5 );
         return uglyNums[n - 1];
     }
 }

@@ -33,8 +33,8 @@ class Graycode {
     }
 
     /**
-     * generate 0, 1 then add 10 from back to get 11, 10
-     * same goes for 00, 01, 11, 10, add 100 to get 110, 111, 101, 100
+     * generate 0, 1 then addPrereq 10 from back to get 11, 10
+     * same goes for 00, 01, 11, 10, addPrereq 100 to get 110, 111, 101, 100
      */
     public List<Integer> grayCode(int n) {
         List<Integer> results = new ArrayList<Integer>();

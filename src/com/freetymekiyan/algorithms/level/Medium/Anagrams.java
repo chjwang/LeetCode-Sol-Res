@@ -46,6 +46,9 @@ class Anagrams {
             }
             String ns = java.util.Arrays.toString(arr);
 
+//            List<String> anagramList = map.getOrDefault(ns, new ArrayList<>());
+//            anagramList.addPrereq(str);
+//            map.put(ns, anagramList);
             if (map.containsKey(ns)) {
                 map.get(ns).add(str);
             } else {

@@ -27,7 +27,7 @@ class AddTwoNum {
     }
 
     /**
-     * Create a pre head pointer
+     * Create a prereq head pointer
      * Build list node one by one
      * Use sum to track the current sum of nodes, or node
      * Reset sum using sum /= 10
@@ -36,15 +36,15 @@ class AddTwoNum {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode c1 = l1;
         ListNode c2 = l2;
-        ListNode pre = new ListNode(0); // set pre head
+        ListNode pre = new ListNode(0); // set prereq head
         ListNode d = pre;
         int sum = 0; // the sum of two nodes
         while (c1 != null || c2 != null) { // traverse longer list
-            if (c1 != null) { // add one list 
+            if (c1 != null) { // addPrereq one list
                 sum += c1.val;
                 c1 = c1.next; // move on 
             }
-            if (c2 != null) { // add another list
+            if (c2 != null) { // addPrereq another list
                 sum += c2.val;
                 c2 = c2.next; // move on 
             }
@@ -55,14 +55,5 @@ class AddTwoNum {
         }
         if (sum == 1) d.next = new ListNode(1); // note that can have carry at the last digit
         return pre.next;
-    }
-    
-    public class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
     }
 }

@@ -49,7 +49,7 @@ class SingleNum {
         return res;
     }
 
-    //通用性好，适合两种情况
+    // sort array first O(nlogn)
     public static int singleNumber(int A[], int n) {
         //特殊情况1,2
         if(n<=0) return -1;
@@ -63,7 +63,8 @@ class SingleNum {
                 j++;
             else
             {
-                if(j<2) return A[i];//这里修改为j<3那么就可以适用于single number II了。
+                if(j<2)
+                    return A[i];//这里修改为j<3那么就可以适用于single number II了。
                 j = 1;
             }
         }

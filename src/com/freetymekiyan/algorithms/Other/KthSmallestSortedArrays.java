@@ -1,3 +1,7 @@
+package com.freetymekiyan.algorithms.Other;
+
+import java.util.Arrays;
+
 /**
  * Given two sorted arrays A, B of size m and n respectively. Find the k-th
  * smallest element in the union of A and B. You can assume that there are no
@@ -24,14 +28,14 @@ class KthSmallestSortedArrays {
      * If Bj-1 < Ai < Bj, then Ai must be the k-th smallest,
      * or else if Ai-1 < Bj < Ai, then Bj must be the k-th smallest.
      */
-    public static int kthSmallestRec(int k, int[] A, int[] B) {
+    public static double kthSmallestRec(int k, int[] A, int[] B) {
         /*keep smaller array first one*/
         int n = A.length;
         int m = B.length;
         if (n > m)
             return kthSmallestRec(k, B, A);
 
-        int k = (n + m - 1) / 2;
+//        int k = (n + m - 1) / 2;
         int l = 0, r = Math.min(k, n); // r is n, NOT n-1, this is important!!
         while (l < r) {
             int midA = (l + r) / 2;
@@ -79,5 +83,38 @@ class KthSmallestSortedArrays {
             }
         }
         return -1;
+    }
+
+    int findKthSmallest(int A[], int m, int B[], int n, int k) {
+        assert(m >= 0); assert(n >= 0); assert(k > 0); assert(k <= m+n);
+
+        int i = (int)((double)m / (m+n) * (k-1));
+        int j = (k-1) - i;
+
+        assert(i >= 0); assert(j >= 0); assert(i <= m); assert(j <= n);
+        // invariant: i + j = k-1
+        // Note: A[-1] = -INF and A[m] = +INF to maintain invariant
+        int Ai_1 = ((i == 0) ? Integer.MIN_VALUE : A[i-1]);
+        int Bj_1 = ((j == 0) ? Integer.MIN_VALUE : B[j-1]);
+        int Ai   = ((i == m) ? Integer.MAX_VALUE : A[i]);
+        int Bj   = ((j == n) ? Integer.MAX_VALUE : B[j]);
+
+        if (Bj_1 < Ai && Ai < Bj)
+            return Ai;
+        else if (Ai_1 < Bj && Bj < Ai)
+            return Bj;
+
+        assert((Ai > Bj && Ai_1 > Bj) ||
+                (Ai < Bj && Ai < Bj_1));
+
+        // if none of the cases above, then it is either:
+        if (Ai < Bj)
+            // exclude Ai and below portion
+            // exclude Bj and above portion
+            return findKthSmallest(Arrays.copyOfRange(A, i+1, A.length), m-i-1, B, j, k-i-1);
+        else /* Bj < Ai */
+            // exclude Ai and above portion
+            // exclude Bj and below portion
+            return findKthSmallest(A, i, Arrays.copyOfRange(B, j+1, B.length), n-j-1, k-j-1);
     }
 }

@@ -1,6 +1,7 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,15 +38,46 @@ class Triangle {
      * Pick the smaller one of next row and add it up to current level
      */
     public static int minimumTotal(List<List<Integer>> triangle) {
-        List<Integer> res = new ArrayList<Integer>(triangle.get(level));
         int level = triangle.size() - 1;
+
+        List<Integer> res = new ArrayList<Integer>(triangle.get(level));
+
         for (int i = level - 1; i >= 0; i--) { // start from second last row
             for (int j = 0; j <= i; j++) { // go through each node
-                int res = Math.min(res.get(j), res.get(j + 1)) + triangle.get(i).get(j); // add the smaller one
-                res.set(j, res);
+                int result = Math.min(res.get(j), res.get(j + 1)) + triangle.get(i).get(j); // add the smaller one
+                res.set(j, result);
             }
         }
         return res.get(0);
+    }
+
+    /**
+     * 一道动态规划的经典题目。需要自底向上求解。
+
+     递推公式是： dp[i][j] = dp[i+1][j] + dp[i+1][j+1] ，当前这个点的最小值，由他下面那一行临近的2个点的最小值与当前点的值相加得到。
+
+     由于是三角形，且历史数据只在计算最小值时应用一次，所以无需建立二维数组，每次更新1维数组值，最后那个值里存的就是最终结果。
+
+     * @param triangle
+     * @return
+     */
+    public int minimumTotal2(List<List<Integer>> triangle) {
+        if(triangle.size()==1)
+            return triangle.get(0).get(0);
+
+        //initial value of dp set by last row
+        Integer[] dp = new Integer[triangle.size()];;
+        dp = triangle.get(triangle.size() - 1).toArray(dp);
+
+        // iterate from last second row
+        for (int i = triangle.size() - 2; i >= 0; i--) {
+            List<Integer> row = triangle.get(i);
+            for (int j = 0; j < row.size(); j++) {
+                dp[j] = Math.min(dp[j], dp[j + 1]) + row.get(j);
+            }
+        }
+
+        return dp[0];
     }
 
     static List<List<Integer>> generateInput(TestType t) {

@@ -1,4 +1,4 @@
-package com.freetymekiyan.algorithms.level.medium;
+package com.freetymekiyan.algorithms.level.Medium;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class LexicographicalNumbers {
 
     /**
      * DFS.
-     * Search for the next possible number to add to result.
+     * Search for the next possible number to addPrereq to result.
      *         1
      *     /       \
      *   10 ...    19

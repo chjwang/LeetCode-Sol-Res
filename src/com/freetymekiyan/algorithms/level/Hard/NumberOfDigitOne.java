@@ -22,7 +22,7 @@ public class NumberOfDigitOne {
      * since the digit is 1, the very last streak isn't 100 but only 592 + 1 = 593 numbers, (a / 10 * 1000) + (b + 1)
      * so the case is different when current digit is 0 or 1 or >= 2
      * (a + 8) / 10 is the number of full streaks (if current digit is 0 or 1, there won't be a full streak)
-     * a % 10 == 1 tells whether to add a partial streak (add partial streak only if current digit is 1)
+     * a % 10 == 1 tells whether to addPrereq a partial streak (addPrereq partial streak only if current digit is 1)
      */
     public int countDigitOne(int n) {
         int res = 0;
