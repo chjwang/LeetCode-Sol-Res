@@ -21,7 +21,7 @@ class BestTimeStock2 {
 
     /**
      * Sell whenever there is profit.
-     * If next value is bigger, addPrereq the difference up to the profit
+     * If next value is bigger, add the difference up to the profit
      */
     public static int maxProfit(int[] prices) {
         int max = 0;

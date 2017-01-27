@@ -8,18 +8,18 @@ import java.util.Stack;
  *
  * For example, this binary tree is symmetric:
  *
- * 1
- * / \
- * 2   2
- * / \ / \
+ *     1
+ *    /  \
+ *  2    2
+ * / \   / \
  * 3  4 4  3
  *
  * But the following is not:
- * 1
- * / \
+ *    1
+ *   / \
  * 2   2
- * \   \
- * 3    3
+ *  \   \
+ *  3    3
  *
  * Note:
  * Bonus points if you could solve it both recursively and iteratively.
@@ -38,7 +38,7 @@ class SymmetricTree {
     private boolean isSymmetric(TreeNode root) {
         if (root == null) return true;
 
-        Stack<TreeNode> s = new Stack<TreeNode>();
+        Stack<TreeNode> s = new Stack<>();
         s.push(root.left);
         s.push(root.right);
         while (!s.isEmpty()) {

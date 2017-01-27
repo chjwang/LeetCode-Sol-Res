@@ -54,32 +54,66 @@ class SpiralMatrix {
             //below, process a circle
 
             //top - move right
-            for (int i = 0; i < n - 1; i++) {
+            for (int i = 0; i < n - 1; i++)
                 result.add(matrix[x][y++]);
-            }
 
             //right - move down
-            for (int i = 0; i < m - 1; i++) {
+            for (int i = 0; i < m - 1; i++)
                 result.add(matrix[x++][y]);
-            }
 
             //bottom - move left
-            for (int i = 0; i < n - 1; i++) {
+            for (int i = 0; i < n - 1; i++)
                 result.add(matrix[x][y--]);
-            }
 
             //left - move up
-            for (int i = 0; i < m - 1; i++) {
+            for (int i = 0; i < m - 1; i++)
                 result.add(matrix[x--][y]);
-            }
 
-            x++;
-            y++;
-            m = m - 2;
-            n = n - 2;
+            x++; y++;
+            m = m - 2; n = n - 2;
         }
 
         return result;
+    }
+
+    public List<Integer> spiralOrder2(int[][] matrix) {
+        List<Integer> path = new ArrayList<>();
+        if (matrix.length == 0) return path;
+
+        int rowStart = 0, rowEnd = matrix.length-1, colStart = 0, colEnd = matrix[0].length-1;
+
+        // Until it reach the spiral center that is rowStart > rowEnd or colStart > colEnd
+        while (true) {
+            // Right
+            for (int j = colStart; j <= colEnd; j++) {
+                path.add(matrix[rowStart][j]);
+            }
+            rowStart++;
+            if (rowStart > rowEnd) break;
+
+            // Down
+            for (int i = rowStart; i <= rowEnd; i++) {
+                path.add(matrix[i][colEnd]);
+            }
+            colEnd--;
+            if (colStart > colEnd) break;
+
+            // Left
+            for (int j = colEnd; j >= colStart; j--) {
+                path.add(matrix[rowEnd][j]);
+            }
+            rowEnd--;
+            if (rowStart > rowEnd) break;
+
+            // Up
+            for (int i = rowEnd; i >= rowStart; i--) {
+                path.add(matrix[i][colStart]);
+            }
+            colStart++;
+            if (colStart > colEnd) break;
+        }
+
+        return path;
     }
 
     /**
@@ -118,23 +152,23 @@ class SpiralMatrix {
     }
 
     /**
-     * Use rMin, rMax, cMin, cMax, to store the boundries
+     * Use rMin, rMax, cMin, cMax, to store the boundaries
      * Use i, j to track the position
-     * Move i, j around to addPrereq elements
+     * Move i, j around to add elements
      * Break whenever out of bounds to avoid duplicate traversal
      */
     public List<Integer> spiralOrderB(int[][] matrix) {
-        List<Integer> res = new ArrayList<Integer>();
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+        List<Integer> res = new ArrayList<>();
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
             return res;
-        }
+
         int iMin = 0;
         int iMax = matrix.length - 1;
         int jMin = 0;
         int jMax = matrix[0].length - 1;
         int i = 0;
         int j = 0;
-        // update boundry as soon as we traverse through it
+        // update boundary as soon as we traverse through it
         while (iMin <= iMax && jMin <= jMax) {
             for (j = jMin; j <= jMax; j++) {
                 res.add(matrix[iMin][j]);

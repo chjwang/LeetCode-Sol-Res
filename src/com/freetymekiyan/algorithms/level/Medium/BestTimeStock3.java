@@ -52,4 +52,35 @@ class BestTimeStock3 {
         }
         return maxProfit;
     }
+
+    public int maxProfit2(int[] prices) {
+        int maxProfit = 0;
+        if (prices == null || prices.length < 2) {
+            return maxProfit;
+        }
+
+        int n = prices.length;
+        int[] leftProfit = new int[n];
+
+        int maxLeftProfit = 0, minPrice = prices[0];
+        for(int i=1; i<n; i++) {
+            if(prices[i]<minPrice)
+                minPrice = prices[i];
+            else
+                maxLeftProfit = Math.max(maxLeftProfit, prices[i]-minPrice);
+            leftProfit[i] = maxLeftProfit;
+        }
+
+        int ret = leftProfit[n-1];
+        int maxRightProfit = 0, maxPrice = prices[n-1];
+        for(int i=n-2; i>=0; i--) {
+            if(prices[i]>maxPrice)
+                maxPrice = prices[i];
+            else
+                maxRightProfit = Math.max(maxRightProfit, maxPrice-prices[i]);
+            ret = Math.max(ret, maxRightProfit + leftProfit[i]);
+        }
+
+        return ret;
+    }
 }
