@@ -11,10 +11,26 @@ import java.util.List;
 public class SpiralLoopInMatrix {
 
   private enum Direction {
-    E(1, 0) {Direction next() {return N;}},
-    N(0, 1) {Direction next() {return W;}},
-    W(-1, 0) {Direction next() {return S;}},
-    S(0, -1) {Direction next() {return E;}},;
+    E(1, 0) {
+      Direction next() {
+        return N;
+      }
+    },
+    N(0, 1) {
+      Direction next() {
+        return W;
+      }
+    },
+    W(-1, 0) {
+      Direction next() {
+        return S;
+      }
+    },
+    S(0, -1) {
+      Direction next() {
+        return E;
+      }
+    },;
 
     private int dx;
     private int dy;
@@ -110,4 +126,40 @@ public class SpiralLoopInMatrix {
     }
     System.out.println();
   }
+
+
+  void print_spiral(int[][] matrix) {
+    int size = matrix.length;
+
+    int x = 0; // current position; x
+    int y = 0; // current position; y
+    int d = 0; // current direction; 0=RIGHT, 1=DOWN, 2=LEFT, 3=UP
+    int c = 0; // counter
+    int s = 1; // chain size
+
+    // starting point
+    x = ((int) Math.floor(size / 2.0)) - 1;
+    y = ((int) Math.floor(size / 2.0)) - 1;
+
+    for (int k = 1; k <= (size - 1); k++) {
+      for (int j = 0; j < (k < (size - 1) ? 2 : 3); j++) {
+        for (int i = 0; i < s; i++) {
+          System.out.print(matrix[x][y] + " ");
+          c++;
+
+          switch (d) {
+            case 0: y = y + 1; break;
+            case 1: x = x + 1; break;
+            case 2: y = y - 1; break;
+            case 3: x = x - 1; break;
+          }
+        }
+        d = (d + 1) % 4;
+      }
+      s = s + 1;
+    }
+  }
+
+
+
 }
